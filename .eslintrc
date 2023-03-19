@@ -37,8 +37,15 @@
       }
     }
   },
+
   "rules": {
     // Add your own rules here to override ones from the extended configs.
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "no-console": "warn",
