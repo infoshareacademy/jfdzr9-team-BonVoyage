@@ -1,7 +1,16 @@
-import AddTrip from "./pages/AddTrip";
+import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
+import { BrowserRouter } from "react-router-dom";
+import { LandingPage } from "./pages/LandingPage";
 
-function App() {
-  return <AddTrip />;
-}
+const App: React.FC = () => {
+  return (
+    <>
+      <BrowserRouter>
+        <GlobalStyles />
+        <LandingPage />
+      </BrowserRouter>
+    </>
+  );
+};
 
 export default App;
