@@ -1,5 +1,7 @@
+import AddTrip from "./pages/AddTrip";
+
 function App() {
-  return <div>Welcome from BonVoyage</div>;
+  return <AddTrip />;
 }
 
 export default App;
