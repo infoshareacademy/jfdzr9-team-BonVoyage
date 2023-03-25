@@ -8,7 +8,6 @@ const App: React.FC = () => {
       <BrowserRouter>
         <GlobalStyles />
         <LandingPage />
-        <div>Welcome booba BonVoffsdge</div>;
       </BrowserRouter>
     </>
   );

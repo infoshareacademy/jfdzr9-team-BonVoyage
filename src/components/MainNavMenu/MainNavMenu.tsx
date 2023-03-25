@@ -1,4 +1,4 @@
-import { NavMenuContainer, NavMenuItem, NavMenuDiv, TestDiv } from "./MainNavMenu.styled";
+import { NavMenuContainer, NavMenuItem, NavMenuDiv } from "./MainNavMenu.styled";
 import { Link } from "react-router-dom";
 
 interface NavigationProps {
@@ -29,9 +29,6 @@ export const MainNavMenu: React.FC<NavigationProps> = (props): JSX.Element => {
           </ul>
         </NavMenuDiv>
       </NavMenuContainer>
-      <TestDiv>
-        <h1>aids</h1>
-      </TestDiv>
     </>
   );
 };

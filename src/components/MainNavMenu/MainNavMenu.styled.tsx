@@ -59,7 +59,3 @@ export const NavMenuItem = styled.li`
   list-style-type: none;
   display: flex;
 `;
-
-export const TestDiv = styled.div`
-  height: 1000vh;
-`;
