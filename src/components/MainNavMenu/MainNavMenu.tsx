@@ -2,7 +2,7 @@ import { NavMenuContainer, NavMenuItem, NavMenuDiv, TestDiv } from "./MainNavMen
 import { Link } from "react-router-dom";
 
 interface NavigationProps {
-  booba?: string;
+  something?: string;
 }
 
 export const MainNavMenu: React.FC<NavigationProps> = (props): JSX.Element => {
