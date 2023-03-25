@@ -1,12 +1,11 @@
 import { createGlobalStyle } from "styled-components";
+import "typeface-roboto";
 
 export const GlobalStyles = createGlobalStyle`
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: var(--Very-light-grey);
   color: var(--Very-dark-blue);
   transition: background-color 0.4s;
@@ -22,7 +21,7 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Roboto";
+  font-family: "Roboto", sans-serif;
 }
 
 /* .container {
@@ -32,7 +31,8 @@ body {
 } */
 
 h1 {
-    color: white;
+    color: #4A6A2B;
+    font-family: "Roboto";
 }
 
 .header {

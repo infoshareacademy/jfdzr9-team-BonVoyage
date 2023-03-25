@@ -1,12 +1,15 @@
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
-import { MainNavMenu } from "./components/MainNavMenu/MainNavMenu";
+import { BrowserRouter } from "react-router-dom";
+import { LandingPage } from "./pages/LandingPage";
 
 const App: React.FC = () => {
   return (
     <>
-      <GlobalStyles />
-      <MainNavMenu />
-      <div>Welcome booba BonVoffsdge</div>;
+      <BrowserRouter>
+        <GlobalStyles />
+        <LandingPage />
+        <div>Welcome booba BonVoffsdge</div>;
+      </BrowserRouter>
     </>
   );
 };
