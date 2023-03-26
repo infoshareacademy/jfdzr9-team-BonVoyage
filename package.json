@@ -24,7 +24,8 @@
     "react-router-dom": "^6.9.0",
     "react-hook-form": "^7.43.8",
     "styled-components": "^5.3.9",
-    "typeface-roboto": "^1.1.13"
+    "typeface-roboto": "^1.1.13",
+    "use-places-autocomplete": "^4.0.0"
   },
   "devDependencies": {
     "@testing-library/cypress": "^9.0.0",
