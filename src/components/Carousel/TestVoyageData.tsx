@@ -22,8 +22,7 @@ export const TestVoyageData: Voyage[] = [
     id: 3,
     name: "Test Voyage 3",
     destination: "Poznań",
-    image:
-      "https://static.wikia.nocookie.net/poznan/images/4/4c/Kozio%C5%82ki.jpg/revision/latest?cb=20110909212434&path-prefix=pl",
+    image: "https://codziennypoznan.pl/wp-content/uploads/2022/06/obrazekpic11016183387331831with-ratio16_9.png",
   },
   {
     id: 4,
