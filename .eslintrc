@@ -43,7 +43,7 @@
     "prettier/prettier": [
       "error",
       {
-        "endOfLine": "auto"
+        "endOfLine": "CRLF"
       }
     ],
     "react/react-in-jsx-scope": "off",
