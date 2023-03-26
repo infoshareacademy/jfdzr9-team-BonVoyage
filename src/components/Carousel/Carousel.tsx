@@ -18,7 +18,6 @@ export const Carousel: React.FC = () => {
   return (
     <>
       <Swiper
-        // cssMode={true}
         navigation={true}
         pagination={true}
         loop={true}
@@ -37,7 +36,7 @@ export const Carousel: React.FC = () => {
                   <img src={voyage.image} alt="" />
                 </div>
                 <div>
-                  <StyledLink to={`/voyage${voyage.id}`}>
+                  <StyledLink to={`/voyage/${voyage.id}`}>
                     <h2>{voyage.name}</h2>
                     <h3> {voyage.destination} </h3>
                   </StyledLink>
