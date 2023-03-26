@@ -27,16 +27,17 @@ const options = {
 };
 
 const Map = ({ markerPosition, center }: GoogleMapProps) => {
-  const [office, setOffice] = useState<LatLngLiteral>();
+  const [place, setPlace] = useState<LatLngLiteral>();
   const mapRef = useRef<GoogleMap>();
-  const onLoad = useCallback((map) => (mapRef.current = map), []);
+  const onLoad = useCallback((map: any) => (mapRef.current = map), []);
 
   return (
     <FullWrapper>
       <SearchbardWrapper>
+        {!place && <p>Pick your trip place!</p>}
         <SearchBarInput
           setOffice={(position) => {
-            setOffice(position);
+            setPlace(position);
             mapRef.current?.panTo(position);
           }}
         />
