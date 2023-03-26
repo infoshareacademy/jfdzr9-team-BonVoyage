@@ -6,6 +6,8 @@ const RegisterPage = () => {
     <>
       <StyledForm>
         <h1>Register</h1>
+        <input />
+        <input />
         <Button type="submit">Register</Button>
       </StyledForm>
     </>
