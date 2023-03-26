@@ -1,9 +1,10 @@
 import { TestVoyageData } from "./TestVoyageData";
+import { StyledLink } from "./Carousel.style";
 
 import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { SliderDiv, SliderDivBottom, SliderDivTop, SliderWrapper } from "./Carousel.style";
+import "./Swiper.css";
 
 // Import Swiper styles
 import "swiper/css";
@@ -17,29 +18,34 @@ export const Carousel: React.FC = () => {
   return (
     <>
       <Swiper
-        cssMode={true}
+        // cssMode={true}
         navigation={true}
         pagination={true}
-        mousewheel={false}
-        keyboard={false}
+        loop={true}
+        slidesPerView={3}
         modules={[Navigation, Pagination, Mousewheel, Keyboard]}
         className="mySwiper"
       >
-        <SliderWrapper>
+        <div>
+          <div>
+            <h1>Our Voyages</h1>
+          </div>
           {TestVoyageData.map((voyage) => (
             <SwiperSlide key={voyage.id}>
-              <SliderDiv>
-                <SliderDivTop>
+              <div className="Card">
+                <div>
                   <img src={voyage.image} alt="" />
-                </SliderDivTop>
-                <SliderDivBottom>
-                  <h2>{voyage.name}</h2>
-                  <h3> {voyage.destination} </h3>
-                </SliderDivBottom>
-              </SliderDiv>
+                </div>
+                <div>
+                  <StyledLink to={`/voyage${voyage.id}`}>
+                    <h2>{voyage.name}</h2>
+                    <h3> {voyage.destination} </h3>
+                  </StyledLink>
+                </div>
+              </div>
             </SwiperSlide>
           ))}
-        </SliderWrapper>
+        </div>
       </Swiper>
     </>
   );

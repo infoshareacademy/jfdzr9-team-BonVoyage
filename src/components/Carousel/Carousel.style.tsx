@@ -1,25 +1,18 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-export const SliderDiv = styled.div`
-  width: 50vh;
-  height: 50vh;
-`;
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #4a6a2b;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
 
-export const SliderDivTop = styled.div`
-  width: 50vh;
-  height: 5vh;
-`;
+  &:hover {
+    color: #1d532e;
+  }
 
-export const SliderDivBottom = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-export const SliderWrapper = styled.div`
-  height: 10vh;
-  width: 10vh;
-
-  img {
-    object-fit: cover;
+  &.active {
+    border-bottom: 2px solid black;
   }
 `;

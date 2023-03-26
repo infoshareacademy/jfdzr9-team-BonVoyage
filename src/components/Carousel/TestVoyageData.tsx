@@ -16,13 +16,13 @@ export const TestVoyageData: Voyage[] = [
     id: 2,
     name: "Test Voyage 2",
     destination: "Zielona Góra",
-    image: "https://visitzielonagora.pl/wp-content/uploads/2021/01/DJI_0028-scaled.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Ratuno21w.jpg/1200px-Ratuno21w.jpg",
   },
   {
     id: 3,
     name: "Test Voyage 3",
     destination: "Poznań",
-    image: "https://codziennypoznan.pl/wp-content/uploads/2022/06/obrazekpic11016183387331831with-ratio16_9.png",
+    image: "https://www.polska.travel/images/pl-PL/glowne-miasta/poznan/poznan_ratusz_2_1170.jpg",
   },
   {
     id: 4,
@@ -36,5 +36,11 @@ export const TestVoyageData: Voyage[] = [
     destination: "Moon",
     image:
       "https://www.seti.org/sites/default/files/styles/original/public/2020-10/earth-view-from-moon-perspective-footprints-1400px.jpg?itok=hAH2R4i3",
+  },
+  {
+    id: 6,
+    name: "Test Voyage 6",
+    destination: "Białystok",
+    image: "https://upload.wikimedia.org/wikipedia/commons/8/81/Bazylika_w_Bia%C5%82ymstoku_-_Emilia_Ernst.jpg",
   },
 ];
