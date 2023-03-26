@@ -1,16 +1,21 @@
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
-import { BrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Route, RouterProvider, createRoutesFromElements } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
 import AddTrip from "./pages/AddTrip";
 
 const App: React.FC = () => {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LandingPage />} />
+      </>,
+    ),
+  );
   return (
     <>
-      <BrowserRouter>
-        <GlobalStyles />
-        <LandingPage />
-        <AddTrip />
-      </BrowserRouter>
+      <GlobalStyles />
+      <RouterProvider router={router} />
     </>
   );
 };
