@@ -1,6 +1,7 @@
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
 import { createBrowserRouter, Route, RouterProvider, createRoutesFromElements } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
+import AddTrip from "./pages/AddTrip";
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
