@@ -1,6 +1,7 @@
 import { GlobalStyles } from "./GlobalStyles/GlobalStyles";
 import { BrowserRouter } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
+import AddTrip from "./pages/AddTrip";
 
 const App: React.FC = () => {
   return (
@@ -8,6 +9,7 @@ const App: React.FC = () => {
       <BrowserRouter>
         <GlobalStyles />
         <LandingPage />
+        <AddTrip />
       </BrowserRouter>
     </>
   );
