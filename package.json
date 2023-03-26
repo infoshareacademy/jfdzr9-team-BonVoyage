@@ -16,7 +16,6 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@reach/combobox": "^0.18.0",
     "@react-google-maps/api": "^2.18.1",
     "firebase": "^9.18.0",
     "react": "^18.2.0",

@@ -1,7 +1,5 @@
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
-import { Combobox, ComboboxPopover, ComboboxList, ComboboxOption } from "@reach/combobox";
-import "@reach/combobox/styles.css";
-import { SearchBar } from "./SearchBarInput.styled";
+import { List, ListButton, ListItem, SearchBar, SearchBarWrapper } from "./SearchBarInput.styled";
 
 type SearchBarInputProps = {
   setOffice: (position: google.maps.LatLngLiteral) => void;
@@ -26,19 +24,30 @@ export default function SearchBarInput({ setOffice }: SearchBarInputProps) {
   };
 
   return (
-    <Combobox onSelect={handleSelect}>
+    <SearchBarWrapper>
       <SearchBar
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
         disabled={!ready}
         placeholder="Find your place"
       />
-      <ComboboxPopover>
-        <ComboboxList>
-          {status === "OK" &&
-            data.map(({ place_id, description }) => <ComboboxOption key={place_id} value={description} />)}
-        </ComboboxList>
-      </ComboboxPopover>
-    </Combobox>
+      {status === "OK" && (
+        <List>
+          {data.map((suggestion) => (
+            <ListItem key={suggestion.place_id}>
+              <ListButton
+                onClick={() => {
+                  handleSelect(suggestion.description);
+                }}
+              >
+                {suggestion.description}
+              </ListButton>
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </SearchBarWrapper>
   );
 }
