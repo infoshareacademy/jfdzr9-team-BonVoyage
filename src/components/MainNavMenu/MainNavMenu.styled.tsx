@@ -21,6 +21,7 @@ export const NavMenuContainer = styled.nav`
   li {
     margin-right: 20px;
     color: white;
+    transition: all 0.3s ease-in-out;
 
     &:last-child {
       margin-right: 0;
@@ -29,6 +30,7 @@ export const NavMenuContainer = styled.nav`
 
   li:hover {
     transform: scale(1.07);
+    transition: all 0.3s ease-in-out;
   }
 
   a {
