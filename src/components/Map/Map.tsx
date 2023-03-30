@@ -1,7 +1,8 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { FullWrapper, MapWrapper, SearchbardWrapper } from "./Map.styled";
 import { useRef, useCallback, useState } from "react";
-import SearchBarInput from "../SerchBarInput/SearchBarInput";
+import SearchBarInput from "../SearchBarInput/SearchBarInput";
+import TripDetailsForm from "../TripDetailsForm/TripDetailsForm";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
@@ -13,6 +14,13 @@ type LatLngFunctions = {
 type Coordinates = {
   lat: number;
   lng: number;
+};
+
+type Pin = Coordinates & {
+  id: number;
+  name: string;
+  description: string;
+  imagesUrl: string[];
 };
 
 type GoogleMapProps = {
@@ -32,17 +40,32 @@ const options = {
 };
 
 const Map = ({ center }: GoogleMapProps) => {
-  const [pins, setPins] = useState<Coordinates[]>([]);
+  const [pins, setPins] = useState<Pin[]>([]);
   const [place, setPlace] = useState<LatLngLiteral>();
+  const [clickedPin, setClickedPin] = useState<Pin>();
   const mapRef = useRef<GoogleMap>();
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
 
   const addNewPin = (e: google.maps.MapMouseEvent) => {
+    setClickedPin(undefined);
     const { lat, lng } = e.latLng as LatLngFunctions;
-    setPins((prev) => [...prev, { lat: lat(), lng: lng() }]);
+    const emptyPin = pins.find((pin) => !pin.description && pin.imagesUrl.length === 0 && !pin.name);
+    if (emptyPin) {
+      setPins((prev) => {
+        const newPins = prev.filter((pin) => pin.id !== emptyPin.id);
+        return [...newPins, { lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: [] }];
+      });
+    } else
+      setPins((prev) => [
+        ...prev,
+        { lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: [] },
+      ]);
   };
 
-  console.log(pins);
+  const onPinClickHandler = (e: google.maps.MapMouseEvent) => {
+    const { lat, lng } = e.latLng as LatLngFunctions;
+    setClickedPin(pins.find((pin) => pin.lat === lat() && pin.lng === lng()));
+  };
   return (
     <FullWrapper>
       <SearchbardWrapper>
@@ -53,6 +76,7 @@ const Map = ({ center }: GoogleMapProps) => {
             mapRef.current?.panTo(position);
           }}
         />
+        {clickedPin && <TripDetailsForm />}
       </SearchbardWrapper>
       <MapWrapper>
         <GoogleMap
@@ -63,7 +87,7 @@ const Map = ({ center }: GoogleMapProps) => {
           onLoad={onLoad}
           onClick={addNewPin}
         >
-          {place && pins.map((pin) => <Marker key={pin.lat} position={pin} />)}
+          {place && pins.map((pin) => <Marker key={pin.lat} position={pin} onClick={onPinClickHandler} />)}
         </GoogleMap>
       </MapWrapper>
     </FullWrapper>
