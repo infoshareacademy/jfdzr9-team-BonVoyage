@@ -5,7 +5,7 @@ type SearchBarInputProps = {
   setCity: (position: google.maps.LatLngLiteral) => void;
 };
 
-export default function SearchBarInput({ setCity }: SearchBarInputProps) {
+const SearchBarInput = ({ setCity }: SearchBarInputProps) => {
   const {
     ready,
     value,
@@ -31,7 +31,7 @@ export default function SearchBarInput({ setCity }: SearchBarInputProps) {
           setValue(e.target.value);
         }}
         disabled={!ready}
-        placeholder="Find your place"
+        placeholder="Type here"
       />
       {status === "OK" && (
         <List>
@@ -50,4 +50,6 @@ export default function SearchBarInput({ setCity }: SearchBarInputProps) {
       )}
     </SearchBarWrapper>
   );
-}
+};
+
+export default SearchBarInput;

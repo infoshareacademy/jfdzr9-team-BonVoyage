@@ -5,13 +5,17 @@ import SearchBarInput from "../SerchBarInput/SearchBarInput";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
+type LatLngFunctions = {
+  lat: () => number;
+  lng: () => number;
+};
+
 type Coordinates = {
   lat: number;
   lng: number;
 };
 
 type GoogleMapProps = {
-  markerPosition: Coordinates;
   center: Coordinates;
 };
 
@@ -23,14 +27,22 @@ const mapContainerStyle = {
 
 const options = {
   disableDefaultUI: true,
-  zoomControl: true,
+  zoomControl: false,
+  clickableIcons: false,
 };
 
-const Map = ({ markerPosition, center }: GoogleMapProps) => {
+const Map = ({ center }: GoogleMapProps) => {
+  const [pins, setPins] = useState<Coordinates[]>([]);
   const [place, setPlace] = useState<LatLngLiteral>();
   const mapRef = useRef<GoogleMap>();
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
 
+  const addNewPin = (e: google.maps.MapMouseEvent) => {
+    const { lat, lng } = e.latLng as LatLngFunctions;
+    setPins((prev) => [...prev, { lat: lat(), lng: lng() }]);
+  };
+
+  console.log(pins);
   return (
     <FullWrapper>
       <SearchbardWrapper>
@@ -43,8 +55,15 @@ const Map = ({ markerPosition, center }: GoogleMapProps) => {
         />
       </SearchbardWrapper>
       <MapWrapper>
-        <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={12} options={options} onLoad={onLoad}>
-          <Marker position={markerPosition} />
+        <GoogleMap
+          mapContainerStyle={mapContainerStyle}
+          center={center}
+          zoom={12}
+          options={options}
+          onLoad={onLoad}
+          onClick={addNewPin}
+        >
+          {place && pins.map((pin) => <Marker key={pin.lat} position={pin} />)}
         </GoogleMap>
       </MapWrapper>
     </FullWrapper>
