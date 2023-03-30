@@ -36,7 +36,7 @@ const Map = ({ markerPosition, center }: GoogleMapProps) => {
       <SearchbardWrapper>
         {!place && <p>Pick your trip place!</p>}
         <SearchBarInput
-          setOffice={(position) => {
+          setCity={(position) => {
             setPlace(position);
             mapRef.current?.panTo(position);
           }}

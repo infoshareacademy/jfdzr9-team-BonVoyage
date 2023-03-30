@@ -2,10 +2,10 @@ import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocom
 import { List, ListButton, ListItem, SearchBar, SearchBarWrapper } from "./SearchBarInput.styled";
 
 type SearchBarInputProps = {
-  setOffice: (position: google.maps.LatLngLiteral) => void;
+  setCity: (position: google.maps.LatLngLiteral) => void;
 };
 
-export default function SearchBarInput({ setOffice }: SearchBarInputProps) {
+export default function SearchBarInput({ setCity }: SearchBarInputProps) {
   const {
     ready,
     value,
@@ -20,7 +20,7 @@ export default function SearchBarInput({ setOffice }: SearchBarInputProps) {
 
     const results = await getGeocode({ address: val });
     const { lat, lng } = await getLatLng(results[0]);
-    setOffice({ lat, lng });
+    setCity({ lat, lng });
   };
 
   return (
