@@ -10,11 +10,7 @@ const AddTrip = () => {
     return <div>Error loading maps</div>;
   }
 
-  return isLoaded ? (
-    <Map markerPosition={{ lat: 1, lng: 1 }} center={{ lat: 45.7749, lng: -122.4194 }} />
-  ) : (
-    <div>Loading maps...</div>
-  );
+  return isLoaded ? <Map center={{ lat: 45.7749, lng: -122.4194 }} /> : <div>Loading maps...</div>;
 };
 
 export default AddTrip;
