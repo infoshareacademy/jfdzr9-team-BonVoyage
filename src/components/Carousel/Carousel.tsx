@@ -1,5 +1,6 @@
 import { TestVoyageData } from "./TestVoyageData";
 import { StyledLink } from "./Carousel.style";
+// import { Switch, Route } from "react-router-dom";
 
 import React, { useRef, useState } from "react";
 // Import Swiper React components
