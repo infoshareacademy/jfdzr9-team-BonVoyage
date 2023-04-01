@@ -46,7 +46,7 @@ const Map = ({ center }: GoogleMapProps) => {
   const mapRef = useRef<GoogleMap>();
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
 
-  const addNewPin = (e: google.maps.MapMouseEvent) => {
+  const addNewPin = (e: google.maps.KmlMouseEvent) => {
     setClickedPin(undefined);
     const { lat, lng } = e.latLng as LatLngFunctions;
     const emptyPin = pins.find((pin) => !pin.description && pin.imagesUrl.length === 0 && !pin.name);
