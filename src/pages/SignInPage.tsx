@@ -1,14 +1,15 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FirebaseError } from "@firebase/util";
-import { Link } from "react-router-dom";
 import { firebaseErrors } from "../firebase/firebaseErrors";
 import { StyledForm } from "../ui/form/form.styled";
 import { Button } from "../ui/button/button.styled";
 import { auth } from "../firebase/firebase.config";
 import { FcGoogle } from "react-icons/fc";
 import { TextInput } from "../ui/TextInput/TextInput.styled";
+import { useUser } from "../context/auth.context";
+import { Link, useNavigate } from "react-router-dom";
 
 interface IFormInputs {
   email: string;
@@ -17,8 +18,10 @@ interface IFormInputs {
 type FirebaseErrorsKeys = keyof typeof firebaseErrors;
 
 const SignInPage = () => {
+  const user = useUser();
   const { handleSubmit, control } = useForm<IFormInputs>();
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<IFormInputs> = ({ email, password }) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -36,6 +39,10 @@ const SignInPage = () => {
       setError(firebaseErrors[(error as FirebaseError).code as FirebaseErrorsKeys]);
     }
   };
+
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user]);
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
