@@ -6,6 +6,7 @@ import SignInPage from "./pages/SignInPage";
 import AddTrip from "./pages/AddTrip";
 import AccountPage from "./pages/AccountPage";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
+import { Team } from "./components/AboutUs/AboutUs";
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Route path="/signIn" element={<SignInPage />} />
         <Route path="/signIn/register" element={<RegisterPage />} />
         <Route element={<RequireAuth />}>
+          <Route path="/about" element={<Team />} />
           <Route path="/voyages" element={<AddTrip />} />
           <Route path="/account" element={<AccountPage />} />
         </Route>
