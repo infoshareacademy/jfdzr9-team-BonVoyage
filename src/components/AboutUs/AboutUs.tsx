@@ -3,6 +3,7 @@ import { MemberCard, MemberWrapper, H1, LogoContainer } from "./AboutUs.style";
 import { GithubLogo } from "../../assets/GithubLogo";
 import { LinkedinLogo } from "../../assets/LinkedinLogo";
 import { Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 export const Team: React.FC = () => {
   return (

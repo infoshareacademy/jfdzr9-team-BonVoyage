@@ -1,9 +1,8 @@
 import { TestVoyageData } from "./TestVoyageData";
 import { StyledLink } from "./Carousel.style";
-import { Route, Switch } from "react-router-dom";
-// import { Switch, Route } from "react-router-dom";
+import { useMediaQuery } from "../../hooks/UseMediaQuery";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./Swiper.css";
@@ -17,42 +16,76 @@ import "swiper/css/pagination";
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 
 export const Carousel: React.FC = () => {
-  return (
-    <>
-      <Swiper
-        // breakpoints={
-        //   768:{
-        //     slidesPerView: 2,
-        //   }
-        // }
-        navigation={true}
-        pagination={true}
-        loop={true}
-        slidesPerView={3}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-        className="mySwiper"
-      >
-        <div>
+  const smallScreen = useMediaQuery("(min-width: 768px)");
+  const mediumScreen = useMediaQuery("(min-width: 768px)");
+
+  if (smallScreen) {
+    return (
+      <>
+        <Swiper
+          navigation={true}
+          pagination={true}
+          loop={true}
+          slidesPerView={3}
+          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+          className="mySwiper"
+        >
           <div>
-            <h1>Our Voyages</h1>
+            <div>
+              <h1>Our Voyages</h1>
+            </div>
+            {TestVoyageData.map((voyage) => (
+              <SwiperSlide key={voyage.id}>
+                <div className="Card">
+                  <div>
+                    <img src={voyage.image} alt="" />
+                  </div>
+                  <div>
+                    <StyledLink to={`/voyage/${voyage.id}`}>
+                      <h2>{voyage.name}</h2>
+                      <h3> {voyage.destination} </h3>
+                    </StyledLink>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
           </div>
-          {TestVoyageData.map((voyage) => (
-            <SwiperSlide key={voyage.id}>
-              <div className="Card">
-                <div>
-                  <img src={voyage.image} alt="" />
+        </Swiper>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Swiper
+          navigation={true}
+          pagination={true}
+          loop={true}
+          slidesPerView={1}
+          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+          className="mySwiper"
+        >
+          <div>
+            <div>
+              <h1>Our Voyages</h1>
+            </div>
+            {TestVoyageData.map((voyage) => (
+              <SwiperSlide key={voyage.id}>
+                <div className="Card">
+                  <div>
+                    <img src={voyage.image} alt="" />
+                  </div>
+                  <div>
+                    <StyledLink to={`/voyage/${voyage.id}`}>
+                      <h2>{voyage.name}</h2>
+                      <h3> {voyage.destination} </h3>
+                    </StyledLink>
+                  </div>
                 </div>
-                <div>
-                  <StyledLink to={`/voyage/${voyage.id}`}>
-                    <h2>{voyage.name}</h2>
-                    <h3> {voyage.destination} </h3>
-                  </StyledLink>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </div>
-      </Swiper>
-    </>
-  );
+              </SwiperSlide>
+            ))}
+          </div>
+        </Swiper>
+      </>
+    );
+  }
 };

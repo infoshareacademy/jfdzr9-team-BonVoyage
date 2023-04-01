@@ -50,6 +50,10 @@ export const MemberCard = styled.div`
   h3 {
     text-align: center;
   }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    margin: 2vh 0;
+  }
 `;
 
 export const MemberWrapper = styled.div`
@@ -60,6 +64,7 @@ export const MemberWrapper = styled.div`
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
+    padding: 5vh;
   }
 `;
 
