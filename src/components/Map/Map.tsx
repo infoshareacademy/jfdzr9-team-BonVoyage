@@ -46,7 +46,7 @@ const Map = ({ center }: GoogleMapProps) => {
   const mapRef = useRef<GoogleMap>();
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
 
-  const addNewPin = (e: google.maps.KmlMouseEvent) => {
+  const addNewPin = (e: google.maps.MapMouseEvent) => {
     setClickedPin(undefined);
     const { lat, lng } = e.latLng as LatLngFunctions;
     const emptyPin = pins.find((pin) => !pin.description && pin.imagesUrl.length === 0 && !pin.name);
@@ -62,7 +62,7 @@ const Map = ({ center }: GoogleMapProps) => {
       ]);
   };
 
-  const onPinClickHandler = (e: google.maps.KmlMouseEvent) => {
+  const onPinClickHandler = (e: google.maps.MapMouseEvent) => {
     const { lat, lng } = e.latLng as LatLngFunctions;
     setClickedPin(pins.find((pin) => pin.lat === lat() && pin.lng === lng()));
   };
