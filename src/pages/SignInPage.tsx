@@ -10,6 +10,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useUser } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
 import { TextInputProps } from "../ui/TextInput/TextInputProps";
+import { TextInput } from "../ui/TextInput/TextInput.styled";
 
 interface IFormInputs {
   email: string;
@@ -19,16 +20,14 @@ type FirebaseErrorsKeys = keyof typeof firebaseErrors;
 
 const SignInPage = () => {
   const user = useUser();
-  const { handleSubmit, control } = useForm<IFormInputs>();
+  const { handleSubmit, register } = useForm<IFormInputs>();
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<IFormInputs> = ({ email, password }) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then()
-      .catch((error: FirebaseError) => {
-        setError(firebaseErrors[(error as FirebaseError).code as FirebaseErrorsKeys]);
-      });
+    signInWithEmailAndPassword(auth, email, password).catch((error: FirebaseError) => {
+      setError(firebaseErrors[(error as FirebaseError).code as FirebaseErrorsKeys]);
+    });
   };
 
   const googleProvider = new GoogleAuthProvider();
@@ -47,7 +46,9 @@ const SignInPage = () => {
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <h1>Sign in to existing account:</h1>
-      <Controller
+      <TextInput placeholder="Type email" {...register("email")} />
+      <TextInput placeholder="Type password" {...register("password")} />
+      {/* <Controller
         name="email"
         control={control}
         render={({ field }) => <TextInputProps placeholder="Type email" type={"email"} {...field} />}
@@ -56,7 +57,7 @@ const SignInPage = () => {
         name="password"
         control={control}
         render={({ field }) => <TextInputProps placeholder="Type password" type={"password"} {...field} />}
-      />
+      /> */}
       <Button type="submit">Login</Button>
       <Button onClick={googleLogin}>
         <FcGoogle />
