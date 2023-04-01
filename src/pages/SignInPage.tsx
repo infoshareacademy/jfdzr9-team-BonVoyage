@@ -7,6 +7,7 @@ import { firebaseErrors } from "../firebase/firebaseErrors";
 import { StyledForm } from "../ui/form/form.styled";
 import { Button } from "../ui/button/button.styled";
 import { auth } from "../firebase/firebase.config";
+import { FcGoogle } from "react-icons/fc";
 
 interface IFormInputs {
   email: string;
@@ -41,7 +42,10 @@ const SignInPage = () => {
       <input placeholder="Type email" type={"email"} />
       <input placeholder="Type password" type={"password"} />
       <Button type="submit">Register</Button>
-      <Button onClick={googleLogin}>Sign in with Google</Button>
+      <Button onClick={googleLogin}>
+        <FcGoogle />
+        Sign in with Google
+      </Button>
       <h3>Do you want to create a new account?</h3>
       <Link to={"/signIn/register"}>Register</Link>
 
