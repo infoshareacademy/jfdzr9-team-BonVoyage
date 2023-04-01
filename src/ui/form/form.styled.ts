@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-//na razie ogólne stylowanie
-
 export const StyledForm = styled.form`
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 4rem 0;
-  width: 100%;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
 `;
