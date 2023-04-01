@@ -16,7 +16,7 @@ type Coordinates = {
   lng: number;
 };
 
-type Pin = Coordinates & {
+export type Pin = Coordinates & {
   id: number;
   name: string;
   description: string;
@@ -42,7 +42,7 @@ const options = {
 const Map = ({ center }: GoogleMapProps) => {
   const [pins, setPins] = useState<Pin[]>([]);
   const [place, setPlace] = useState<LatLngLiteral>();
-  const [clickedPin, setClickedPin] = useState<Pin>();
+  const [clickedPin, setClickedPin] = useState<number>();
   const mapRef = useRef<GoogleMap>();
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
 
@@ -64,8 +64,11 @@ const Map = ({ center }: GoogleMapProps) => {
 
   const onPinClickHandler = (e: google.maps.MapMouseEvent) => {
     const { lat, lng } = e.latLng as LatLngFunctions;
-    setClickedPin(pins.find((pin) => pin.lat === lat() && pin.lng === lng()));
+    setClickedPin(pins.find((pin) => pin.lat === lat() && pin.lng === lng())?.id);
   };
+
+  console.log(pins, clickedPin);
+
   return (
     <FullWrapper>
       <SearchbardWrapper>
@@ -76,7 +79,7 @@ const Map = ({ center }: GoogleMapProps) => {
             mapRef.current?.panTo(position);
           }}
         />
-        {clickedPin && <TripDetailsForm />}
+        {clickedPin && <TripDetailsForm pinId={clickedPin} setPins={setPins} pins={pins} />}
       </SearchbardWrapper>
       <MapWrapper>
         <GoogleMap
