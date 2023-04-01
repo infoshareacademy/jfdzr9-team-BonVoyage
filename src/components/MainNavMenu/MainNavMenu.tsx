@@ -40,7 +40,7 @@ export const MainNavMenu: React.FC<NavigationProps> = (props): JSX.Element => {
                 <NavLink to="/about">About Us</NavLink>
               </li>
               <li>
-                <Link to="/login">Login</Link>
+                <Link to="/signIn">Login</Link>
               </li>
             </ul>
           </NavMenuDiv>

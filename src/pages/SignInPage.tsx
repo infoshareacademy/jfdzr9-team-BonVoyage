@@ -24,9 +24,12 @@ const SignInPage = () => {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<IFormInputs> = ({ email, password }) => {
-    signInWithEmailAndPassword(auth, email, password).catch((error: FirebaseError) => {
-      setError(firebaseErrors[(error as FirebaseError).code as FirebaseErrorsKeys]);
-    });
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => navigate(`/account`))
+
+      .catch((error: FirebaseError) => {
+        setError(firebaseErrors[(error as FirebaseError).code as FirebaseErrorsKeys]);
+      });
   };
 
   const googleProvider = new GoogleAuthProvider();
