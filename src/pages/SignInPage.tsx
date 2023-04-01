@@ -7,9 +7,9 @@ import { StyledForm } from "../ui/form/form.styled";
 import { Button } from "../ui/button/button.styled";
 import { auth } from "../firebase/firebase.config";
 import { FcGoogle } from "react-icons/fc";
-import { TextInput } from "../ui/TextInput/TextInput.styled";
 import { useUser } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
+import { TextInputProps } from "../ui/TextInput/TextInputProps";
 
 interface IFormInputs {
   email: string;
@@ -41,7 +41,7 @@ const SignInPage = () => {
   };
 
   useEffect(() => {
-    if (user) navigate("/");
+    if (user) navigate("/account");
   }, [user]);
 
   return (
@@ -50,14 +50,14 @@ const SignInPage = () => {
       <Controller
         name="email"
         control={control}
-        render={({ field }) => <TextInput placeholder="Type email" type={"email"} {...field} />}
+        render={({ field }) => <TextInputProps placeholder="Type email" type={"email"} {...field} />}
       />
       <Controller
         name="password"
         control={control}
-        render={({ field }) => <TextInput placeholder="Type password" type={"password"} {...field} />}
+        render={({ field }) => <TextInputProps placeholder="Type password" type={"password"} {...field} />}
       />
-      <Button type="submit">Register</Button>
+      <Button type="submit">Login</Button>
       <Button onClick={googleLogin}>
         <FcGoogle />
         Sign in with Google
