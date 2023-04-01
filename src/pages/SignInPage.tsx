@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { FirebaseError } from "@firebase/util";
@@ -9,7 +9,6 @@ import { auth } from "../firebase/firebase.config";
 import { FcGoogle } from "react-icons/fc";
 import { useUser } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
-import { TextInputProps } from "../ui/TextInput/TextInputProps";
 import { TextInput } from "../ui/TextInput/TextInput.styled";
 
 interface IFormInputs {
@@ -48,16 +47,6 @@ const SignInPage = () => {
       <h1>Sign in to existing account:</h1>
       <TextInput placeholder="Type email" {...register("email")} />
       <TextInput placeholder="Type password" {...register("password")} />
-      {/* <Controller
-        name="email"
-        control={control}
-        render={({ field }) => <TextInputProps placeholder="Type email" type={"email"} {...field} />}
-      />
-      <Controller
-        name="password"
-        control={control}
-        render={({ field }) => <TextInputProps placeholder="Type password" type={"password"} {...field} />}
-      /> */}
       <Button type="submit">Login</Button>
       <Button onClick={googleLogin}>
         <FcGoogle />
