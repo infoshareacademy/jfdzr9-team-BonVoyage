@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { FirebaseError } from "@firebase/util";
@@ -17,7 +17,7 @@ interface IFormInputs {
 type FirebaseErrorsKeys = keyof typeof firebaseErrors;
 
 const SignInPage = () => {
-  const { handleSubmit } = useForm<IFormInputs>();
+  const { handleSubmit, control } = useForm<IFormInputs>();
   const [error, setError] = useState("");
 
   const onSubmit: SubmitHandler<IFormInputs> = ({ email, password }) => {
@@ -40,8 +40,16 @@ const SignInPage = () => {
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <h1>Sign in to existing account:</h1>
-      <TextInput placeholder="Type email" type={"email"} />
-      <TextInput placeholder="Type password" type={"password"} />
+      <Controller
+        name="email"
+        control={control}
+        render={({ field }) => <TextInput placeholder="Type email" type={"email"} {...field} />}
+      />
+      <Controller
+        name="password"
+        control={control}
+        render={({ field }) => <TextInput placeholder="Type password" type={"password"} {...field} />}
+      />
       <Button type="submit">Register</Button>
       <Button onClick={googleLogin}>
         <FcGoogle />
@@ -49,7 +57,6 @@ const SignInPage = () => {
       </Button>
       <h3>Do you want to create a new account?</h3>
       <Link to={"/signIn/register"}>Register</Link>
-
       {error}
     </StyledForm>
   );
