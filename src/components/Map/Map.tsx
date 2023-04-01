@@ -62,7 +62,7 @@ const Map = ({ center }: GoogleMapProps) => {
       ]);
   };
 
-  const onPinClickHandler = (e: google.maps.MapMouseEvent) => {
+  const onPinClickHandler = (e: google.maps.KmlMouseEvent) => {
     const { lat, lng } = e.latLng as LatLngFunctions;
     setClickedPin(pins.find((pin) => pin.lat === lat() && pin.lng === lng()));
   };
