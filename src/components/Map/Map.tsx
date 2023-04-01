@@ -16,8 +16,8 @@ type Coordinates = {
   lng: number;
 };
 
-type Pin = Coordinates & {
-  id: number;
+export type Pin = Coordinates & {
+  id?: number;
   name: string;
   description: string;
   imagesUrl: string[];
@@ -66,6 +66,7 @@ const Map = ({ center }: GoogleMapProps) => {
     const { lat, lng } = e.latLng as LatLngFunctions;
     setClickedPin(pins.find((pin) => pin.lat === lat() && pin.lng === lng()));
   };
+
   return (
     <FullWrapper>
       <SearchbardWrapper>
@@ -76,7 +77,7 @@ const Map = ({ center }: GoogleMapProps) => {
             mapRef.current?.panTo(position);
           }}
         />
-        {clickedPin && <TripDetailsForm />}
+        {clickedPin && <TripDetailsForm clickedPin={clickedPin} setPins={setPins} setClickedPin={setClickedPin} />}
       </SearchbardWrapper>
       <MapWrapper>
         <GoogleMap
