@@ -5,13 +5,14 @@ export const Button = styled.button`
   flex-direction: row;
   gap: 0.7rem;
   align-items: center;
-  font-size: 16px;
+  justify-content: center;
+  font-size: 15px;
   font-weight: 700;
   border-radius: 10px;
-  padding: 0.7rem;
-  text-transform: capitalize;
+  padding: 5px;
   transition: 0.2s linear;
   background-color: #0a4d3b;
   color: #e0e9e7;
-  border: 0;
+  border: 1px solid gray;
+  width: 100%;
 `;

@@ -7,6 +7,7 @@ import { firebaseErrors } from "../firebase/firebaseErrors";
 // import { FirebaseError } from "firebase/app";
 import { FirebaseError } from "@firebase/util";
 import { useState } from "react";
+import { TextInput } from "../ui/TextInput/TextInput.styled";
 
 interface IFormInput {
   email: string;
@@ -27,8 +28,8 @@ const RegisterPage = () => {
     <>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <h1>Register</h1>
-        <input {...register("email")} />
-        <input {...register("password")} />
+        <TextInput placeholder="Type email" {...register("email")} />
+        <TextInput placeholder="Type password" {...register("password")} />
         <Button type="submit">Register</Button>
         {error}
       </StyledForm>

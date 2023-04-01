@@ -8,6 +8,7 @@ import { StyledForm } from "../ui/form/form.styled";
 import { Button } from "../ui/button/button.styled";
 import { auth } from "../firebase/firebase.config";
 import { FcGoogle } from "react-icons/fc";
+import { TextInput } from "../ui/TextInput/TextInput.styled";
 
 interface IFormInputs {
   email: string;
@@ -39,8 +40,8 @@ const SignInPage = () => {
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <h1>Sign in to existing account:</h1>
-      <input placeholder="Type email" type={"email"} />
-      <input placeholder="Type password" type={"password"} />
+      <TextInput placeholder="Type email" type={"email"} />
+      <TextInput placeholder="Type password" type={"password"} />
       <Button type="submit">Register</Button>
       <Button onClick={googleLogin}>
         <FcGoogle />
