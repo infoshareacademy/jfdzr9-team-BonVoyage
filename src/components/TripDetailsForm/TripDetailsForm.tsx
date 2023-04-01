@@ -11,22 +11,30 @@ type FormData = {
 };
 
 type FormProps = {
-  pinId: number;
-  pins: Pin[];
+  clickedPin: Pin;
   setPins: React.Dispatch<React.SetStateAction<Pin[]>>;
+  setClickedPin: React.Dispatch<React.SetStateAction<Pin | undefined>>;
 };
 
-const TripDetailsForm = ({ pinId, pins, setPins }: FormProps) => {
-  // const selectedPin = pins?.find((pin) => pin.id === pinId);
-
-  const { register, handleSubmit } = useForm<FormData>();
+const TripDetailsForm = ({ clickedPin, setPins, setClickedPin }: FormProps) => {
+  const { register, handleSubmit } = useForm<FormData>({
+    values: {
+      name: clickedPin.name,
+      description: clickedPin.description,
+      imagesUrl: clickedPin.imagesUrl,
+    },
+  });
 
   const onSubmit = handleSubmit(({ name, description, imagesUrl }) => {
     setPins((prev) => {
-      const selectedPin = prev.find((pin) => pin.id === pinId);
-      const otherPins = prev.filter((pin) => pin.id !== pinId);
-      return [...otherPins, { ...selectedPin, name, description, imagesUrl }];
+      const selectedPin = prev.find((pin) => pin.id === clickedPin.id);
+      const otherPins = prev.filter((pin) => pin.id !== clickedPin.id);
+      return [
+        ...otherPins,
+        { ...selectedPin, name, description, imagesUrl, lat: selectedPin?.lat || 0, lng: selectedPin?.lng || 0 },
+      ];
     });
+    setClickedPin(undefined);
   });
 
   return (
