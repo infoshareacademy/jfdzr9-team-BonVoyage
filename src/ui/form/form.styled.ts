@@ -8,5 +8,6 @@ export const StyledForm = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4rem;
+  padding: 4rem 0;
+  width: 100%;
 `;
