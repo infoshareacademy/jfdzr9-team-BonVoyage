@@ -9,3 +9,13 @@ export const TextInput = styled.input`
   border: 1px solid gray;
   width: 100%;
 `;
+
+export const InputLabel = styled.label`
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: var(--padding-search-bar-items);
+  min-width: 20rem;
+  width: 100%;
+`;

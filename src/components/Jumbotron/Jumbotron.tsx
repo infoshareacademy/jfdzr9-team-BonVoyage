@@ -7,7 +7,7 @@ export const Jumbotron: React.FC = () => {
     <JumbotronContainer>
       <JumbotronDiv>
         <h1>Bon voyage</h1>
-        <Link to="/login">
+        <Link to="/signIn">
           <ButtonGreen />
         </Link>
       </JumbotronDiv>
