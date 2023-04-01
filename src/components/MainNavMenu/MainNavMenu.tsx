@@ -1,5 +1,7 @@
 import { NavMenuContainer, NavMenuItem, NavMenuDiv } from "./MainNavMenu.styled";
 import { Link } from "react-router-dom";
+// import { Carousel } from "../Carousel/Carousel";
+// import { Team } from "../AboutUs/AboutUs";
 
 interface NavigationProps {
   something?: string;

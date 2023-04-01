@@ -1,5 +1,6 @@
 import { TestVoyageData } from "./TestVoyageData";
 import { StyledLink } from "./Carousel.style";
+import { Route, Switch } from "react-router-dom";
 // import { Switch, Route } from "react-router-dom";
 
 import React, { useRef, useState } from "react";
@@ -19,6 +20,11 @@ export const Carousel: React.FC = () => {
   return (
     <>
       <Swiper
+        // breakpoints={
+        //   768:{
+        //     slidesPerView: 2,
+        //   }
+        // }
         navigation={true}
         pagination={true}
         loop={true}
