@@ -1,6 +1,7 @@
 import { useLoadScript } from "@react-google-maps/api";
 import Map from "../components/Map/Map";
 import { MainNavMenu } from "../components/MainNavMenu/MainNavMenu";
+import { Footer } from "../components/Footer/Footer";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
 
@@ -23,6 +24,7 @@ export const AddTripPage = () => {
     <>
       <MainNavMenu />
       <AddTrip />
+      <Footer year={2023} />
     </>
   );
 };
