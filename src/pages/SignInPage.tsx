@@ -10,6 +10,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useUser } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
 import { TextInput } from "../ui/TextInput/TextInput.styled";
+import { MainNavMenu } from "../components/MainNavMenu/MainNavMenu";
 
 interface IFormInputs {
   email: string;
@@ -46,19 +47,22 @@ const SignInPage = () => {
   }, [user]);
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <h1>Sign in to existing account:</h1>
-      <TextInput placeholder="Type email" {...register("email")} />
-      <TextInput placeholder="Type password" {...register("password")} />
-      <Button type="submit">Login</Button>
-      <Button onClick={googleLogin}>
-        <FcGoogle />
-        Sign in with Google
-      </Button>
-      <h3>Do you want to create a new account?</h3>
-      <Link to={"/signIn/register"}>Register</Link>
-      {error}
-    </StyledForm>
+    <>
+      <MainNavMenu />
+      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        <h1>Sign in to existing account:</h1>
+        <TextInput placeholder="Type email" {...register("email")} />
+        <TextInput placeholder="Type password" {...register("password")} />
+        <Button type="submit">Login</Button>
+        <Button onClick={googleLogin}>
+          <FcGoogle />
+          Sign in with Google
+        </Button>
+        <h3>Do you want to create a new account?</h3>
+        <Link to={"/signIn/register"}>Register</Link>
+        {error}
+      </StyledForm>
+    </>
   );
 };
 

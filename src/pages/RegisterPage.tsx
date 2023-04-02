@@ -8,6 +8,7 @@ import { firebaseErrors } from "../firebase/firebaseErrors";
 import { FirebaseError } from "@firebase/util";
 import { useState } from "react";
 import { TextInput } from "../ui/TextInput/TextInput.styled";
+import { MainNavMenu } from "../components/MainNavMenu/MainNavMenu";
 // import { Navigate } from "react-router-dom";
 
 interface IFormInput {
@@ -29,6 +30,7 @@ const RegisterPage = () => {
   };
   return (
     <>
+      <MainNavMenu />
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <h1>Register</h1>
         <TextInput placeholder="Type email" {...register("email")} />

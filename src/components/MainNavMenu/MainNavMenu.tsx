@@ -36,6 +36,11 @@ export const MainNavMenu: React.FC<NavigationProps> = (): JSX.Element => {
             </ul>
           </NavMenuDiv>
         </NavMenuContainer>
+        <div>
+          <br />
+          <br />
+          <br />
+        </div>
       </>
     );
   } else {
