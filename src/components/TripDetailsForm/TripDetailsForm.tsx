@@ -1,5 +1,5 @@
 import { Button } from "../../ui/button/button.styled";
-import { StyledForm } from "../../ui/form/form.styled";
+import { StyledFormDetails } from "../../ui/form/form.styled";
 import { TextInput } from "../../ui/TextInput/TextInput.styled";
 import { useForm } from "react-hook-form";
 import { Pin } from "../Map/Map";
@@ -38,13 +38,13 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin }: FormProps) => {
   });
 
   return (
-    <StyledForm onSubmit={onSubmit}>
+    <StyledFormDetails onSubmit={onSubmit}>
       <h2>Trip Details</h2>
       <TextInput placeholder="Pin name" type={"text"} {...register("name")} />
       <TextInput placeholder="Add details" type={"text"} {...register("description")} />
       <TextInput alt="Uppload photos" type={"image"} {...register("imagesUrl")} />
       <Button>Save</Button>
-    </StyledForm>
+    </StyledFormDetails>
   );
 };
 
