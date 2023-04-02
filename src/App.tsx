@@ -3,7 +3,7 @@ import { createBrowserRouter, Route, RouterProvider, createRoutesFromElements } 
 import { LandingPage } from "./pages/LandingPage";
 import RegisterPage from "./pages/RegisterPage";
 import SignInPage from "./pages/SignInPage";
-import AddTrip from "./pages/AddTrip";
+import { AddTripPage } from "./pages/AddTrip";
 import AccountPage from "./pages/AccountPage";
 // import RequireAuth from "./components/RequireAuth/RequireAuth";
 import { Team } from "./components/AboutUs/AboutUs";
@@ -17,7 +17,7 @@ const App: React.FC = () => {
         <Route path="/signIn/register" element={<RegisterPage />} />
         {/* <Route element={<RequireAuth />}> */}
         <Route path="/about" element={<Team />} />
-        <Route path="/voyages" element={<AddTrip />} />
+        <Route path="/voyages" element={<AddTripPage />} />
         <Route path="/account" element={<AccountPage />} />
         {/* </Route> */}
       </>,
