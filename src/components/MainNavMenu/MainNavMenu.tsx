@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { Burger } from "./MobileMainNav";
 import { Menu } from "./MobileMenu";
+import { Dropdown } from "./Dropdown";
 
 interface NavigationProps {
   something?: string;
@@ -12,6 +13,7 @@ interface NavigationProps {
 export const MainNavMenu: React.FC<NavigationProps> = (): JSX.Element => {
   const bigScreen = useMediaQuery("(min-width: 768px)");
   const [open, setOpen] = useState(false);
+
   if (bigScreen) {
     return (
       <>
@@ -31,7 +33,7 @@ export const MainNavMenu: React.FC<NavigationProps> = (): JSX.Element => {
                 <NavLink to="/about">About Us</NavLink>
               </li>
               <li>
-                <Link to="/signIn">Login</Link>
+                <Dropdown />
               </li>
             </ul>
           </NavMenuDiv>
