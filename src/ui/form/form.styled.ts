@@ -12,3 +12,13 @@ export const StyledForm = styled.form`
   margin-left: auto;
   margin-right: auto;
 `;
+
+export const StyledFormDetails = styled.form`
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 0;
+  width: 100%;
+`;
