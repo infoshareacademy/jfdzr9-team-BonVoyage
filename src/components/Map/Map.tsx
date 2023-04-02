@@ -44,9 +44,7 @@ const Map = ({ center }: GoogleMapProps) => {
   const [place, setPlace] = useState<LatLngLiteral>();
   const [clickedPin, setClickedPin] = useState<Pin>();
   const mapRef = useRef<GoogleMap>();
-  const onLoad = useCallback((map: GoogleMap) => {
-    mapRef.current = map;
-  }, []);
+  const onLoad = useCallback((map: any) => (mapRef.current = map), []);
 
   const addNewPin = (e: google.maps.MapMouseEvent) => {
     setClickedPin(undefined);
