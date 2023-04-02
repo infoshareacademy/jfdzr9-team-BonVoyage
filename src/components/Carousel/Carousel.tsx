@@ -2,7 +2,6 @@ import { TestVoyageData } from "./TestVoyageData";
 import { StyledLink } from "./Carousel.style";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
 
-import React, { useEffect, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./Swiper.css";
@@ -17,7 +16,6 @@ import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 
 export const Carousel: React.FC = () => {
   const smallScreen = useMediaQuery("(min-width: 768px)");
-  const mediumScreen = useMediaQuery("(min-width: 768px)");
 
   if (smallScreen) {
     return (

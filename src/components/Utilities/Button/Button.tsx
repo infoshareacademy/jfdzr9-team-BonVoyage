@@ -17,6 +17,6 @@ const Button = styled.button`
   }
 `;
 
-export const ButtonGreen: React.FC = (value) => {
+export const ButtonGreen: React.FC = () => {
   return <Button>Sign In</Button>;
 };
