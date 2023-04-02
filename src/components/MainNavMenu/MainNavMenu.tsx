@@ -1,4 +1,4 @@
-import { NavMenuContainer, NavMenuItem, NavMenuDiv } from "./MainNavMenu.styled";
+import { NavMenuContainer, NavMenuDiv } from "./MainNavMenu.styled";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
@@ -9,16 +9,7 @@ interface NavigationProps {
   something?: string;
 }
 
-interface MenuItem {
-  title: string;
-  url: string;
-}
-
-interface Props {
-  menuItems: MenuItem[];
-}
-
-export const MainNavMenu: React.FC<NavigationProps> = (props): JSX.Element => {
+export const MainNavMenu: React.FC<NavigationProps> = (): JSX.Element => {
   const bigScreen = useMediaQuery("(min-width: 768px)");
   const [open, setOpen] = useState(false);
   if (bigScreen) {
@@ -40,7 +31,7 @@ export const MainNavMenu: React.FC<NavigationProps> = (props): JSX.Element => {
                 <NavLink to="/about">About Us</NavLink>
               </li>
               <li>
-                <Link to="/login">Login</Link>
+                <Link to="/signIn">Login</Link>
               </li>
             </ul>
           </NavMenuDiv>
