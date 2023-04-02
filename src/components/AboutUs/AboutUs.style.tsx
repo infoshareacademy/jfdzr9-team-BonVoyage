@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const H1 = styled.h1`
   text-align: center;
+  padding-top: 12vh;
 `;
 
 export const MemberCard = styled.div`
