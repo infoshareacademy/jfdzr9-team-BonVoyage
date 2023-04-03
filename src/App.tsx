@@ -8,7 +8,6 @@ import AccountPage from "./pages/AccountPage";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import { Team } from "./components/AboutUs/AboutUs";
 import { AuthContextProvider } from "./context/auth.context";
-//some changes
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
