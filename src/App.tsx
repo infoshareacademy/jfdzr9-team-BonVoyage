@@ -7,7 +7,7 @@ import { AddTripPage } from "./pages/AddTrip";
 import AccountPage from "./pages/AccountPage";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import { Team } from "./components/AboutUs/AboutUs";
-//some changes
+import { AuthContextProvider } from "./context/auth.context";
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
@@ -26,8 +26,10 @@ const App: React.FC = () => {
   );
   return (
     <>
-      <GlobalStyles />
-      <RouterProvider router={router} />
+      <AuthContextProvider>
+        <GlobalStyles />
+        <RouterProvider router={router} />
+      </AuthContextProvider>
     </>
   );
 };
