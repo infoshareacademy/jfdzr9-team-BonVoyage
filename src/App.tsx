@@ -8,11 +8,12 @@ import AccountPage from "./pages/AccountPage";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import { Team } from "./components/AboutUs/AboutUs";
 import { AuthContextProvider } from "./context/auth.context";
+import LayoutMain from "./components/Layout/LayoutMain";
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <>
+      <Route path="/" element={<LayoutMain />}>
         <Route path="/" element={<LandingPage />} />
         <Route path="/signIn" element={<SignInPage />} />
         <Route path="/signIn/register" element={<RegisterPage />} />
@@ -21,7 +22,7 @@ const App: React.FC = () => {
           <Route path="/voyages" element={<AddTripPage />} />
           <Route path="/account" element={<AccountPage />} />
         </Route>
-      </>,
+      </Route>,
     ),
   );
   return (
