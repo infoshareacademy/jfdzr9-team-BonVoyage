@@ -1,5 +1,6 @@
 import { useLoadScript } from "@react-google-maps/api";
 import Map from "../components/Map/Map";
+import { MainNavMenu } from "../components/MainNavMenu/MainNavMenu";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
 
@@ -17,4 +18,11 @@ const AddTrip = () => {
   return isLoaded ? <Map center={{ lat: 45.7749, lng: -122.4194 }} /> : <div>Loading maps...</div>;
 };
 
-export default AddTrip;
+export const AddTripPage = () => {
+  return (
+    <>
+      <MainNavMenu />
+      <AddTrip />
+    </>
+  );
+};
