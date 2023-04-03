@@ -7,6 +7,7 @@ import { AddTripPage } from "./pages/AddTrip";
 import AccountPage from "./pages/AccountPage";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import { Team } from "./components/AboutUs/AboutUs";
+//some changes
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
