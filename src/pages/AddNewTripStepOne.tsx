@@ -1,5 +1,7 @@
+import NewTripForm from "../components/NewTripForm/NewTripForm";
+
 const AddNewTripStepOne = () => {
-  return <div>AddNewTripStepOne</div>;
+  return <NewTripForm />;
 };
 
 export default AddNewTripStepOne;

@@ -8,6 +8,7 @@ import AccountPage from "./pages/AccountPage";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import { Team } from "./components/AboutUs/AboutUs";
 import { AuthContextProvider } from "./context/auth.context";
+import AddNewTripStepOne from "./pages/AddNewTripStepOne";
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
@@ -18,7 +19,8 @@ const App: React.FC = () => {
         <Route path="/signIn/register" element={<RegisterPage />} />
         <Route path="/about" element={<Team />} />
         <Route element={<RequireAuth />}>
-          <Route path="/voyages" element={<AddTripPage />} />
+          <Route path="/voyages2" element={<AddTripPage />} />
+          <Route path="/voyages" element={<AddNewTripStepOne />} />
           <Route path="/account" element={<AccountPage />} />
         </Route>
       </>,
