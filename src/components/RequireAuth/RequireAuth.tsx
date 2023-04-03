@@ -1,9 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
-// import { useUser } from "../../context/auth.context";
-import { auth } from "../../firebase/firebase.config";
+import { useUser } from "../../context/auth.context";
 
 const RequireAuth = () => {
-  const user = auth.currentUser;
+  const user = useUser();
 
   return user ? <Outlet /> : <Navigate to={"/signIn"} />;
 };
