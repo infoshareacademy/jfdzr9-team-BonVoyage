@@ -13,7 +13,7 @@ type FormData = {
 type FormProps = {
   clickedPin: Pin;
   setPins: React.Dispatch<React.SetStateAction<Pin[]>>;
-  setClickedPin: React.Dispatch<React.SetStateAction<Pin | undefined>>;
+  setClickedPin: React.Dispatch<React.SetStateAction<Pin | undefined | null>>;
 };
 
 const TripDetailsForm = ({ clickedPin, setPins, setClickedPin }: FormProps) => {
@@ -34,13 +34,12 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin }: FormProps) => {
         { ...selectedPin, name, description, imagesUrl, lat: selectedPin?.lat || 0, lng: selectedPin?.lng || 0 },
       ];
     });
-    setClickedPin(undefined);
+    setClickedPin(null);
   });
-
   return (
     <StyledFormDetails onSubmit={onSubmit}>
       <h2>Trip Details</h2>
-      <TextInput placeholder="Pin name" type={"text"} {...register("name")} />
+      <TextInput placeholder="Pin name" type={"text"} {...register("name")} required />
       <TextInput placeholder="Add details" type={"text"} {...register("description")} />
       <TextInput alt="Uppload photos" type={"image"} {...register("imagesUrl")} />
       <Button>Save</Button>
