@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../ui/button/button.styled";
 import { StyledFormNewTrip } from "../../ui/form/form.styled";
 import { TextInput } from "../../ui/TextInput/TextInput.styled";
@@ -10,16 +11,18 @@ type FormData = {
 };
 const NewTripForm = () => {
   const { register, handleSubmit } = useForm<FormData>();
+  const navigate = useNavigate();
   const onSubmit = handleSubmit(({ title, description, imageUrl }) => {
     console.log(title, description, imageUrl);
+    navigate("/voyages2");
   });
 
   return (
     <StyledFormNewTrip onSubmit={onSubmit}>
       <h1>Create new trip</h1>
-      <TextInput placeholder="Trip Title" {...register("title")} />
-      <TextInput placeholder="Description" {...register("description")} />
-      <TextInput type="file" {...register("imageUrl")} />
+      <TextInput placeholder="Trip Title" {...register("title")} required />
+      <TextInput placeholder="Description" {...register("description")} required />
+      <TextInput type="file" {...register("imageUrl")} required />
       <Button>Create and go to next step</Button>
     </StyledFormNewTrip>
   );
