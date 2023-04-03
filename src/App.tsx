@@ -5,8 +5,9 @@ import RegisterPage from "./pages/RegisterPage";
 import SignInPage from "./pages/SignInPage";
 import { AddTripPage } from "./pages/AddTrip";
 import AccountPage from "./pages/AccountPage";
-// import RequireAuth from "./components/RequireAuth/RequireAuth";
+import RequireAuth from "./components/RequireAuth/RequireAuth";
 import { Team } from "./components/AboutUs/AboutUs";
+//some changes
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
@@ -15,11 +16,11 @@ const App: React.FC = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/signIn" element={<SignInPage />} />
         <Route path="/signIn/register" element={<RegisterPage />} />
-        {/* <Route element={<RequireAuth />}> */}
-        <Route path="/about" element={<Team />} />
-        <Route path="/voyages" element={<AddTripPage />} />
-        <Route path="/account" element={<AccountPage />} />
-        {/* </Route> */}
+        <Route element={<RequireAuth />}>
+          <Route path="/about" element={<Team />} />
+          <Route path="/voyages" element={<AddTripPage />} />
+          <Route path="/account" element={<AccountPage />} />
+        </Route>
       </>,
     ),
   );
