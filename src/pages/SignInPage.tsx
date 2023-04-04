@@ -10,7 +10,6 @@ import { FcGoogle } from "react-icons/fc";
 import { useUser } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
 import { TextInput } from "../ui/TextInput/TextInput.styled";
-import { MainNavMenu } from "../components/MainNavMenu/MainNavMenu";
 
 interface IFormInputs {
   email: string;
@@ -48,7 +47,6 @@ const SignInPage = () => {
 
   return (
     <>
-      <MainNavMenu />
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <h1>Sign in to existing account:</h1>
         <TextInput placeholder="Type email" {...register("email")} />
