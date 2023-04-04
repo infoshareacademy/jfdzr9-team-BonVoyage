@@ -3,6 +3,7 @@ import { StyledFormDetails } from "../../ui/form/form.styled";
 import { TextInput } from "../../ui/TextInput/TextInput.styled";
 import { useForm } from "react-hook-form";
 import { Pin } from "../Map/Map";
+import { FakeButton } from "./TripDetailsForm.styled";
 
 type FormData = {
   name: string;
@@ -14,9 +15,10 @@ type FormProps = {
   clickedPin: Pin;
   setPins: React.Dispatch<React.SetStateAction<Pin[]>>;
   setClickedPin: React.Dispatch<React.SetStateAction<Pin | undefined | null>>;
+  deletePin: () => void;
 };
 
-const TripDetailsForm = ({ clickedPin, setPins, setClickedPin }: FormProps) => {
+const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin }: FormProps) => {
   const { register, handleSubmit } = useForm<FormData>({
     values: {
       name: clickedPin.name,
@@ -36,12 +38,14 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin }: FormProps) => {
     });
     setClickedPin(null);
   });
+
   return (
     <StyledFormDetails onSubmit={onSubmit}>
       <h2>Trip Details</h2>
       <TextInput placeholder="Pin name" type={"text"} {...register("name")} required />
       <TextInput placeholder="Add details" type={"text"} {...register("description")} />
       <TextInput alt="Uppload photos" type={"image"} {...register("imagesUrl")} />
+      <FakeButton onClick={deletePin}>Delete</FakeButton>
       <Button>Save</Button>
     </StyledFormDetails>
   );
