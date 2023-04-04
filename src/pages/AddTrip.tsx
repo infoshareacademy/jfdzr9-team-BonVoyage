@@ -1,6 +1,5 @@
 import { useLoadScript } from "@react-google-maps/api";
 import Map from "../components/Map/Map";
-import { MainNavMenu } from "../components/MainNavMenu/MainNavMenu";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
 
@@ -19,10 +18,5 @@ const AddTrip = () => {
 };
 
 export const AddTripPage = () => {
-  return (
-    <>
-      <MainNavMenu />
-      <AddTrip />
-    </>
-  );
+  return <AddTrip />;
 };
