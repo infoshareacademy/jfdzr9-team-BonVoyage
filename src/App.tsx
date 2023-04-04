@@ -11,7 +11,6 @@ import { AuthContextProvider } from "./context/auth.context";
 import AddNewTripStepOne from "./pages/AddNewTripStepOne";
 import LayoutMain from "./components/Layout/LayoutMain";
 
-
 const App: React.FC = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
