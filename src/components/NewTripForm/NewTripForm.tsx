@@ -12,8 +12,7 @@ type FormData = {
 const NewTripForm = () => {
   const { register, handleSubmit } = useForm<FormData>();
   const navigate = useNavigate();
-  const onSubmit = handleSubmit(({ title, description, imageUrl }) => {
-    console.log(title, description, imageUrl);
+  const onSubmit = handleSubmit(() => {
     navigate("/voyages2");
   });
 
