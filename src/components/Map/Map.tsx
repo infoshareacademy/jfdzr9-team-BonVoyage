@@ -42,13 +42,13 @@ const options = {
 const Map = ({ center }: GoogleMapProps) => {
   const [pins, setPins] = useState<Pin[]>([]);
   const [place, setPlace] = useState<LatLngLiteral>();
-  const [clickedPin, setClickedPin] = useState<Pin>();
+  const [clickedPin, setClickedPin] = useState<Pin | null>();
   const mapRef = useRef<GoogleMap>();
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
 
   const addNewPin = (e: google.maps.MapMouseEvent) => {
-    setClickedPin(undefined);
     const { lat, lng } = e.latLng as LatLngFunctions;
+
     const emptyPin = pins.find((pin) => !pin.description && pin.imagesUrl.length === 0 && !pin.name);
     if (emptyPin) {
       setPins((prev) => {
@@ -60,6 +60,7 @@ const Map = ({ center }: GoogleMapProps) => {
         ...prev,
         { lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: [] },
       ]);
+    setClickedPin({ lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: [] });
   };
 
   const onPinClickHandler = (e: google.maps.MapMouseEvent) => {
@@ -78,6 +79,7 @@ const Map = ({ center }: GoogleMapProps) => {
           }}
         />
         {clickedPin && <TripDetailsForm clickedPin={clickedPin} setPins={setPins} setClickedPin={setClickedPin} />}
+        {clickedPin === null && <p>Your pin was succesfully saved!</p>}
       </SearchbardWrapper>
       <MapWrapper>
         <GoogleMap
