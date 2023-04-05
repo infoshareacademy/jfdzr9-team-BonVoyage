@@ -3,6 +3,7 @@ import { FullWrapper, MapWrapper, SearchbardWrapper } from "./Map.styled";
 import { useRef, useCallback, useState } from "react";
 import SearchBarInput from "../SearchBarInput/SearchBarInput";
 import TripDetailsForm from "../TripDetailsForm/TripDetailsForm";
+import { Trip } from "../../pages/AddTrip";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
@@ -25,6 +26,8 @@ export type Pin = Coordinates & {
 
 type GoogleMapProps = {
   center: Coordinates;
+  tripData: Trip | undefined;
+  setTripData: React.Dispatch<React.SetStateAction<Trip | undefined>>;
 };
 
 const mapContainerStyle = {
@@ -39,7 +42,7 @@ const options = {
   clickableIcons: false,
 };
 
-const Map = ({ center }: GoogleMapProps) => {
+const Map = ({ center, setTripData, tripData }: GoogleMapProps) => {
   const [pins, setPins] = useState<Pin[]>([]);
   const [place, setPlace] = useState<LatLngLiteral>();
   const [clickedPin, setClickedPin] = useState<Pin | null>();
