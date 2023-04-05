@@ -26,7 +26,6 @@ const SignInPage = () => {
   const onSubmit: SubmitHandler<IFormInputs> = ({ email, password }) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => navigate(`/account`))
-
       .catch((error: FirebaseError) => {
         setError(firebaseErrors[(error as FirebaseError).code as FirebaseErrorsKeys]);
       });

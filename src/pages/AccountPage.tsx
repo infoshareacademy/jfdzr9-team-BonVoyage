@@ -11,7 +11,7 @@ export interface UsersDetailsFormInput {
   lastName: string;
   imageUrl: string;
   city: string;
-  userEmail: string;
+  userEmail?: string;
 }
 
 const AccountPage = () => {
@@ -21,7 +21,7 @@ const AccountPage = () => {
   const user = useUser();
 
   const onSubmit: SubmitHandler<UsersDetailsFormInput> = (data) => {
-    addUsersDetails(data).then(() => {
+    addUsersDetails(data, user.uid).then(() => {
       setSuccess(true);
     });
   };
