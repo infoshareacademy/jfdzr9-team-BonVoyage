@@ -5,6 +5,7 @@ import { TextInput } from "../ui/TextInput/TextInput.styled";
 import { StyledForm } from "../ui/form/form.styled";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../ui/button/button.styled";
+import UsersDetails from "../components/UsersDetails/UsersDetails";
 
 export interface UsersDetailsFormInput {
   firstName: string;
@@ -29,7 +30,7 @@ const AccountPage = () => {
   return user ? (
     <>
       {success ? (
-        <h2>You just added your account details</h2>
+        <UsersDetails uid={user.uid} />
       ) : (
         <>
           {" "}
