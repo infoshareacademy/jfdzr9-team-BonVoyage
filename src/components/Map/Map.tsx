@@ -68,6 +68,10 @@ const Map = ({ center }: GoogleMapProps) => {
     setClickedPin(pins.find((pin) => pin.lat === lat() && pin.lng === lng()));
   };
 
+  const deletePin = () => {
+    setPins((prev) => prev.filter((pin) => pin.lat !== clickedPin?.lat && pin.lng !== clickedPin?.lng));
+    setClickedPin(undefined);
+  };
   return (
     <FullWrapper>
       <SearchbardWrapper>
@@ -78,7 +82,14 @@ const Map = ({ center }: GoogleMapProps) => {
             mapRef.current?.panTo(position);
           }}
         />
-        {clickedPin && <TripDetailsForm clickedPin={clickedPin} setPins={setPins} setClickedPin={setClickedPin} />}
+        {clickedPin && (
+          <TripDetailsForm
+            deletePin={deletePin}
+            clickedPin={clickedPin}
+            setPins={setPins}
+            setClickedPin={setClickedPin}
+          />
+        )}
         {clickedPin === null && <p>Your pin was succesfully saved!</p>}
       </SearchbardWrapper>
       <MapWrapper>
