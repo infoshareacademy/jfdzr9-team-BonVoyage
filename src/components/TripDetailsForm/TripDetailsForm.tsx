@@ -7,7 +7,7 @@ import { FakeButton } from "./TripDetailsForm.styled";
 type FormData = {
   name: string;
   description: string;
-  imagesUrl: string[];
+  imagesUrl: FileList | null | ArrayLike<File>;
 };
 
 type FormProps = {
@@ -43,7 +43,7 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin }: Form
       <h2>Trip Details</h2>
       <TextInput placeholder="Pin name" type={"text"} {...register("name")} required />
       <TextInput placeholder="Add details" type={"text"} {...register("description")} />
-      <TextInput alt="Uppload photos" type={"image"} {...register("imagesUrl")} />
+      <TextInput alt="Uppload photos" type={"file"} multiple {...register("imagesUrl")} />
       <FakeButton onClick={deletePin}>Delete</FakeButton>
       <Button>Save</Button>
     </StyledFormDetails>

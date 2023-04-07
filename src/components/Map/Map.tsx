@@ -5,7 +5,8 @@ import SearchBarInput from "../SearchBarInput/SearchBarInput";
 import TripDetailsForm from "../TripDetailsForm/TripDetailsForm";
 import { Trip } from "../../pages/AddTrip";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebase/firebase.config";
+import { auth, db, storage } from "../../firebase/firebase.config";
+import { ref, uploadBytes } from "firebase/storage";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
@@ -23,7 +24,7 @@ export type Pin = Coordinates & {
   id?: number;
   name: string;
   description: string;
-  imagesUrl: string[];
+  imagesUrl: FileList | null | ArrayLike<File>;
 };
 
 type GoogleMapProps = {
@@ -54,18 +55,18 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
   const addNewPin = (e: google.maps.MapMouseEvent) => {
     const { lat, lng } = e.latLng as LatLngFunctions;
 
-    const emptyPin = pins.find((pin) => !pin.description && pin.imagesUrl.length === 0 && !pin.name);
+    const emptyPin = pins.find((pin) => !pin.description && !pin.imagesUrl && !pin.name);
     if (emptyPin) {
       setPins((prev) => {
         const newPins = prev.filter((pin) => pin.id !== emptyPin.id);
-        return [...newPins, { lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: [] }];
+        return [...newPins, { lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: null }];
       });
     } else
       setPins((prev) => [
         ...prev,
-        { lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: [] },
+        { lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: null },
       ]);
-    setClickedPin({ lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: [] });
+    setClickedPin({ lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: null });
   };
 
   const onPinClickHandler = (e: google.maps.MapMouseEvent) => {
@@ -80,9 +81,10 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
 
   useEffect(() => {
     const tripRef = doc(db, "trips", `${tripId}`);
-    if (!clickedPin?.name && !clickedPin?.description && clickedPin?.imagesUrl.length === 0) {
+    const urls: string[] = [];
+    if (!clickedPin?.name && !clickedPin?.description && !clickedPin?.imagesUrl) {
       return;
-    } else updateDoc(tripRef, { ...tripData, places: pins });
+    } else updateDoc(tripRef, { ...tripData, imagesUrl: urls, places: pins });
   }, [pins]);
 
   return (
