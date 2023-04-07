@@ -20,7 +20,7 @@ const App: React.FC = () => {
         <Route path="/signIn/register" element={<RegisterPage />} />
         <Route path="/about" element={<Team />} />
         <Route element={<RequireAuth />}>
-          <Route path="/voyages/:tripID" element={<AddTripPage />} />
+          <Route path="/voyages/:tripId" element={<AddTripPage />} />
           <Route path="/voyages" element={<AddNewTripStepOne />} />
           <Route path="/account" element={<AccountPage />} />
         </Route>
