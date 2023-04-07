@@ -1,9 +1,11 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { FullWrapper, MapWrapper, SearchbardWrapper } from "./Map.styled";
-import { useRef, useCallback, useState } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import SearchBarInput from "../SearchBarInput/SearchBarInput";
 import TripDetailsForm from "../TripDetailsForm/TripDetailsForm";
 import { Trip } from "../../pages/AddTrip";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase.config";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
@@ -26,8 +28,8 @@ export type Pin = Coordinates & {
 
 type GoogleMapProps = {
   center: Coordinates;
+  tripId: string | undefined;
   tripData: Trip | undefined;
-  setTripData: React.Dispatch<React.SetStateAction<Trip | undefined>>;
 };
 
 const mapContainerStyle = {
@@ -42,7 +44,7 @@ const options = {
   clickableIcons: false,
 };
 
-const Map = ({ center, setTripData, tripData }: GoogleMapProps) => {
+const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
   const [pins, setPins] = useState<Pin[]>([]);
   const [place, setPlace] = useState<LatLngLiteral>();
   const [clickedPin, setClickedPin] = useState<Pin | null>();
@@ -75,6 +77,14 @@ const Map = ({ center, setTripData, tripData }: GoogleMapProps) => {
     setPins((prev) => prev.filter((pin) => pin.lat !== clickedPin?.lat && pin.lng !== clickedPin?.lng));
     setClickedPin(undefined);
   };
+
+  useEffect(() => {
+    const tripRef = doc(db, "trips", `${tripId}`);
+    if (!clickedPin?.name && !clickedPin?.description && clickedPin?.imagesUrl.length === 0) {
+      return;
+    } else updateDoc(tripRef, { ...tripData, places: pins });
+  }, [pins]);
+
   return (
     <FullWrapper>
       <SearchbardWrapper>

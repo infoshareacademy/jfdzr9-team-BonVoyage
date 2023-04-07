@@ -24,10 +24,10 @@ const AddTrip = () => {
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries,
   });
-  const { tripID } = useParams();
+  const { tripId } = useParams<{ tripId: string }>();
 
   useEffect(() => {
-    const tripRef = doc(db, "trips", `${tripID}`) as DocumentReference<Trip>;
+    const tripRef = doc(db, "trips", `${tripId}`) as DocumentReference<Trip>;
     const getTrip = async () => {
       const res = await getDoc(tripRef);
       const data = res.data();
@@ -35,12 +35,13 @@ const AddTrip = () => {
     };
     getTrip();
   }, []);
+
   if (loadError) {
     return <div>Error loading maps</div>;
   }
 
   return isLoaded ? (
-    <Map center={{ lat: 45.7749, lng: -122.4194 }} tripData={tripData} setTripData={setTripData} />
+    <Map center={{ lat: 45.7749, lng: -122.4194 }} tripData={tripData} tripId={tripId} />
   ) : (
     <div>Loading maps...</div>
   );

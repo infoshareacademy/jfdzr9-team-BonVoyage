@@ -4,7 +4,6 @@ import { TextInput } from "../../ui/TextInput/TextInput.styled";
 import { useForm } from "react-hook-form";
 import { Pin } from "../Map/Map";
 import { FakeButton } from "./TripDetailsForm.styled";
-
 type FormData = {
   name: string;
   description: string;
