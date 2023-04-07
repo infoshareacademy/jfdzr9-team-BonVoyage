@@ -5,8 +5,7 @@ import SearchBarInput from "../SearchBarInput/SearchBarInput";
 import TripDetailsForm from "../TripDetailsForm/TripDetailsForm";
 import { Trip } from "../../pages/AddTrip";
 import { doc, updateDoc } from "firebase/firestore";
-import { auth, db, storage } from "../../firebase/firebase.config";
-import { ref, uploadBytes } from "firebase/storage";
+import { db } from "../../firebase/firebase.config";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
@@ -81,10 +80,8 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
 
   useEffect(() => {
     const tripRef = doc(db, "trips", `${tripId}`);
-    const urls: string[] = [];
-    if (!clickedPin?.name && !clickedPin?.description && !clickedPin?.imagesUrl) {
-      return;
-    } else updateDoc(tripRef, { ...tripData, imagesUrl: urls, places: pins });
+    if (!clickedPin?.name && !clickedPin?.description && !clickedPin?.imagesUrl) return;
+    else updateDoc(tripRef, { ...tripData, places: pins });
   }, [pins]);
 
   return (
