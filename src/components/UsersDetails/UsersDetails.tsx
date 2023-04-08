@@ -7,18 +7,18 @@ interface User {
   imageUrl: string;
 }
 
-interface Props {
-  uid: string;
-}
+// interface Props {
+//   uid: string;
+// }
 
-const UsersDetails = ({ uid }: Props) => {
-  const usersDetails = getUsersDetails(uid);
+const UsersDetails = () => {
+  const usersDetails = getUsersDetails();
 
-  if (!usersDetails) {
-    return null;
-  }
+  // if (!usersDetails) {
+  //   return null;
+  // }
 
-  const userData = usersDetails.data() as User;
+  const userData = usersDetails;
 
   const firstName = userData.firstName;
   const lastName = userData.lastName;

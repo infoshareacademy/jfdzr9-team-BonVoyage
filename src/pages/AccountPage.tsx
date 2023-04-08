@@ -30,7 +30,7 @@ const AccountPage = () => {
   return user ? (
     <>
       {success ? (
-        <UsersDetails uid={user.uid} />
+        <UsersDetails />
       ) : (
         <>
           {" "}
