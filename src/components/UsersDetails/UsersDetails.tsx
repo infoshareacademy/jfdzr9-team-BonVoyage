@@ -1,6 +1,6 @@
 import getUsersDetails from "../../firebase/getUsersDetails";
 
-interface User {
+export interface User {
   firstName: string;
   lastName: string;
   city: string;
@@ -12,22 +12,30 @@ interface User {
 // }
 
 const UsersDetails = () => {
-  const usersDetails = getUsersDetails();
+  const usersDetails = getUsersDetails() as unknown as User | undefined;
 
-  // if (!usersDetails) {
-  //   return null;
-  // }
+  if (!usersDetails) {
+    return (
+      <>
+        <h1>No usersDetails!!!!!</h1>
+        <h1>No usersDetails!!!!!</h1>
+        <h1>No usersDetails!!!!!</h1>
+        <h1>No usersDetails!!!!!</h1>
+        <h1>No usersDetails!!!!!</h1>
+      </>
+    );
+  }
 
-  const userData = usersDetails;
+  // const userData = usersDetails;
 
-  const firstName = userData.firstName;
-  const lastName = userData.lastName;
-  const city = userData.city;
-  const imageUrl = userData.imageUrl;
+  const firstName = usersDetails.firstName;
+  const lastName = usersDetails.lastName;
+  const city = usersDetails.city;
+  // const imageUrl = userData.imageUrl;
 
   return (
     <>
-      <p>{firstName}</p> <p>{lastName}</p> <p>{city}</p> <p>{imageUrl}</p>
+      <h2>First name: {firstName}</h2> <h2>Last name: {lastName}</h2> <h2>City: {city}</h2>
     </>
   );
 };
