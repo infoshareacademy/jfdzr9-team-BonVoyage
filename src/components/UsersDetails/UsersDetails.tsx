@@ -1,4 +1,5 @@
 import getUsersDetails from "../../firebase/getUsersDetails";
+import { useState, useEffect } from "react";
 
 export interface User {
   firstName: string;
@@ -12,9 +13,18 @@ export interface User {
 // }
 
 const UsersDetails = () => {
-  const usersDetails = getUsersDetails() as unknown as User | undefined;
+  const [userData, setUserData] = useState<User | null>(null);
 
-  if (!usersDetails) {
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getUsersDetails();
+      setUserData(data);
+    };
+
+    fetchData();
+  }, []);
+
+  if (!userData) {
     return (
       <>
         <h1>No usersDetails!!!!!</h1>
@@ -26,12 +36,7 @@ const UsersDetails = () => {
     );
   }
 
-  // const userData = usersDetails;
-
-  const firstName = usersDetails.firstName;
-  const lastName = usersDetails.lastName;
-  const city = usersDetails.city;
-  // const imageUrl = userData.imageUrl;
+  const { firstName, lastName, city, imageUrl } = userData;
 
   return (
     <>
