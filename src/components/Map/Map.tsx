@@ -6,7 +6,7 @@ import TripDetailsForm from "../TripDetailsForm/TripDetailsForm";
 import { Trip } from "../../pages/AddTrip";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase.config";
-import { StorageReference } from "firebase/storage";
+import { StorageReference, UploadResult, uploadBytes } from "firebase/storage";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
@@ -24,7 +24,8 @@ export type Pin = Coordinates & {
   id?: number;
   name: string;
   description: string;
-  imagesUrl: string[] | null;
+  imageUrls?: FileList | null | undefined;
+  imageRefs: string[] | null;
 };
 
 type GoogleMapProps = {
@@ -61,18 +62,29 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
   const addNewPin = (e: google.maps.MapMouseEvent) => {
     const { lat, lng } = e.latLng as LatLngFunctions;
 
-    const emptyPin = pins.find((pin) => !pin.description && !pin.imagesUrl && !pin.name);
+    const emptyPin = pins.find((pin) => !pin.description && !pin.imageUrls && !pin.name);
     if (emptyPin) {
       setPins((prev) => {
         const newPins = prev.filter((pin) => pin.id !== emptyPin.id);
-        return [...newPins, { lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: null }];
+        return [
+          ...newPins,
+          { lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imageUrls: null, imageRefs: null },
+        ];
       });
     } else
       setPins((prev) => [
         ...prev,
-        { lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: null },
+        { lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imageUrls: null, imageRefs: null },
       ]);
-    setClickedPin({ lat: lat(), lng: lng(), id: lat() * lng(), name: "", description: "", imagesUrl: null });
+    setClickedPin({
+      lat: lat(),
+      lng: lng(),
+      id: lat() * lng(),
+      name: "",
+      description: "",
+      imageUrls: null,
+      imageRefs: null,
+    });
   };
 
   const onPinClickHandler = (e: google.maps.MapMouseEvent) => {
@@ -87,10 +99,23 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
 
   useEffect(() => {
     const tripRef = doc(db, "trips", `${tripId}`);
-    if (!clickedPin?.name && !clickedPin?.description && !clickedPin?.imagesUrl) return;
-    else updateDoc(tripRef, { ...tripData, places: pins });
+    // if (!clickedPin?.name && !clickedPin?.description && !clickedPin?.imageUrls) return;
+    const promises: Promise<UploadResult>[] = [];
+    pinImages.forEach(({ file, ref }) => {
+      const uploadedImage = uploadBytes(ref, file);
+      promises.push(uploadedImage);
+    });
+    console.log(promises);
+    Promise.all(promises)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    updateDoc(tripRef, { ...tripData, places: pins });
+    setPinImages([]);
   }, [pins]);
 
+  console.log("pins", pins, "pins images", pinImages);
   return (
     <FullWrapper>
       <SearchbardWrapper>

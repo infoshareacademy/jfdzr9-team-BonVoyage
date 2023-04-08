@@ -10,7 +10,7 @@ import { auth, storage } from "../../firebase/firebase.config";
 type FormData = {
   name: string;
   description: string;
-  imagesUrl: FileList | null;
+  imageUrls: FileList | null | undefined;
 };
 
 type FormProps = {
@@ -27,21 +27,21 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
     values: {
       name: clickedPin.name,
       description: clickedPin.description,
-      imagesUrl: clickedPin.imagesUrl,
+      imageUrls: clickedPin.imageUrls,
     },
   });
 
-  const onSubmit = handleSubmit(({ name, description, imagesUrl }) => {
-    const urls: string[] = [];
-    if (imagesUrl !== null)
-      [...imagesUrl].forEach((file: Blob, index: number) => {
+  const onSubmit = handleSubmit(({ name, description, imageUrls }) => {
+    const refs: string[] = [];
+    if (imageUrls)
+      [...imageUrls].forEach((file: Blob, index: number) => {
         const imageRef = ref(
           storage,
           `${auth.currentUser?.email}/${tripId}/${clickedPin.name || `no-name${index}`}/${Math.floor(
             Math.random() * 100000 + 1,
           )}`,
         );
-        urls.push(imageRef.fullPath);
+        refs.push(imageRef.fullPath);
         setPinImages((prev) => [...prev, { file, ref: imageRef }]);
       });
     setPins((prev) => {
@@ -49,7 +49,15 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
       const otherPins = prev.filter((pin) => pin.id !== clickedPin.id);
       return [
         ...otherPins,
-        { ...selectedPin, name, description, imagesUrl: urls, lat: selectedPin?.lat || 0, lng: selectedPin?.lng || 0 },
+        {
+          ...selectedPin,
+          name,
+          description,
+          imageUrls,
+          imageRefs: refs,
+          lat: selectedPin?.lat || 0,
+          lng: selectedPin?.lng || 0,
+        },
       ];
     });
     setClickedPin(null);
@@ -60,7 +68,7 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
       <h2>Trip Details</h2>
       <TextInput placeholder="Pin name" type={"text"} {...register("name")} required />
       <TextInput placeholder="Add details" type={"text"} {...register("description")} />
-      <TextInput alt="Uppload photos" type={"file"} multiple {...register("imagesUrl")} />
+      <TextInput alt="Uppload photos" type={"file"} multiple {...register("imageUrls")} />
       <FakeButton onClick={deletePin}>Delete</FakeButton>
       <Button>Save</Button>
     </StyledFormDetails>
