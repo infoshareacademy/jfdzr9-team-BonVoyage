@@ -2,14 +2,15 @@ import { Button } from "../../ui/button/button.styled";
 import { StyledFormDetails } from "../../ui/form/form.styled";
 import { TextInput } from "../../ui/TextInput/TextInput.styled";
 import { useForm } from "react-hook-form";
-import { Pin } from "../Map/Map";
+import { Pin, PinImage } from "../Map/Map";
 import { FakeButton } from "./TripDetailsForm.styled";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref } from "firebase/storage";
+import { auth, storage } from "../../firebase/firebase.config";
 
 type FormData = {
   name: string;
   description: string;
-  imagesUrl: FileList | null | ArrayLike<File>;
+  imagesUrl: FileList | null;
 };
 
 type FormProps = {
@@ -17,9 +18,11 @@ type FormProps = {
   setPins: React.Dispatch<React.SetStateAction<Pin[]>>;
   setClickedPin: React.Dispatch<React.SetStateAction<Pin | undefined | null>>;
   deletePin: () => void;
+  tripId: string | undefined;
+  setPinImages: React.Dispatch<React.SetStateAction<PinImage[]>>;
 };
 
-const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin }: FormProps) => {
+const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId, setPinImages }: FormProps) => {
   const { register, handleSubmit } = useForm<FormData>({
     values: {
       name: clickedPin.name,
@@ -29,26 +32,24 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin }: Form
   });
 
   const onSubmit = handleSubmit(({ name, description, imagesUrl }) => {
+    const urls: string[] = [];
+    if (imagesUrl !== null)
+      [...imagesUrl].forEach((file: Blob, index: number) => {
+        const imageRef = ref(
+          storage,
+          `${auth.currentUser?.email}/${tripId}/${clickedPin.name || `no-name${index}`}/${Math.floor(
+            Math.random() * 100000 + 1,
+          )}`,
+        );
+        urls.push(imageRef.fullPath);
+        setPinImages((prev) => [...prev, { file, ref: imageRef }]);
+      });
     setPins((prev) => {
       const selectedPin = prev.find((pin) => pin.id === clickedPin.id);
       const otherPins = prev.filter((pin) => pin.id !== clickedPin.id);
-      // const urls: string[] = [];
-
-      // {
-      //   Array.from(clickedPin.imagesUrl).forEach((file: Blob, index: number) => {
-      //     const imageRef = ref(
-      //       storage,
-      //       `${auth.currentUser?.email}/${tripId}/${clickedPin.name || `no-name${index}`}/${Math.floor(
-      //         Math.random() * 100000 + 1,
-      //       )}`,
-      //     );
-      //     uploadBytes(imageRef, file);
-      //     urls.push(imageRef.fullPath);
-      //   });
-      // }
       return [
         ...otherPins,
-        { ...selectedPin, name, description, imagesUrl, lat: selectedPin?.lat || 0, lng: selectedPin?.lng || 0 },
+        { ...selectedPin, name, description, imagesUrl: urls, lat: selectedPin?.lat || 0, lng: selectedPin?.lng || 0 },
       ];
     });
     setClickedPin(null);

@@ -6,6 +6,7 @@ import TripDetailsForm from "../TripDetailsForm/TripDetailsForm";
 import { Trip } from "../../pages/AddTrip";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase.config";
+import { StorageReference } from "firebase/storage";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
@@ -23,13 +24,18 @@ export type Pin = Coordinates & {
   id?: number;
   name: string;
   description: string;
-  imagesUrl: FileList | null | ArrayLike<File>;
+  imagesUrl: string[] | null;
 };
 
 type GoogleMapProps = {
   center: Coordinates;
   tripId: string | undefined;
   tripData: Trip | undefined;
+};
+
+export type PinImage = {
+  file: Blob;
+  ref: StorageReference;
 };
 
 const mapContainerStyle = {
@@ -48,6 +54,7 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
   const [pins, setPins] = useState<Pin[]>([]);
   const [place, setPlace] = useState<LatLngLiteral>();
   const [clickedPin, setClickedPin] = useState<Pin | null>();
+  const [pinImages, setPinImages] = useState<PinImage[]>([]);
   const mapRef = useRef<GoogleMap>();
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
 
@@ -100,6 +107,8 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
             clickedPin={clickedPin}
             setPins={setPins}
             setClickedPin={setClickedPin}
+            tripId={tripId}
+            setPinImages={setPinImages}
           />
         )}
         {clickedPin === null && <p>Your pin was succesfully saved!</p>}
