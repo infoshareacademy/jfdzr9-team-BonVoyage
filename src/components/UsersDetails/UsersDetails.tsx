@@ -17,14 +17,16 @@ export interface User {
 const UsersDetails = () => {
   const [userData, setUserData] = useState<User | null>(null);
   const user = useUser();
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getUsersDetails(user.uid);
-      setUserData(data);
-    };
+  if (user) {
+    useEffect(() => {
+      const fetchData = async () => {
+        const data = await getUsersDetails(user.uid);
+        setUserData(data);
+      };
 
-    fetchData();
-  }, []);
+      fetchData();
+    }, []);
+  }
 
   if (!userData) {
     return (
