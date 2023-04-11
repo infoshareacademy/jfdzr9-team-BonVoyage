@@ -5,8 +5,8 @@ import SearchBarInput from "../SearchBarInput/SearchBarInput";
 import TripDetailsForm from "../TripDetailsForm/TripDetailsForm";
 import { Trip } from "../../pages/AddTrip";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebase/firebase.config";
-import { StorageReference, UploadResult, uploadBytes } from "firebase/storage";
+import { db, storage } from "../../firebase/firebase.config";
+import { StorageReference, UploadResult, deleteObject, ref, uploadBytes } from "firebase/storage";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
@@ -93,6 +93,12 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
   };
 
   const deletePin = () => {
+    if (clickedPin?.imageRefs?.length !== 0) {
+      clickedPin?.imageRefs?.forEach((url) => {
+        const imageRef = ref(storage, url);
+        deleteObject(imageRef);
+      });
+    }
     setPins((prev) => prev.filter((pin) => pin.lat !== clickedPin?.lat && pin.lng !== clickedPin?.lng));
     setClickedPin(undefined);
   };

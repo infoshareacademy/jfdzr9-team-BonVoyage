@@ -35,10 +35,7 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
     const refs: string[] = [];
     if (imageUrls)
       [...imageUrls].forEach((file: Blob) => {
-        const imageRef = ref(
-          storage,
-          `${auth.currentUser?.email}/${tripId}/${name}/${Math.floor(Math.random() * 100000 + 1)}`,
-        );
+        const imageRef = ref(storage, `${auth.currentUser?.email}/${tripId}/${name}/${file.name}`);
         refs.push(imageRef.fullPath);
         setPinImages((prev) => [...prev, { file, ref: imageRef }]);
       });
@@ -66,7 +63,7 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
       <h2>Trip Details</h2>
       <TextInput placeholder="Pin name" type={"text"} {...register("name")} required />
       <TextInput placeholder="Add details" type={"text"} {...register("description")} />
-      <TextInput alt="Uppload photos" type={"file"} multiple {...register("imageUrls")} />
+      <TextInput type={"file"} multiple {...register("imageUrls")} />
       <FakeButton onClick={deletePin}>Delete</FakeButton>
       <Button>Save</Button>
     </StyledFormDetails>
