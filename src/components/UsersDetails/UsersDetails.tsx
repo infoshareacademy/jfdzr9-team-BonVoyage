@@ -1,6 +1,7 @@
 import getUsersDetails from "../../firebase/getUsersDetails";
 import { useState, useEffect } from "react";
 import { DetailsWrapper } from "./UsersDetails.styled";
+import { useUser } from "../../context/auth.context";
 
 export interface User {
   firstName: string;
@@ -15,10 +16,10 @@ export interface User {
 
 const UsersDetails = () => {
   const [userData, setUserData] = useState<User | null>(null);
-
+  const user = useUser();
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getUsersDetails();
+      const data = await getUsersDetails(user.uid);
       setUserData(data);
     };
 
