@@ -6,6 +6,7 @@ import { Pin, PinImage } from "../Map/Map";
 import { FakeButton } from "./TripDetailsForm.styled";
 import { ref } from "firebase/storage";
 import { auth, storage } from "../../firebase/firebase.config";
+import { useState } from "react";
 
 type FormData = {
   name: string;
@@ -23,6 +24,7 @@ type FormProps = {
 };
 
 const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId, setPinImages }: FormProps) => {
+  const [imageError, setImageError] = useState(false);
   const { register, handleSubmit } = useForm<FormData>({
     values: {
       name: clickedPin.name,
@@ -33,12 +35,19 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
 
   const onSubmit = handleSubmit(({ name, description, imageUrls }) => {
     const refs: string[] = [];
-    if (imageUrls)
-      [...imageUrls].forEach((file: Blob) => {
-        const imageRef = ref(storage, `${auth.currentUser?.email}/${tripId}/${name}/${file.name}`);
-        refs.push(imageRef.fullPath);
-        setPinImages((prev) => [...prev, { file, ref: imageRef }]);
-      });
+    if (imageUrls) {
+      if ([...imageUrls].length > 4) {
+        setImageError(true);
+        return;
+      } else {
+        setImageError(false);
+        [...imageUrls].forEach((file: Blob) => {
+          const imageRef = ref(storage, `${auth.currentUser?.email}/${tripId}/${name}/${file.name}`);
+          refs.push(imageRef.fullPath);
+          setPinImages((prev) => [...prev, { file, ref: imageRef }]);
+        });
+      }
+    }
     setPins((prev) => {
       const selectedPin = prev.find((pin) => pin.id === clickedPin.id);
       const otherPins = prev.filter((pin) => pin.id !== clickedPin.id);
@@ -64,6 +73,7 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
       <TextInput placeholder="Pin name" type={"text"} {...register("name")} required />
       <TextInput placeholder="Add details" type={"text"} {...register("description")} />
       <TextInput type={"file"} multiple {...register("imageUrls")} />
+      {imageError && <p>You can choose maximum 4 pictures for one place!</p>}
       <FakeButton onClick={deletePin}>Delete</FakeButton>
       <Button>Save</Button>
     </StyledFormDetails>
