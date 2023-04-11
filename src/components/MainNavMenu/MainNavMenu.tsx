@@ -32,10 +32,8 @@ export const MainNavMenu: React.FC<NavigationProps> = (): JSX.Element => {
               <li>
                 <NavLink to="/about">About Us</NavLink>
               </li>
-              <li>
-                <Dropdown />
-              </li>
             </ul>
+            <Dropdown />
           </NavMenuDiv>
         </NavMenuContainer>
         <div>

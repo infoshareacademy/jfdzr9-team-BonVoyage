@@ -1,32 +1,30 @@
-import React, { useState } from "react";
 import { ProfileSVG } from "../../assets/ProfileSVG";
-import { UserProfileWrapper } from "../UserProfile/UserProfile.style";
+import { useState } from "react";
+import { DropdownButton, DropdownContainer, DropdownListItem, DropdownList } from "./Dropdown.style";
+import { Link } from "react-router-dom";
 
-type DropdownProps = object;
+export function Dropdown() {
+  const [isOpen, setIsOpen] = useState(false);
+  const options = ["Option 2", "Option 3"];
 
-export const Dropdown = (props: DropdownProps) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => setIsDropdownOpen((prevState) => !prevState);
-
-  const handleDropdownSelection = (selectedItem: string) => {
-    console.log(`Selected item: ${selectedItem}`);
-    setIsDropdownOpen(false);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
-    <UserProfileWrapper>
-      <button onClick={toggleDropdown}>
+    <DropdownContainer>
+      <DropdownButton onClick={toggleMenu}>
         <ProfileSVG />
-      </button>
-      {isDropdownOpen && (
-        <div className="drop">
-          <ul>
-            <li onClick={() => handleDropdownSelection("Item 1")}>Log in</li>
-            <li onClick={() => handleDropdownSelection("Item 2")}>Register</li>
-          </ul>
-        </div>
+      </DropdownButton>
+      {isOpen && (
+        <DropdownList>
+          {options.map((option) => (
+            <DropdownListItem key={option}>
+              <p>{option}</p>
+            </DropdownListItem>
+          ))}
+        </DropdownList>
       )}
-    </UserProfileWrapper>
+    </DropdownContainer>
   );
-};
+}
