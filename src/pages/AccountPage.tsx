@@ -6,6 +6,8 @@ import { StyledForm } from "../ui/form/form.styled";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../ui/button/button.styled";
 import UsersDetails from "../components/UsersDetails/UsersDetails";
+import { NavLink } from "react-router-dom";
+import { WrapperStyled } from "../ui/wrapper/wrapper.styled";
 
 export interface UsersDetailsFormInput {
   firstName: string;
@@ -32,7 +34,12 @@ const AccountPage = () => {
   return user ? (
     <>
       {success ? (
-        <UsersDetails />
+        <WrapperStyled>
+          <UsersDetails />
+          <NavLink to="/voyages">
+            <Button>Add new trip</Button>
+          </NavLink>
+        </WrapperStyled>
       ) : (
         <>
           {" "}
