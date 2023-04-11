@@ -22,9 +22,11 @@ const AccountPage = () => {
   const user = useUser();
 
   const onSubmit: SubmitHandler<UsersDetailsFormInput> = (data) => {
-    addUsersDetails(data, user.uid).then(() => {
-      setSuccess(true);
-    });
+    if (user) {
+      addUsersDetails(data, user.uid).then(() => {
+        setSuccess(true);
+      });
+    }
   };
 
   return user ? (
