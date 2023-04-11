@@ -37,7 +37,7 @@ const UsersDetails = () => {
 
   return (
     <DetailsWrapper>
-      <img src="imageUrl"></img>
+      <img src={imageUrl} />
       <h2>
         {firstName} {lastName}
       </h2>
