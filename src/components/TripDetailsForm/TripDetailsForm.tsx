@@ -34,12 +34,10 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
   const onSubmit = handleSubmit(({ name, description, imageUrls }) => {
     const refs: string[] = [];
     if (imageUrls)
-      [...imageUrls].forEach((file: Blob, index: number) => {
+      [...imageUrls].forEach((file: Blob) => {
         const imageRef = ref(
           storage,
-          `${auth.currentUser?.email}/${tripId}/${clickedPin.name || `no-name${index}`}/${Math.floor(
-            Math.random() * 100000 + 1,
-          )}`,
+          `${auth.currentUser?.email}/${tripId}/${name}/${Math.floor(Math.random() * 100000 + 1)}`,
         );
         refs.push(imageRef.fullPath);
         setPinImages((prev) => [...prev, { file, ref: imageRef }]);

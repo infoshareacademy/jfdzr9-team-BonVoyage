@@ -99,23 +99,17 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
 
   useEffect(() => {
     const tripRef = doc(db, "trips", `${tripId}`);
-    // if (!clickedPin?.name && !clickedPin?.description && !clickedPin?.imageUrls) return;
+    if (clickedPin && !clickedPin?.name && !clickedPin?.description && !clickedPin?.imageRefs) return;
     const promises: Promise<UploadResult>[] = [];
     pinImages.forEach(({ file, ref }) => {
       const uploadedImage = uploadBytes(ref, file);
       promises.push(uploadedImage);
     });
-    console.log(promises);
-    Promise.all(promises)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-    updateDoc(tripRef, { ...tripData, places: pins });
+    Promise.all(promises).catch((err) => console.log(err));
+    updateDoc(tripRef, { ...tripData, places: pins.map((pin) => ({ ...pin, imageUrls: [] })) });
     setPinImages([]);
   }, [pins]);
 
-  console.log("pins", pins, "pins images", pinImages);
   return (
     <FullWrapper>
       <SearchbardWrapper>
