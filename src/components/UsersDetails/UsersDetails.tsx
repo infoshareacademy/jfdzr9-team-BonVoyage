@@ -1,5 +1,6 @@
 import getUsersDetails from "../../firebase/getUsersDetails";
 import { useState, useEffect } from "react";
+import { DetailsWrapper } from "./UsersDetails.styled";
 
 export interface User {
   firstName: string;
@@ -28,10 +29,6 @@ const UsersDetails = () => {
     return (
       <>
         <h1>No usersDetails!!!!!</h1>
-        <h1>No usersDetails!!!!!</h1>
-        <h1>No usersDetails!!!!!</h1>
-        <h1>No usersDetails!!!!!</h1>
-        <h1>No usersDetails!!!!!</h1>
       </>
     );
   }
@@ -39,9 +36,13 @@ const UsersDetails = () => {
   const { firstName, lastName, city, imageUrl } = userData;
 
   return (
-    <>
-      <h2>First name: {firstName}</h2> <h2>Last name: {lastName}</h2> <h2>City: {city}</h2>
-    </>
+    <DetailsWrapper>
+      <img src="imageUrl"></img>
+      <h2>
+        {firstName} {lastName}
+      </h2>
+      <p>City: {city}</p>
+    </DetailsWrapper>
   );
 };
 
