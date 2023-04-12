@@ -19,7 +19,7 @@ export interface UsersDetailsFormInput {
 
 const AccountPage = () => {
   const { register, handleSubmit, setValue } = useForm<UsersDetailsFormInput>();
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(true);
   const [imgUrl, setImgUrl] = useState("");
   const [file, setFile] = useState<File | null>(null);
 
@@ -49,7 +49,16 @@ const AccountPage = () => {
   return user ? (
     <>
       {success ? (
-        <UsersDetails />
+        <>
+          <UsersDetails />
+          <Button
+            onClick={() => {
+              setSuccess(false);
+            }}
+          >
+            Edit profile
+          </Button>
+        </>
       ) : (
         <>
           {" "}
