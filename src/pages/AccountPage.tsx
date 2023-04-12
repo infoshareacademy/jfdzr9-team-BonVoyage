@@ -29,11 +29,11 @@ const AccountPage = () => {
 
   const uploadImage = () => {
     if (!file) return;
-    const imageRef = ref(storage, `users-avatar/${file.name}`);
+    const imageRef = ref(storage, `users-avatar/${user?.uid}`);
     uploadBytes(imageRef, file).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        setImgUrl(url);
-        // console.log("url: ", url);
+        setValue("imageUrl", url);
+        console.log("url: ", url);
       });
     });
   };
@@ -76,7 +76,7 @@ const AccountPage = () => {
             <TextInput placeholder="First name" type={"text"} {...register("firstName")} required />
             <TextInput placeholder="Last name" type={"text"} {...register("lastName")} required />
             <TextInput placeholder="City" type={"text"} {...register("city")} required />
-            <TextInput value={imgUrl} alt="Uppload photos" type={"hidden"} {...register("imageUrl")} />
+            <TextInput alt="Uppload photos" type={"hidden"} {...register("imageUrl")} />
             <Button type="submit">Submit</Button>
           </StyledForm>{" "}
         </>
