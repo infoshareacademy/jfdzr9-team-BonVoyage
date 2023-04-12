@@ -54,7 +54,24 @@ const AccountPage = () => {
           {" "}
           <h1>Hello {user.email} please fill in this form:</h1>
           <StyledForm onSubmit={handleSubmit(onSubmit)}>
-            <input type="file"></input>
+            <div>
+              <input
+                type="file"
+                onChange={(e) => {
+                  e.preventDefault();
+                  if (!e.target.files) return;
+                  setFile(e.target.files[0]);
+                }}
+              ></input>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  uploadImage();
+                }}
+              >
+                Upload image
+              </Button>
+            </div>
             <TextInput placeholder="First name" type={"text"} {...register("firstName")} required />
             <TextInput placeholder="Last name" type={"text"} {...register("lastName")} required />
             <TextInput placeholder="City" type={"text"} {...register("city")} required />
