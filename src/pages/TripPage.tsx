@@ -31,10 +31,10 @@ const TripPage = () => {
     return <div>Error loading maps</div>;
   }
 
-  return isLoaded ? (
-    <MapPreview center={{ lat: 45.7749, lng: -122.4194 }} tripData={tripData} />
+  return tripData?.center && isLoaded ? (
+    <MapPreview center={tripData?.center} tripData={tripData} />
   ) : (
-    <div>Loading maps...</div>
+    <div style={{ margin: "100px" }}>Loading maps...</div>
   );
 };
 

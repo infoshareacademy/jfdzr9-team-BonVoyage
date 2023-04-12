@@ -1,6 +1,7 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useCallback, useRef } from "react";
 import { Trip } from "../../pages/AddTrip";
+import { FullWrapper } from "../Map/Map.styled";
 
 const mapContainerStyle = {
   width: "100%",
@@ -20,7 +21,7 @@ type Coordinates = {
 };
 
 type MapProps = {
-  center: Coordinates;
+  center: Coordinates | undefined;
   tripData: Trip | undefined;
 };
 
@@ -32,13 +33,13 @@ const MapPreview = ({ center, tripData }: MapProps) => {
     console.log("test");
   };
   return (
-    <div>
+    <FullWrapper>
       <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={12} options={options} onLoad={onLoad}>
         {tripData?.places.map((pin) => (
           <Marker key={pin.lat} position={pin} onClick={onPinClickHandler} />
         ))}
       </GoogleMap>
-    </div>
+    </FullWrapper>
   );
 };
 

@@ -17,7 +17,7 @@ type LatLngFunctions = {
   lng: () => number;
 };
 
-type Coordinates = {
+export type Coordinates = {
   lat: number;
   lng: number;
 };
@@ -34,6 +34,7 @@ type GoogleMapProps = {
   center: Coordinates;
   tripId: string | undefined;
   tripData: Trip | undefined;
+  setTripData: React.Dispatch<React.SetStateAction<Trip | undefined>>;
 };
 
 export type PinImage = {
@@ -53,7 +54,7 @@ const options = {
   clickableIcons: false,
 };
 
-const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
+const Map = ({ center, tripId, tripData, setTripData }: GoogleMapProps) => {
   const navigate = useNavigate();
   const [pins, setPins] = useState<Pin[]>([]);
   const [place, setPlace] = useState<LatLngLiteral>();
@@ -120,7 +121,7 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
       promises.push(uploadedImage);
     });
     Promise.all(promises).catch((err) => console.log(err));
-    updateDoc(tripRef, { ...tripData, places: pins.map((pin) => ({ ...pin, imageUrls: [] })) });
+    updateDoc(tripRef, { ...tripData, center: place, places: pins.map((pin) => ({ ...pin, imageUrls: [] })) });
     setPinImages([]);
   }, [pins]);
 
@@ -130,7 +131,11 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
       return;
     }
     const tripRef = doc(db, "trips", `${tripId}`);
-    updateDoc(tripRef, { ...tripData, places: pins.map((pin) => ({ ...pin, imageUrls: [] })), inProgress: false });
+    updateDoc(tripRef, {
+      ...tripData,
+      places: pins.map((pin) => ({ ...pin, imageUrls: [] })),
+      inProgress: false,
+    });
     navigate(`/${tripId}`);
   };
 

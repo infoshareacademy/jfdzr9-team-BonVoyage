@@ -1,5 +1,5 @@
 import { useLoadScript } from "@react-google-maps/api";
-import Map, { Pin } from "../components/Map/Map";
+import Map, { Coordinates, Pin } from "../components/Map/Map";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DocumentReference, doc, getDoc } from "firebase/firestore";
@@ -17,6 +17,7 @@ export type Trip = {
   imageUrl: string;
   userEmail: string;
   inProgress: boolean;
+  center: Coordinates;
 };
 
 const AddTrip = () => {
@@ -42,7 +43,7 @@ const AddTrip = () => {
   }
 
   return isLoaded ? (
-    <Map center={{ lat: 45.7749, lng: -122.4194 }} tripData={tripData} tripId={tripId} />
+    <Map center={{ lat: 45.7749, lng: -122.4194 }} tripData={tripData} tripId={tripId} setTripData={setTripData} />
   ) : (
     <div>Loading maps...</div>
   );
