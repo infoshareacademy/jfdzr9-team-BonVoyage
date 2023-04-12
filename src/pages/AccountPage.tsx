@@ -18,7 +18,7 @@ export interface UsersDetailsFormInput {
 }
 
 const AccountPage = () => {
-  const { register, handleSubmit } = useForm<UsersDetailsFormInput>();
+  const { register, handleSubmit, setValue } = useForm<UsersDetailsFormInput>();
   const [success, setSuccess] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -33,6 +33,7 @@ const AccountPage = () => {
     uploadBytes(imageRef, file).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setImgUrl(url);
+        // console.log("url: ", url);
       });
     });
   };
@@ -75,7 +76,7 @@ const AccountPage = () => {
             <TextInput placeholder="First name" type={"text"} {...register("firstName")} required />
             <TextInput placeholder="Last name" type={"text"} {...register("lastName")} required />
             <TextInput placeholder="City" type={"text"} {...register("city")} required />
-            <TextInput alt="Uppload photos" type={"hidden"} {...register("imageUrl")} />
+            <TextInput value={imgUrl} alt="Uppload photos" type={"hidden"} {...register("imageUrl")} />
             <Button type="submit">Submit</Button>
           </StyledForm>{" "}
         </>
