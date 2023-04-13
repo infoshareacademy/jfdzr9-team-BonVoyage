@@ -23,4 +23,5 @@ export const Avatar = styled.img`
   grid-column-end: 2;
   border: 0;
   border-radius: 150%;
+  object-fit: cover;
 `;
