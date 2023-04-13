@@ -10,6 +10,7 @@ import { Team } from "./components/AboutUs/AboutUs";
 import { AuthContextProvider } from "./context/auth.context";
 import AddNewTripStepOne from "./pages/AddNewTripStepOne";
 import LayoutMain from "./components/Layout/LayoutMain";
+import Voyages from "./pages/Voyages";
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
@@ -20,8 +21,9 @@ const App: React.FC = () => {
         <Route path="/signIn/register" element={<RegisterPage />} />
         <Route path="/about" element={<Team />} />
         <Route element={<RequireAuth />}>
-          <Route path="/voyages/:tripId" element={<AddTripPage />} />
-          <Route path="/voyages" element={<AddNewTripStepOne />} />
+          <Route path="/voyages" element={<Voyages />} />
+          <Route path="/add-new-trip/:tripId" element={<AddTripPage />} />
+          <Route path="/add-new-trip" element={<AddNewTripStepOne />} />
           <Route path="/account" element={<AccountPage />} />
         </Route>
       </Route>,
