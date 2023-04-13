@@ -7,6 +7,8 @@ import { Trip } from "../../pages/AddTrip";
 import { doc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase/firebase.config";
 import { StorageReference, UploadResult, deleteObject, ref, uploadBytes } from "firebase/storage";
+import { Button } from "../../ui/button/button.styled";
+import { useNavigate } from "react-router-dom";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
@@ -52,14 +54,18 @@ const options = {
 };
 
 const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
+  const navigate = useNavigate();
   const [pins, setPins] = useState<Pin[]>([]);
   const [place, setPlace] = useState<LatLngLiteral>();
   const [clickedPin, setClickedPin] = useState<Pin | null>();
   const [pinImages, setPinImages] = useState<PinImage[]>([]);
   const mapRef = useRef<GoogleMap>();
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
+  const [error, setError] = useState(false);
 
   const addNewPin = (e: google.maps.MapMouseEvent) => {
+    setError(false);
+    if (!place) return;
     const { lat, lng } = e.latLng as LatLngFunctions;
 
     const emptyPin = pins.find((pin) => !pin.description && !pin.imageUrls && !pin.name);
@@ -88,6 +94,8 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
   };
 
   const onPinClickHandler = (e: google.maps.MapMouseEvent) => {
+    setError(false);
+
     const { lat, lng } = e.latLng as LatLngFunctions;
     setClickedPin(pins.find((pin) => pin.lat === lat() && pin.lng === lng()));
   };
@@ -116,6 +124,16 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
     setPinImages([]);
   }, [pins]);
 
+  const finishTrip = () => {
+    if (pins.length === 0) {
+      setError(true);
+      return;
+    }
+    const tripRef = doc(db, "trips", `${tripId}`);
+    updateDoc(tripRef, { ...tripData, places: pins.map((pin) => ({ ...pin, imageUrls: [] })), inProgress: false });
+    navigate(`/${tripId}`);
+  };
+
   return (
     <FullWrapper>
       <SearchbardWrapper>
@@ -137,6 +155,8 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
           />
         )}
         {clickedPin === null && <p>Your pin was succesfully saved!</p>}
+        {!clickedPin && <Button onClick={finishTrip}>Save and finish trip</Button>}
+        {error && <p>There must be at least one place in your trip to finish it!</p>}
       </SearchbardWrapper>
       <MapWrapper>
         <GoogleMap
