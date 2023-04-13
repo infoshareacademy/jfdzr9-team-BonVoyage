@@ -16,6 +16,7 @@ export type Trip = {
   places: Pin[];
   imageUrl: string;
   userEmail: string;
+  inProgress: boolean;
 };
 
 const AddTrip = () => {
