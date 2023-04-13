@@ -17,7 +17,7 @@ const NewTripForm = () => {
   const navigate = useNavigate();
   const onSubmit = handleSubmit(({ title, description, imageUrl }) => {
     const id = `${title}-${Math.floor(Math.random() * 100000000 + 1)}`;
-    const imageRef = ref(storage, `${auth.currentUser?.email}/${id}`);
+    const imageRef = ref(storage, `${auth.currentUser?.email}/${id}/${imageUrl[0].name}`);
     uploadBytes(imageRef, imageUrl[0]);
     const trip = {
       title,
@@ -28,7 +28,7 @@ const NewTripForm = () => {
     };
     const tripRef = doc(db, "trips", id);
     setDoc(tripRef, trip);
-    navigate(`/voyages/${id}`);
+    navigate(`/add-new-trip/${id}`);
   });
 
   return (
