@@ -10,10 +10,6 @@ export interface User {
   imageUrl: string;
 }
 
-// interface Props {
-//   uid: string;
-// }
-
 const UsersDetails = () => {
   const [userData, setUserData] = useState<User | null>(null);
   const user = useUser();
@@ -31,7 +27,11 @@ const UsersDetails = () => {
   if (!userData) {
     return (
       <>
-        <h1>No usersDetails!!!!!</h1>
+        <DetailsWrapper>
+          <img src="https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/users-avatar%2Favatar.jpg?alt=media&token=da740dbc-b0d9-40bc-8024-6415d43d5c00" />
+          <h2>Name: </h2>
+          <p>City: </p>
+        </DetailsWrapper>
       </>
     );
   }
