@@ -8,6 +8,8 @@ import { Button } from "../ui/button/button.styled";
 import UsersDetails from "../components/UsersDetails/UsersDetails";
 import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import { storage } from "../firebase/firebase.config";
+import { AccountPageWrapper } from "../components/TripsList/TripsList.styled";
+import { TripsList } from "../components/TripsList/TripsList";
 
 export interface UsersDetailsFormInput {
   firstName: string;
@@ -49,7 +51,7 @@ const AccountPage = () => {
   return user ? (
     <>
       {success ? (
-        <>
+        <AccountPageWrapper>
           <UsersDetails />
           <Button
             onClick={() => {
@@ -58,9 +60,10 @@ const AccountPage = () => {
           >
             Edit profile
           </Button>
-        </>
+          <TripsList />
+        </AccountPageWrapper>
       ) : (
-        <>
+        <AccountPageWrapper>
           {" "}
           <h1>Hello {user.email} please fill in this form:</h1>
           <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -88,7 +91,7 @@ const AccountPage = () => {
             <TextInput alt="Uppload photos" type={"hidden"} {...register("imageUrl")} />
             <Button type="submit">Submit</Button>
           </StyledForm>{" "}
-        </>
+        </AccountPageWrapper>
       )}
     </>
   ) : (
