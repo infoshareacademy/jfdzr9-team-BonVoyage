@@ -2,10 +2,13 @@ import { ProfileSVG } from "../../assets/ProfileSVG";
 import { useState } from "react";
 import { DropdownButton, DropdownContainer, DropdownListItem, DropdownList, LinkStyle } from "./Dropdown.style";
 import { Link } from "react-router-dom";
-import { useUser } from "../../context/auth.context";
-import AccountPage from "../../pages/AccountPage";
+import { useUser, useLogout } from "../../context/auth.context";
 
 export function Dropdown() {
+  const logout = useLogout();
+  const handleLogout = async () => {
+    await logout();
+  };
   const user = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const options = [
@@ -19,7 +22,17 @@ export function Dropdown() {
     },
   ];
 
-  const loggedInOptions = [{ label: "Your Profile", path: "/account" }];
+  const loggedInOptions = [
+    {
+      label: "Your Profile",
+      path: "/account",
+    },
+    {
+      label: "Logout",
+      onClick: handleLogout,
+    },
+  ];
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -35,9 +48,15 @@ export function Dropdown() {
             <DropdownList>
               {loggedInOptions.map((option) => (
                 <DropdownListItem key={option.path}>
-                  <LinkStyle to={option.path}>
-                    <p>{option.label}</p>
-                  </LinkStyle>
+                  {option.onClick ? (
+                    <LinkStyle onClick={option.onClick}>
+                      <p>{option.label}</p>
+                    </LinkStyle>
+                  ) : (
+                    <LinkStyle to={option.path}>
+                      <p>{option.label}</p>
+                    </LinkStyle>
+                  )}
                 </DropdownListItem>
               ))}
             </DropdownList>
