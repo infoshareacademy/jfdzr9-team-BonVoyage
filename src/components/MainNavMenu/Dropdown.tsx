@@ -1,7 +1,6 @@
 import { ProfileSVG } from "../../assets/ProfileSVG";
 import { useState } from "react";
 import { DropdownButton, DropdownContainer, DropdownListItem, DropdownList, LinkStyle } from "./Dropdown.style";
-import { Link } from "react-router-dom";
 import { useUser, useLogout } from "../../context/auth.context";
 
 export function Dropdown() {
