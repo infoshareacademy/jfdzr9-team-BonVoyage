@@ -1,6 +1,6 @@
 import getUsersDetails from "../../firebase/getUsersDetails";
 import { useState, useEffect } from "react";
-import { DetailsWrapper } from "./UsersDetails.styled";
+import { Avatar, Details, DetailsWrapper } from "./UsersDetails.styled";
 import { useUser } from "../../context/auth.context";
 
 export interface User {
@@ -28,9 +28,13 @@ const UsersDetails = () => {
     return (
       <>
         <DetailsWrapper>
-          <img src="https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/users-avatar%2Favatar.jpg?alt=media&token=da740dbc-b0d9-40bc-8024-6415d43d5c00" />
-          <h2>Name: </h2>
-          <p>City: </p>
+          <Avatar src="https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/users-avatar%2Favatar.jpg?alt=media&token=da740dbc-b0d9-40bc-8024-6415d43d5c00" />
+          <Details>
+            {" "}
+            <h2>Name: </h2>
+            <p>City: </p>
+            <p>Trips: </p>
+          </Details>
         </DetailsWrapper>
       </>
     );
@@ -39,13 +43,19 @@ const UsersDetails = () => {
   const { firstName, lastName, city, imageUrl } = userData;
 
   return (
-    <DetailsWrapper>
-      <img src={imageUrl} />
-      <h2>
-        {firstName} {lastName}
-      </h2>
-      <p>City: {city}</p>
-    </DetailsWrapper>
+    <>
+      <DetailsWrapper>
+        <Avatar src={imageUrl} />
+        <Details>
+          {" "}
+          <h2>
+            {firstName} {lastName}
+          </h2>
+          <p>City: {city}</p>
+          <p>Trips: </p>
+        </Details>
+      </DetailsWrapper>
+    </>
   );
 };
 
