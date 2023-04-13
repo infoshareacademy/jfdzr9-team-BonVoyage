@@ -5,28 +5,36 @@ import RegisterPage from "./pages/RegisterPage";
 import SignInPage from "./pages/SignInPage";
 import { AddTripPage } from "./pages/AddTrip";
 import AccountPage from "./pages/AccountPage";
-// import RequireAuth from "./components/RequireAuth/RequireAuth";
+import RequireAuth from "./components/RequireAuth/RequireAuth";
 import { Team } from "./components/AboutUs/AboutUs";
+import { AuthContextProvider } from "./context/auth.context";
+import AddNewTripStepOne from "./pages/AddNewTripStepOne";
+import LayoutMain from "./components/Layout/LayoutMain";
+import Voyages from "./pages/Voyages";
 
 const App: React.FC = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <>
+      <Route path="/" element={<LayoutMain />}>
         <Route path="/" element={<LandingPage />} />
         <Route path="/signIn" element={<SignInPage />} />
         <Route path="/signIn/register" element={<RegisterPage />} />
-        {/* <Route element={<RequireAuth />}> */}
         <Route path="/about" element={<Team />} />
-        <Route path="/voyages" element={<AddTripPage />} />
-        <Route path="/account" element={<AccountPage />} />
-        {/* </Route> */}
-      </>,
+        <Route element={<RequireAuth />}>
+          <Route path="/voyages" element={<Voyages />} />
+          <Route path="/add-new-trip/:tripId" element={<AddTripPage />} />
+          <Route path="/add-new-trip" element={<AddNewTripStepOne />} />
+          <Route path="/account" element={<AccountPage />} />
+        </Route>
+      </Route>,
     ),
   );
   return (
     <>
-      <GlobalStyles />
-      <RouterProvider router={router} />
+      <AuthContextProvider>
+        <GlobalStyles />
+        <RouterProvider router={router} />
+      </AuthContextProvider>
     </>
   );
 };

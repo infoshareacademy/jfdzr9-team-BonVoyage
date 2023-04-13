@@ -10,8 +10,6 @@ import { FcGoogle } from "react-icons/fc";
 import { useUser } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
 import { TextInput } from "../ui/TextInput/TextInput.styled";
-import { MainNavMenu } from "../components/MainNavMenu/MainNavMenu";
-import { Footer } from "../components/Footer/Footer";
 
 interface IFormInputs {
   email: string;
@@ -28,7 +26,6 @@ const SignInPage = () => {
   const onSubmit: SubmitHandler<IFormInputs> = ({ email, password }) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => navigate(`/account`))
-
       .catch((error: FirebaseError) => {
         setError(firebaseErrors[(error as FirebaseError).code as FirebaseErrorsKeys]);
       });
@@ -49,7 +46,6 @@ const SignInPage = () => {
 
   return (
     <>
-      <MainNavMenu />
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <h1>Sign in to existing account:</h1>
         <TextInput placeholder="Type email" {...register("email")} />
@@ -63,7 +59,6 @@ const SignInPage = () => {
         <Link to={"/signIn/register"}>Register</Link>
         {error}
       </StyledForm>
-      <Footer year={2023} />
     </>
   );
 };
