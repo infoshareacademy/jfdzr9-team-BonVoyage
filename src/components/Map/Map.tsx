@@ -54,7 +54,7 @@ const options = {
   clickableIcons: false,
 };
 
-const Map = ({ center, tripId, tripData, setTripData }: GoogleMapProps) => {
+const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
   const navigate = useNavigate();
   const [pins, setPins] = useState<Pin[]>([]);
   const [place, setPlace] = useState<LatLngLiteral>();
@@ -121,7 +121,10 @@ const Map = ({ center, tripId, tripData, setTripData }: GoogleMapProps) => {
       promises.push(uploadedImage);
     });
     Promise.all(promises).catch((err) => console.log(err));
-    updateDoc(tripRef, { ...tripData, center: place, places: pins.map((pin) => ({ ...pin, imageUrls: [] })) });
+    updateDoc(tripRef, {
+      ...tripData,
+      places: pins.map((pin) => ({ ...pin, imageUrls: [] })),
+    });
     setPinImages([]);
   }, [pins]);
 

@@ -1,7 +1,7 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import { Trip } from "../../pages/AddTrip";
-import { FullWrapper } from "../Map/Map.styled";
+import { MapWrapper } from "./MapPreview.styled";
 
 const mapContainerStyle = {
   width: "100%",
@@ -15,31 +15,30 @@ const options = {
   clickableIcons: false,
 };
 
-type Coordinates = {
-  lat: number;
-  lng: number;
-};
-
 type MapProps = {
-  center: Coordinates | undefined;
   tripData: Trip | undefined;
 };
 
-const MapPreview = ({ center, tripData }: MapProps) => {
-  const mapRef = useRef<GoogleMap>();
-  const onLoad = useCallback((map: any) => (mapRef.current = map), []);
+const MapPreview = ({ tripData }: MapProps) => {
+  const onLoad = useCallback((map: any) => {
+    const bounds = new window.google.maps.LatLngBounds();
+    tripData?.places.forEach((pin) => {
+      bounds.extend({ lat: pin.lat, lng: pin.lng });
+    });
+    map.fitBounds(bounds);
+  }, []);
 
   const onPinClickHandler = () => {
     console.log("test");
   };
   return (
-    <FullWrapper>
-      <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={12} options={options} onLoad={onLoad}>
+    <MapWrapper>
+      <GoogleMap mapContainerStyle={mapContainerStyle} zoom={12} options={options} onLoad={onLoad}>
         {tripData?.places.map((pin) => (
           <Marker key={pin.lat} position={pin} onClick={onPinClickHandler} />
         ))}
       </GoogleMap>
-    </FullWrapper>
+    </MapWrapper>
   );
 };
 

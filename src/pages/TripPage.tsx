@@ -27,14 +27,22 @@ const TripPage = () => {
     getTrip();
   }, []);
 
-  if (loadError) {
-    return <div>Error loading maps</div>;
-  }
-
-  return tripData?.center && isLoaded ? (
-    <MapPreview center={tripData?.center} tripData={tripData} />
-  ) : (
-    <div style={{ margin: "100px" }}>Loading maps...</div>
+  return (
+    <div>
+      <div>
+        <h1></h1>
+        <div>
+          <p></p>
+          {loadError ? (
+            <div>Error loading maps</div>
+          ) : isLoaded ? (
+            <MapPreview tripData={tripData} />
+          ) : (
+            <div style={{ margin: "100px" }}>Loading maps...</div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
