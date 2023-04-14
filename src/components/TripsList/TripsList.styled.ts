@@ -43,3 +43,9 @@ export const TripMini = styled.img`
   object-fit: cover;
   grid-area: 1 / 1 / 2 / 2;
 `;
+
+export const TripMiniTitle = styled.h2`
+  position: absolute;
+  color: black;
+  justify-self: center;
+`;

@@ -30,7 +30,8 @@
     "styled-components": "^5.3.9",
     "swiper": "^9.1.1",
     "typeface-roboto": "^1.1.13",
-    "use-places-autocomplete": "^4.0.0"
+    "use-places-autocomplete": "^4.0.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@testing-library/cypress": "^9.0.0",
