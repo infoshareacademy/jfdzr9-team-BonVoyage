@@ -139,7 +139,7 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
       places: pins.map((pin) => ({ ...pin, imageUrls: [] })),
       inProgress: false,
     });
-    navigate(`/${tripId}`);
+    navigate(`/voyages/${tripId}`);
   };
 
   return (
