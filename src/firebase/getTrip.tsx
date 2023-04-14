@@ -1,10 +1,11 @@
-import { DocumentReference, collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { CollectionReference, DocumentReference, collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db, auth } from "./firebase.config";
 import { useState } from "react";
 import { Trip } from "../pages/AddTrip";
 import { useUser } from "../context/auth.context";
+import firebase from "firebase";
 
-const getTrips = async () => {
+const getTrips = async (): Promise<Trip[] | null> => {
   // const [doc, setDoc] = useState({});
   // const tripRef = doc(db, "trips", uid) as DocumentReference<User>;
   // const res = await getDoc(userRef);
@@ -19,17 +20,19 @@ const getTrips = async () => {
   //   .then((snapshot) => {
   //     snapshot.forEach((doc) => console.log("doc is ", doc));
   //   });
-  const tripRef = collection(db, "trips");
+  const tripRef = collection(db, "trips") as firebase.firestore.QuerySnapshot<Trip>;
   const docsSnap = await getDocs(tripRef);
+  const data = docsSnap.docs.map((doc) => doc.data()) as Trip[];
+  // const data = docsSnap.data() as Trip[] | null;
   // const data = docsSnap.data();
   // const filteredData = data.filter((trip) => trip.userEmail === auth.currentUser?.email);
   // console.log(filteredData);
   // return filteredData;
-  docsSnap.forEach((doc) => {
-    console.log(doc.data());
-  });
-  // console.log(docsSnap.data());
-  // return docsSnap.data();
+  // docsSnap.forEach((doc) => {
+  //   console.log(doc.data());
+  // });
+  console.log(data);
+  return data;
 };
 
 export default getTrips;
