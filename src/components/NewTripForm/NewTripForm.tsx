@@ -24,6 +24,7 @@ const NewTripForm = () => {
       description,
       imageUrl: imageRef.fullPath,
       userEmail: auth.currentUser?.email,
+      inProgress: true,
       places: [],
     };
     const tripRef = doc(db, "trips", id);
@@ -36,7 +37,7 @@ const NewTripForm = () => {
       <h1>Create new trip</h1>
       <TextInput placeholder="Trip Title" {...register("title")} required />
       <TextInput placeholder="Description" {...register("description")} required />
-      <TextInput type="file" {...register("imageUrl")} />
+      <TextInput type="file" {...register("imageUrl")} required />
       <Button>Create and go to next step</Button>
     </StyledFormNewTrip>
   );
