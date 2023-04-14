@@ -6,12 +6,14 @@ import { Trip } from "./AddTrip";
 import { useLoadScript } from "@react-google-maps/api";
 import MapPreview from "../components/MapPreview/MapPreview";
 import { Title, TripDescription, TripSection, TripWrapper } from "../components/MapPreview/MapPreview.styled";
+import Modal from "../ui/Modal/Modal";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
 
 const libraries: Library[] = ["places"];
 
 const TripPage = () => {
+  const [isModalActive, setIsModalActive] = useState(false);
   const { tripId } = useParams<{ tripId: string }>();
   const [tripData, setTripData] = useState<Trip>();
   const { isLoaded, loadError } = useLoadScript({
@@ -37,12 +39,17 @@ const TripPage = () => {
           {loadError ? (
             <div>Error loading maps</div>
           ) : isLoaded && tripData?.places ? (
-            <MapPreview tripData={tripData} />
+            <MapPreview tripData={tripData} setIsModalActive={setIsModalActive} />
           ) : (
             <div style={{ margin: "100px" }}>Loading maps...</div>
           )}
         </TripSection>
       </TripWrapper>
+      {isModalActive && (
+        <Modal setIsModalActive={setIsModalActive} isModalActive={isModalActive}>
+          <div style={{ zIndex: 100, marginTop: "100px" }}>Modal testowy</div>
+        </Modal>
+      )}
     </div>
   );
 };
