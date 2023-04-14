@@ -6,7 +6,7 @@ import TripDetailsForm from "../TripDetailsForm/TripDetailsForm";
 import { Trip } from "../../pages/AddTrip";
 import { doc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase/firebase.config";
-import { StorageReference, UploadResult, deleteObject, ref, uploadBytes } from "firebase/storage";
+import { StorageReference, UploadResult, deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { Button } from "../../ui/button/button.styled";
 import { useNavigate } from "react-router-dom";
 
@@ -120,12 +120,21 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
       const uploadedImage = uploadBytes(ref, file);
       promises.push(uploadedImage);
     });
-    Promise.all(promises).catch((err) => console.log(err));
-    updateDoc(tripRef, {
-      ...tripData,
-      places: pins.map((pin) => ({ ...pin, imageUrls: [] })),
-    });
-    setPinImages([]);
+    Promise.all(promises)
+      .then((snapshot) => {
+        const urlPromises = snapshot.map((snapshot) => getDownloadURL(snapshot.ref));
+        return Promise.all(urlPromises).then((urls) => {
+          return urls;
+        });
+      })
+      .then((urls) => {
+        updateDoc(tripRef, {
+          ...tripData,
+          places: pins.map((pin) => ({ ...pin, imageUrls: [...urls] })),
+        });
+      })
+      .then(() => setPinImages([]))
+      .catch((err) => console.log(err));
   }, [pins]);
 
   const finishTrip = () => {
