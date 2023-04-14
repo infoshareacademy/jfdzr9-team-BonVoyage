@@ -1,5 +1,6 @@
 import { TripsListStyled } from "./TripsList.styled";
 import { SingleTrip } from "./SingleTrip";
+import getTrip from "../../firebase/getTrip";
 
 const trips = [
   {
@@ -23,6 +24,8 @@ const trips = [
     url: "https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/users-avatar%2Favatar.jpg?alt=media&token=da740dbc-b0d9-40bc-8024-6415d43d5c00",
   },
 ];
+
+// const trips = getTrip();
 
 export const TripsList = () => {
   return (
