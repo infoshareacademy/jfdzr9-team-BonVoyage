@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const DropdownContainer = styled.div`
   position: relative;
@@ -32,5 +33,15 @@ export const DropdownListItem = styled.li`
 
   p {
     color: black;
+  }
+`;
+
+export const LinkStyle = styled(Link)`
+  font-size: 2px;
+  text-decoration: none;
+  color: black;
+
+  :hover {
+    text-decoration: none;
   }
 `;
