@@ -6,6 +6,7 @@ import { StyledForm } from "../ui/form/form.styled";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../ui/button/button.styled";
 import UsersDetails from "../components/UsersDetails/UsersDetails";
+import { NavLink } from "react-router-dom";
 import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import { storage } from "../firebase/firebase.config";
 import { AccountPageWrapper } from "../components/TripsList/TripsList.styled";
@@ -35,7 +36,6 @@ const AccountPage = () => {
     uploadBytes(imageRef, file).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setValue("imageUrl", url);
-        console.log("url: ", url);
       });
     });
   };
@@ -60,6 +60,9 @@ const AccountPage = () => {
           >
             Edit profile
           </Button>
+          <NavLink to="/voyages">
+            <Button>Add new trip</Button>
+          </NavLink>
           <TripsList />
         </AccountPageWrapper>
       ) : (
