@@ -7,12 +7,14 @@ const mapContainerStyle = {
   width: "100%",
   height: "100%",
   margin: "auto",
+  borderRadius: "5vw",
 };
 
 const options = {
   disableDefaultUI: true,
   zoomControl: false,
   clickableIcons: false,
+  mapId: "461a4919bddfec0",
 };
 
 type MapProps = {

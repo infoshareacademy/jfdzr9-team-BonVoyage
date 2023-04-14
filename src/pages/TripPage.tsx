@@ -5,6 +5,7 @@ import { db } from "../firebase/firebase.config";
 import { Trip } from "./AddTrip";
 import { useLoadScript } from "@react-google-maps/api";
 import MapPreview from "../components/MapPreview/MapPreview";
+import { Title, TripDescription, TripSection, TripWrapper } from "../components/MapPreview/MapPreview.styled";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
 
@@ -29,19 +30,19 @@ const TripPage = () => {
 
   return (
     <div>
-      <div>
-        <h1></h1>
-        <div>
-          <p></p>
+      <TripWrapper>
+        <Title>{tripData?.title}</Title>
+        <TripSection>
+          <TripDescription>{tripData?.description}</TripDescription>
           {loadError ? (
             <div>Error loading maps</div>
-          ) : isLoaded ? (
+          ) : isLoaded && tripData?.places ? (
             <MapPreview tripData={tripData} />
           ) : (
             <div style={{ margin: "100px" }}>Loading maps...</div>
           )}
-        </div>
-      </div>
+        </TripSection>
+      </TripWrapper>
     </div>
   );
 };
