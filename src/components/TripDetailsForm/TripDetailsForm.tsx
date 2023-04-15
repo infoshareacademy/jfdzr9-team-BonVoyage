@@ -2,9 +2,9 @@ import { Button } from "../../ui/button/button.styled";
 import { StyledFormDetails } from "../../ui/form/form.styled";
 import { TextInput } from "../../ui/TextInput/TextInput.styled";
 import { useForm } from "react-hook-form";
-import { Pin, PinImage } from "../Map/Map";
+import { Pin } from "../Map/Map";
 import { FakeButton } from "./TripDetailsForm.styled";
-import { ref } from "firebase/storage";
+import { UploadResult, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { auth, storage } from "../../firebase/firebase.config";
 import { useState } from "react";
 
@@ -20,10 +20,9 @@ type FormProps = {
   setClickedPin: React.Dispatch<React.SetStateAction<Pin | undefined | null>>;
   deletePin: () => void;
   tripId: string | undefined;
-  setPinImages: React.Dispatch<React.SetStateAction<PinImage[]>>;
 };
 
-const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId, setPinImages }: FormProps) => {
+const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId }: FormProps) => {
   const [imageError, setImageError] = useState(false);
   const { register, handleSubmit } = useForm<FormData>({
     values: {
@@ -34,7 +33,7 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
   });
 
   const onSubmit = handleSubmit(({ name, description, imageUrls }) => {
-    const refs: string[] = [];
+    const promises: Promise<UploadResult>[] = [];
     if (imageUrls) {
       if ([...imageUrls].length > 4) {
         setImageError(true);
@@ -43,36 +42,43 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
         setImageError(false);
         [...imageUrls].forEach((file: Blob) => {
           const imageRef = ref(storage, `${auth.currentUser?.email}/${tripId}/${name}/${file.name}`);
-          refs.push(imageRef.fullPath);
-          setPinImages((prev) => [...prev, { file, ref: imageRef }]);
+          const uploadedImage = uploadBytes(imageRef, file);
+          promises.push(uploadedImage);
         });
+        Promise.all(promises)
+          .then((snapshot) => {
+            const urlPromises = snapshot.map((snapshot) => getDownloadURL(snapshot.ref));
+            return Promise.all(urlPromises);
+          })
+          .then((urls) =>
+            setPins((prev) => {
+              const selectedPin = prev.find((pin) => pin.id === clickedPin.id);
+              const otherPins = prev.filter((pin) => pin.id !== clickedPin.id);
+              return [
+                ...otherPins,
+                {
+                  ...selectedPin,
+                  name,
+                  description,
+                  imageUrls,
+                  imageRefs: urls,
+                  lat: selectedPin?.lat || 0,
+                  lng: selectedPin?.lng || 0,
+                },
+              ];
+            }),
+          )
+          .then(() => setClickedPin(null));
       }
     }
-    setPins((prev) => {
-      const selectedPin = prev.find((pin) => pin.id === clickedPin.id);
-      const otherPins = prev.filter((pin) => pin.id !== clickedPin.id);
-      return [
-        ...otherPins,
-        {
-          ...selectedPin,
-          name,
-          description,
-          imageUrls,
-          imageRefs: refs,
-          lat: selectedPin?.lat || 0,
-          lng: selectedPin?.lng || 0,
-        },
-      ];
-    });
-    setClickedPin(null);
   });
 
   return (
     <StyledFormDetails onSubmit={onSubmit}>
       <h2>Trip Details</h2>
       <TextInput placeholder="Pin name" type={"text"} {...register("name")} required />
-      <TextInput placeholder="Add details" type={"text"} {...register("description")} />
-      <TextInput type={"file"} multiple {...register("imageUrls")} />
+      <TextInput placeholder="Add details" type={"text"} {...register("description")} required />
+      <TextInput type={"file"} multiple {...register("imageUrls")} required />
       {imageError && <p>You can choose maximum 4 pictures for one place!</p>}
       <FakeButton onClick={deletePin}>Delete</FakeButton>
       <Button>Save</Button>
