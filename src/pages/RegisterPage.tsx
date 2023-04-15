@@ -11,7 +11,6 @@ import { TextInput } from "../ui/TextInput/TextInput.styled";
 import { useNavigate } from "react-router-dom";
 
 // import { Navigate } from "react-router-dom";
-import { Footer } from "../components/Footer/Footer";
 
 interface IFormInput {
   email: string;
@@ -41,7 +40,6 @@ const RegisterPage = () => {
         <Button type="submit">Register</Button>
         {error}
       </StyledForm>
-      <Footer year={2023} />
     </>
   );
 };
