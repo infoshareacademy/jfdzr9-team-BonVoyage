@@ -23,7 +23,7 @@ export const TripsList = () => {
   return (
     <TripsListStyled>
       {trips.map((trip) => (
-        <SingleTrip key={trip.title} url={trip.imageUrl} title={trip.title} />
+        <SingleTrip key={trip.title} url={trip.imageUrl} title={trip.title} tripId={trip.id} />
       ))}
     </TripsListStyled>
   );
