@@ -4,6 +4,7 @@ import getTrips from "../../firebase/getTrip";
 import { useEffect, useState } from "react";
 import { Trip } from "../../pages/AddTrip";
 import { v4 as uuidv4 } from "uuid";
+import { useUser } from "../../context/auth.context";
 
 // const trips = [
 //   {
@@ -35,20 +36,21 @@ import { v4 as uuidv4 } from "uuid";
 
 export const TripsList = () => {
   const [trips, setTrips] = useState<Trip[] | null>([]);
+  const [filteredTrips, setFilteredTrips] = useState<Trip[] | null>([]);
+  const user = useUser();
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getTrips();
       setTrips(data || []);
+      setFilteredTrips(trips.filter((trip) => trip.userEmail === user?.email));
     };
-
     fetchData();
   }, []);
 
-  console.log(trips);
   return (
     <TripsListStyled>
-      {trips.map((trip) => (
+      {filteredTrips?.map((trip) => (
         <SingleTrip key={uuidv4()} url={trip.imageUrl} title={trip.title} />
       ))}
     </TripsListStyled>
