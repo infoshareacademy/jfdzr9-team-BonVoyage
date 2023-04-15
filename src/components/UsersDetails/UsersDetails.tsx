@@ -8,6 +8,7 @@ export interface User {
   lastName: string;
   city: string;
   imageUrl: string;
+  bio: string;
 }
 
 const UsersDetails = () => {
@@ -33,6 +34,7 @@ const UsersDetails = () => {
             {" "}
             <h2>Name: </h2>
             <p>City: </p>
+            <p>Bio: </p>
             <p>Trips: </p>
           </Details>
         </DetailsWrapper>
@@ -40,7 +42,7 @@ const UsersDetails = () => {
     );
   }
 
-  const { firstName, lastName, city, imageUrl } = userData;
+  const { firstName, lastName, city, imageUrl, bio } = userData;
 
   return (
     <>
@@ -52,6 +54,7 @@ const UsersDetails = () => {
             {firstName} {lastName}
           </h2>
           <p>City: {city}</p>
+          <p>Bio: {bio}</p>
           <p>Trips: </p>
         </Details>
       </DetailsWrapper>
