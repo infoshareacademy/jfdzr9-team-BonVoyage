@@ -6,7 +6,7 @@ import TripDetailsForm from "../TripDetailsForm/TripDetailsForm";
 import { Trip } from "../../pages/AddTrip";
 import { doc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase/firebase.config";
-import { StorageReference, UploadResult, deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, ref } from "firebase/storage";
 import { Button } from "../../ui/button/button.styled";
 import { useNavigate } from "react-router-dom";
 
@@ -37,11 +37,6 @@ type GoogleMapProps = {
   setTripData: React.Dispatch<React.SetStateAction<Trip | undefined>>;
 };
 
-export type PinImage = {
-  file: Blob;
-  ref: StorageReference;
-};
-
 const mapContainerStyle = {
   width: "100%",
   height: "100%",
@@ -59,7 +54,6 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
   const [pins, setPins] = useState<Pin[]>([]);
   const [place, setPlace] = useState<LatLngLiteral>();
   const [clickedPin, setClickedPin] = useState<Pin | null>();
-  const [pinImages, setPinImages] = useState<PinImage[]>([]);
   const mapRef = useRef<GoogleMap>();
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
   const [error, setError] = useState(false);
@@ -115,26 +109,10 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
   useEffect(() => {
     const tripRef = doc(db, "trips", `${tripId}`);
     if (clickedPin && !clickedPin?.name && !clickedPin?.description && !clickedPin?.imageRefs) return;
-    const promises: Promise<UploadResult>[] = [];
-    pinImages.forEach(({ file, ref }) => {
-      const uploadedImage = uploadBytes(ref, file);
-      promises.push(uploadedImage);
-    });
-    Promise.all(promises)
-      .then((snapshot) => {
-        const urlPromises = snapshot.map((snapshot) => getDownloadURL(snapshot.ref));
-        return Promise.all(urlPromises).then((urls) => {
-          return urls;
-        });
-      })
-      .then((urls) => {
-        updateDoc(tripRef, {
-          ...tripData,
-          places: pins.map((pin) => ({ ...pin, imageUrls: [...urls] })),
-        });
-      })
-      .then(() => setPinImages([]))
-      .catch((err) => console.log(err));
+    updateDoc(tripRef, {
+      ...tripData,
+      places: pins.map((pin) => ({ ...pin, imageUrls: [] })),
+    }).catch((err) => console.log(err));
   }, [pins]);
 
   const finishTrip = () => {
@@ -168,7 +146,6 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
             setPins={setPins}
             setClickedPin={setClickedPin}
             tripId={tripId}
-            setPinImages={setPinImages}
           />
         )}
         {clickedPin === null && <p>Your pin was succesfully saved!</p>}
