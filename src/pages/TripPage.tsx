@@ -50,7 +50,7 @@ const TripPage = () => {
       </TripWrapper>
       {isModalActive && (
         <Modal setIsModalActive={setIsModalActive} isModalActive={isModalActive} setSelectedPlace={setSelectedPlace}>
-          <PinDetailsCard selectedPlace={selectedPlace} />
+          {selectedPlace && <PinDetailsCard selectedPlace={selectedPlace} />}
         </Modal>
       )}
     </div>
