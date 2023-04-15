@@ -7,6 +7,8 @@ import { useLoadScript } from "@react-google-maps/api";
 import MapPreview from "../components/MapPreview/MapPreview";
 import { Title, TripDescription, TripSection, TripWrapper } from "../components/MapPreview/MapPreview.styled";
 import Modal from "../ui/Modal/Modal";
+import PinDetailsCard from "../components/PinDetailsCard/PinDetailsCard";
+import { Pin } from "../components/Map/Map";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
 
@@ -16,6 +18,7 @@ const TripPage = () => {
   const [isModalActive, setIsModalActive] = useState(false);
   const { tripId } = useParams<{ tripId: string }>();
   const [tripData, setTripData] = useState<Trip>();
+  const [selectedPlace, setSelectedPlace] = useState<Pin>();
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -39,15 +42,15 @@ const TripPage = () => {
           {loadError ? (
             <div>Error loading maps</div>
           ) : isLoaded && tripData?.places ? (
-            <MapPreview tripData={tripData} setIsModalActive={setIsModalActive} />
+            <MapPreview tripData={tripData} setIsModalActive={setIsModalActive} setSelectedPlace={setSelectedPlace} />
           ) : (
             <div style={{ margin: "100px" }}>Loading maps...</div>
           )}
         </TripSection>
       </TripWrapper>
       {isModalActive && (
-        <Modal setIsModalActive={setIsModalActive} isModalActive={isModalActive}>
-          <div style={{ zIndex: 100, marginTop: "100px" }}>Modal testowy</div>
+        <Modal setIsModalActive={setIsModalActive} isModalActive={isModalActive} setSelectedPlace={setSelectedPlace}>
+          {selectedPlace && <PinDetailsCard selectedPlace={selectedPlace} />}
         </Modal>
       )}
     </div>

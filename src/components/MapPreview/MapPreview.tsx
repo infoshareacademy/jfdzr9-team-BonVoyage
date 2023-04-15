@@ -2,6 +2,7 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useCallback } from "react";
 import { Trip } from "../../pages/AddTrip";
 import { MapWrapper } from "./MapPreview.styled";
+import { LatLngFunctions, Pin } from "../Map/Map";
 
 const mapContainerStyle = {
   width: "100%",
@@ -20,9 +21,10 @@ const options = {
 type MapProps = {
   tripData: Trip | undefined;
   setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedPlace: React.Dispatch<React.SetStateAction<Pin | undefined>>;
 };
 
-const MapPreview = ({ tripData, setIsModalActive }: MapProps) => {
+const MapPreview = ({ tripData, setIsModalActive, setSelectedPlace }: MapProps) => {
   const onLoad = useCallback((map: any) => {
     const bounds = new window.google.maps.LatLngBounds();
     tripData?.places.forEach((pin) => {
@@ -31,8 +33,10 @@ const MapPreview = ({ tripData, setIsModalActive }: MapProps) => {
     map.fitBounds(bounds);
   }, []);
 
-  const onPinClickHandler = () => {
+  const onPinClickHandler = (e: google.maps.MapMouseEvent) => {
+    const { lat, lng } = e.latLng as LatLngFunctions;
     setIsModalActive(true);
+    setSelectedPlace(tripData?.places.find((place) => place.lat === lat() && place.lng === lng()));
   };
   return (
     <MapWrapper>
