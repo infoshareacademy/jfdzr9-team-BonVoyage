@@ -4,7 +4,7 @@ const Voyages = () => {
   return (
     <div style={{ marginTop: "100px" }}>
       <Link to={"/add-new-trip"}>Add new trip</Link>
-      <Link to={"/voyages/Swiat-15903816"}>Testowy</Link>
+      <Link to={"/voyages/Zielona Góra - Szlakiem Winnic-66885199"}>Testowy</Link>
     </div>
   );
 };

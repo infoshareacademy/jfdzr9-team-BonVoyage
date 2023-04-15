@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
-type LatLngFunctions = {
+export type LatLngFunctions = {
   lat: () => number;
   lng: () => number;
 };

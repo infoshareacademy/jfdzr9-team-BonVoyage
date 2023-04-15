@@ -13,10 +13,10 @@ export const Overlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  opacity: 0.5;
-  background-color: black;
+  background-color: rgba(000, 000, 000, 0.4);
   z-index: 10;
   cursor: pointer;
+  backdrop-filter: blur(4px);
 `;
 
 export const Wrapper = styled.div`
