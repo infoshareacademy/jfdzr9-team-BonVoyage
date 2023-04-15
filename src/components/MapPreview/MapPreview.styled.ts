@@ -26,4 +26,5 @@ export const TripDescription = styled.p`
   width: 50%;
   height: 100%;
   text-align: justify;
+  padding: 0 2vw;
 `;
