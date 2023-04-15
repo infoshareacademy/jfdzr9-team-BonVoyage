@@ -14,14 +14,15 @@ const options = {
   disableDefaultUI: true,
   zoomControl: false,
   clickableIcons: false,
-  mapId: "461a4919bddfec0",
+  // mapId: "461a4919bddfec0",
 };
 
 type MapProps = {
   tripData: Trip | undefined;
+  setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const MapPreview = ({ tripData }: MapProps) => {
+const MapPreview = ({ tripData, setIsModalActive }: MapProps) => {
   const onLoad = useCallback((map: any) => {
     const bounds = new window.google.maps.LatLngBounds();
     tripData?.places.forEach((pin) => {
@@ -31,7 +32,7 @@ const MapPreview = ({ tripData }: MapProps) => {
   }, []);
 
   const onPinClickHandler = () => {
-    console.log("test");
+    setIsModalActive(true);
   };
   return (
     <MapWrapper>

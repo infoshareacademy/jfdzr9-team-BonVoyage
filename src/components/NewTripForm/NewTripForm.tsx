@@ -5,7 +5,7 @@ import { TextInput } from "../../ui/TextInput/TextInput.styled";
 import { useForm } from "react-hook-form";
 import { db, auth, storage } from "../../firebase/firebase.config";
 import { doc, setDoc } from "firebase/firestore";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 type FormData = {
   title: string;
@@ -18,18 +18,22 @@ const NewTripForm = () => {
   const onSubmit = handleSubmit(({ title, description, imageUrl }) => {
     const id = `${title}-${Math.floor(Math.random() * 100000000 + 1)}`;
     const imageRef = ref(storage, `${auth.currentUser?.email}/${id}/${imageUrl[0].name}`);
-    uploadBytes(imageRef, imageUrl[0]);
-    const trip = {
-      title,
-      description,
-      imageUrl: imageRef.fullPath,
-      userEmail: auth.currentUser?.email,
-      inProgress: true,
-      places: [],
-    };
     const tripRef = doc(db, "trips", id);
-    setDoc(tripRef, trip);
-    navigate(`/add-new-trip/${id}`);
+
+    uploadBytes(imageRef, imageUrl[0])
+      .then((snapshot) => getDownloadURL(snapshot.ref))
+      .then((url) => {
+        const trip = {
+          title,
+          description,
+          imageUrl: url,
+          userEmail: auth.currentUser?.email,
+          inProgress: true,
+          places: [],
+        };
+        setDoc(tripRef, trip);
+      })
+      .then(() => navigate(`/add-new-trip/${id}`));
   });
 
   return (
