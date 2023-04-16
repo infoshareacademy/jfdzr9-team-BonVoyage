@@ -2,7 +2,7 @@ import getUsersDetails from "../../firebase/getUsersDetails";
 import { useState, useEffect } from "react";
 import { Avatar, Details, DetailsWrapper, Name, Description } from "./UsersDetails.styled";
 import { useUser } from "../../context/auth.context";
-import { Button } from "../../ui/button/button.styled";
+import { ButtonEditProfile } from "../../ui/button/button.styled";
 
 export interface User {
   firstName: string;
@@ -39,7 +39,7 @@ const UsersDetails = ({ onClick, numberOfTrips }: Props) => {
           <Details>
             {" "}
             <h2>Name: </h2>
-            <Button onClick={onClick}>Edit Profile</Button>
+            <ButtonEditProfile onClick={onClick}>Edit Profile</ButtonEditProfile>
             <p>City: </p>
             <p>Bio: </p>
             <p>Trips: </p>
@@ -60,7 +60,7 @@ const UsersDetails = ({ onClick, numberOfTrips }: Props) => {
             <h2>
               {firstName} {lastName}
             </h2>
-            <Button onClick={onClick}>Edit Profile</Button>
+            <ButtonEditProfile onClick={onClick}>Edit Profile</ButtonEditProfile>
           </Name>
           <Description>
             <p>City: {city}</p>
