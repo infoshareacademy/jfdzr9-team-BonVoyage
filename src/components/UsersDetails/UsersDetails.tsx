@@ -1,6 +1,6 @@
 import getUsersDetails from "../../firebase/getUsersDetails";
 import { useState, useEffect } from "react";
-import { Avatar, Details, DetailsWrapper } from "./UsersDetails.styled";
+import { Avatar, Details, DetailsWrapper, Name, Description } from "./UsersDetails.styled";
 import { useUser } from "../../context/auth.context";
 import { Button } from "../../ui/button/button.styled";
 
@@ -14,9 +14,10 @@ export interface User {
 
 type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
+  numberOfTrips: number;
 };
 
-const UsersDetails = ({ onClick }: Props) => {
+const UsersDetails = ({ onClick, numberOfTrips }: Props) => {
   const [userData, setUserData] = useState<User | null>(null);
   const user = useUser();
   if (user) {
@@ -55,14 +56,17 @@ const UsersDetails = ({ onClick }: Props) => {
       <DetailsWrapper>
         <Avatar src={imageUrl} />
         <Details>
-          {" "}
-          <h2>
-            {firstName} {lastName}
-          </h2>
-          <Button onClick={onClick}>Edit Profile</Button>
-          <p>City: {city}</p>
-          <p>Bio: {bio}</p>
-          <p>Trips: </p>
+          <Name>
+            <h2>
+              {firstName} {lastName}
+            </h2>
+            <Button onClick={onClick}>Edit Profile</Button>
+          </Name>
+          <Description>
+            <p>City: {city}</p>
+            <p>Bio: {bio}</p>
+            <p>Trips: {numberOfTrips} </p>
+          </Description>
         </Details>
       </DetailsWrapper>
     </>

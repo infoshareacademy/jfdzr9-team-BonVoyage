@@ -1,25 +1,7 @@
 import { TripsListStyled } from "./TripsList.styled";
 import { SingleTrip } from "./SingleTrip";
-import getTrips from "../../firebase/getTrip";
-import { useEffect, useState } from "react";
-import { Trip } from "../../pages/AddTrip";
 
-import { useUser } from "../../context/auth.context";
-
-export const TripsList = () => {
-  const [trips, setTrips] = useState<Trip[]>([]);
-  const user = useUser();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getTrips();
-      setTrips(data?.filter((trip) => trip.userEmail === user?.email) ?? []);
-    };
-    fetchData();
-  }, []);
-
-  // const filteredTrips = trips?.filter((trip) => trip.userEmail === user?.email);
-
+export const TripsList = ({ trips }) => {
   return (
     <TripsListStyled>
       {trips.map((trip) => (

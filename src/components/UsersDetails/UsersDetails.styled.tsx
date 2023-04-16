@@ -1,26 +1,40 @@
 import styled from "styled-components";
 
 export const DetailsWrapper = styled.div`
-  margin: 50px auto;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  height: 100%;
+  margin: 50px 0px;
+  display: flex;
+  gap: 70px;
+  border-bottom: 1px solid grey;
 `;
 
 export const Details = styled.section`
-  grid-column-start: 2;
-  grid-column-end: 3;
+  height: inherit;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
+  gap: 10px;
+  /* margin-top: 3rem;
+  margin-bottom: 3rem; */
 `;
 
+export const Name = styled.div`
+  /* width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: stretch; */
+`;
+
+export const Description = styled.div``;
+
 export const Avatar = styled.img`
-  width: 140px;
-  height: 140px;
+  width: 12rem;
+  height: 12rem;
+  /* margin: 3rem; */
   position: relative;
-  grid-column-start: 1;
-  grid-column-end: 2;
   border: 0;
   border-radius: 150%;
   object-fit: cover;
