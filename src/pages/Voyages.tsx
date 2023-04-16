@@ -1,12 +1,34 @@
 import { Link } from "react-router-dom";
+import { TripsListStyled } from "../components/TripsList/TripsList.styled";
+import { SingleTrip } from "../components/TripsList/SingleTrip";
+import getTrips from "../firebase/getTrip";
+import { useEffect, useState } from "react";
+import { Trip } from "./AddTrip";
 
-const Voyages = () => {
+import { useUser } from "../context/auth.context";
+
+export const Voyages = () => {
+  const [trips, setTrips] = useState<Trip[]>([]);
+  const user = useUser();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getTrips();
+      setTrips(data?.filter((trip) => trip.imageUrl) ?? []);
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div style={{ marginTop: "100px" }}>
-      <Link to={"/add-new-trip"}>Add new trip</Link>
-      <Link to={"/voyages/Zielona Góra - Szlakiem Winnic-66885199"}>Testowy</Link>
-    </div>
+    <>
+      <TripsListStyled>
+        {trips.map((trip) => (
+          <SingleTrip key={trip.title} url={trip.imageUrl} title={trip.title} tripId={trip.id} />
+        ))}
+      </TripsListStyled>
+      <div style={{ marginTop: "100px" }}>
+        <Link to={"/add-new-trip"}>Add new trip</Link>
+      </div>
+    </>
   );
 };
-
-export default Voyages;

@@ -18,8 +18,6 @@ export const TripsList = () => {
     fetchData();
   }, []);
 
-  // const filteredTrips = trips?.filter((trip) => trip.userEmail === user?.email);
-
   return (
     <TripsListStyled>
       {trips.map((trip) => (
