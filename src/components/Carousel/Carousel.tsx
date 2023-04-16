@@ -39,7 +39,7 @@ export const Carousel: React.FC = () => {
                     <img src={voyage.image} alt="" />
                   </div>
                   <div>
-                    <StyledLink to={`/voyage/${voyage.id}`}>
+                    <StyledLink to={`/voyages/notloggedin/${voyage.id}`}>
                       <h2>{voyage.name}</h2>
                       <h3> {voyage.destination} </h3>
                     </StyledLink>
@@ -73,7 +73,7 @@ export const Carousel: React.FC = () => {
                     <img src={voyage.image} alt="" />
                   </div>
                   <div>
-                    <StyledLink to={`/voyage/${voyage.id}`}>
+                    <StyledLink to={`/voyages/notloggedin/${voyage.id}`}>
                       <h2>{voyage.name}</h2>
                       <h3> {voyage.destination} </h3>
                     </StyledLink>
