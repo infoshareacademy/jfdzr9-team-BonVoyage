@@ -17,7 +17,7 @@ export interface UsersDetailsFormInput {
   lastName: string;
   imageUrl: string;
   city: string;
-  userEmail?: string;
+  bio: string;
 }
 
 const AccountPage = () => {
@@ -91,6 +91,7 @@ const AccountPage = () => {
             <TextInput placeholder="First name" type={"text"} {...register("firstName")} required />
             <TextInput placeholder="Last name" type={"text"} {...register("lastName")} required />
             <TextInput placeholder="City" type={"text"} {...register("city")} required />
+            <TextInput placeholder="Bio" type={"text"} {...register("bio")} required />
             <TextInput alt="Uppload photos" type={"hidden"} {...register("imageUrl")} />
             <Button type="submit">Submit</Button>
           </StyledForm>{" "}
