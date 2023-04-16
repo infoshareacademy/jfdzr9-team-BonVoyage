@@ -14,6 +14,10 @@ import "swiper/css/pagination";
 // import required modules
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 
+import { useEffect, useRef } from "react";
+import { register } from "swiper/element/bundle";
+register();
+
 export const Carousel: React.FC = () => {
   const smallScreen = useMediaQuery("(min-width: 768px)");
 
@@ -27,6 +31,17 @@ export const Carousel: React.FC = () => {
           slidesPerView={3}
           modules={[Navigation, Pagination, Mousewheel, Keyboard]}
           className="mySwiper"
+          injectStyles={[
+            `
+          .swiper-button-prev {
+            color: white;
+          }
+          
+          .swiper-button-next {
+            color: #000;
+          }
+          `,
+          ]}
         >
           <div>
             <div>

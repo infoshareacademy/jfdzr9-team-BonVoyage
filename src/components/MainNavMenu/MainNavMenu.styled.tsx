@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const NavMenuContainer = styled.nav`
   display: flex;
   justify-content: space-between;
-  background-color: #cfe5d6;
+  background-color: #f5f5f5;
   height: 8vh;
   position: fixed;
   top: 0;
@@ -34,14 +34,14 @@ export const NavMenuContainer = styled.nav`
   }
 
   a {
-    color: #4a6a2b;
+    color: #5a5a5a;
     text-decoration: none;
     font-size: 20px;
     padding-right: 20px;
   }
 
   a:hover {
-    color: #415c26;
+    color: #000000;
     text-decoration: underline;
     transform: scale(4);
     font-weight: 500;

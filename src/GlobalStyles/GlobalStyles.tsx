@@ -30,7 +30,7 @@ body {
 } */
 
 h1 {
-    color: #4A6A2B;
+    color: #5a5a5a;
     font-family: "Roboto";
 }
 
