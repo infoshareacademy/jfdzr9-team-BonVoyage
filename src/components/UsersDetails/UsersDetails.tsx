@@ -2,6 +2,7 @@ import getUsersDetails from "../../firebase/getUsersDetails";
 import { useState, useEffect } from "react";
 import { Avatar, Details, DetailsWrapper } from "./UsersDetails.styled";
 import { useUser } from "../../context/auth.context";
+import { Button } from "../../ui/button/button.styled";
 
 export interface User {
   firstName: string;
@@ -11,7 +12,11 @@ export interface User {
   bio: string;
 }
 
-const UsersDetails = () => {
+type Props = {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+};
+
+const UsersDetails = ({ onClick }: Props) => {
   const [userData, setUserData] = useState<User | null>(null);
   const user = useUser();
   if (user) {
@@ -33,6 +38,7 @@ const UsersDetails = () => {
           <Details>
             {" "}
             <h2>Name: </h2>
+            <Button onClick={onClick}>Edit Profile</Button>
             <p>City: </p>
             <p>Bio: </p>
             <p>Trips: </p>
@@ -53,6 +59,7 @@ const UsersDetails = () => {
           <h2>
             {firstName} {lastName}
           </h2>
+          <Button onClick={onClick}>Edit Profile</Button>
           <p>City: {city}</p>
           <p>Bio: {bio}</p>
           <p>Trips: </p>

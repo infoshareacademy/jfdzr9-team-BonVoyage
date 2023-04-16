@@ -30,13 +30,6 @@ export const SingleTripStyled = styled.div`
   }
 `;
 
-export const AccountPageWrapper = styled.div`
-  width: 70%;
-
-  margin-left: auto;
-  margin-right: auto;
-`;
-
 export const TripMini = styled.img`
   width: 100%;
   height: 100%;
