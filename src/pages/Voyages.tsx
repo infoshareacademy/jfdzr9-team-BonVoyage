@@ -7,7 +7,7 @@ import { Trip } from "./AddTrip";
 
 import { useUser } from "../context/auth.context";
 
-export const Voyages = () => {
+const Voyages = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
   const user = useUser();
 
@@ -32,3 +32,5 @@ export const Voyages = () => {
     </>
   );
 };
+
+export default Voyages;
