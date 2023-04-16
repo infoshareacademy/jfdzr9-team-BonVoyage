@@ -9,15 +9,15 @@ export const TripsListStyled = styled.article`
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   justify-items: stretch;
-  grid-gap: 0.5rem;
+  grid-gap: 1rem;
 `;
 
 export const SingleTripStyled = styled.div`
   display: grid;
   width: 100%;
-  /* box-sizing: border-box;
-  min-width: 150px;
-  min-height: 150px; */
+  box-sizing: border-box;
+  min-width: 400px;
+  min-height: 400px;
   margin: 0;
   padding: 0;
   border: 0;
@@ -44,6 +44,7 @@ export const TripMiniTitle = styled.h2`
   justify-self: center;
   background-color: white;
   padding: 10px;
+  margin: 0;
 
   /* &::before {
     content: "";
