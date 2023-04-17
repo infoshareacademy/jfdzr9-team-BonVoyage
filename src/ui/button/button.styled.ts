@@ -16,3 +16,16 @@ export const Button = styled.button`
   border: 1px solid gray;
   width: 100%;
 `;
+
+export const ButtonEditProfile = styled.button`
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 10px;
+  transition: 0.2s linear;
+  background-color: lightgray;
+  color: black;
+  border: 0 solid gray;
+`;

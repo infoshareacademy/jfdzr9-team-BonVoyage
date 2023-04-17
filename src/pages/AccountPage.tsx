@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUser } from "../context/auth.context";
 import { addUsersDetails } from "../firebase/addUsersDetails";
 import { TextInput } from "../ui/TextInput/TextInput.styled";
@@ -7,10 +7,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../ui/button/button.styled";
 import UsersDetails from "../components/UsersDetails/UsersDetails";
 import { NavLink } from "react-router-dom";
-import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase/firebase.config";
-import { AccountPageWrapper } from "../components/TripsList/TripsList.styled";
+import { AccountPageWrapper } from "../ui/wrapper/wrapper.styled";
 import { TripsList } from "../components/TripsList/TripsList";
+import { Trip } from "./AddTrip";
+import getTrips from "../firebase/getTrip";
 
 export interface UsersDetailsFormInput {
   firstName: string;
@@ -23,12 +25,12 @@ export interface UsersDetailsFormInput {
 const AccountPage = () => {
   const { register, handleSubmit, setValue } = useForm<UsersDetailsFormInput>();
   const [success, setSuccess] = useState(true);
-  const [imgUrl, setImgUrl] = useState("");
+
   const [file, setFile] = useState<File | null>(null);
 
-  const user = useUser();
+  const [trips, setTrips] = useState<Trip[]>([]);
 
-  const imagesRef = ref(storage, "users-avatar/");
+  const user = useUser();
 
   const uploadImage = () => {
     if (!file) return;
@@ -48,22 +50,28 @@ const AccountPage = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getTrips();
+      setTrips(data?.filter((trip) => trip.userEmail === user?.email) ?? []);
+    };
+    fetchData();
+  }, []);
+
   return user ? (
     <>
       {success ? (
         <AccountPageWrapper>
-          <UsersDetails />
-          <Button
+          <UsersDetails
+            numberOfTrips={trips.length}
             onClick={() => {
               setSuccess(false);
             }}
-          >
-            Edit profile
-          </Button>
+          />
           <NavLink to="/voyages">
             <Button>Add new trip</Button>
           </NavLink>
-          <TripsList />
+          <TripsList trips={trips} />
         </AccountPageWrapper>
       ) : (
         <AccountPageWrapper>
