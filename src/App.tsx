@@ -21,6 +21,7 @@ const App: React.FC = () => {
         <Route path="/signIn" element={<SignInPage />} />
         <Route path="/signIn/register" element={<RegisterPage />} />
         <Route path="/about" element={<Team />} />
+        <Route path="/voyages/notloggedin/:tripId" element={<TripPage />} />
         <Route element={<RequireAuth />}>
           <Route path="/voyages" element={<Voyages />} />
           <Route path="/voyages/:tripId" element={<TripPage />} />
@@ -31,6 +32,7 @@ const App: React.FC = () => {
       </Route>,
     ),
   );
+
   return (
     <>
       <AuthContextProvider>
