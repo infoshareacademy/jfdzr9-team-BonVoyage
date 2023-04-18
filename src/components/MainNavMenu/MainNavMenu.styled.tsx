@@ -3,14 +3,12 @@ import styled from "styled-components";
 export const NavMenuContainer = styled.nav`
   display: flex;
   justify-content: space-between;
-  background-color: #cfe5d6;
-  height: 8vh;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  padding: 10px;
   z-index: 999;
+  background-color: transparent;
 
   ul {
     display: flex;
@@ -23,9 +21,9 @@ export const NavMenuContainer = styled.nav`
     color: white;
     transition: all 0.3s ease-in-out;
 
-    &:last-child {
+    /* &:last-child {
       margin-right: 0;
-    }
+    } */
   }
 
   li:hover {
@@ -34,15 +32,10 @@ export const NavMenuContainer = styled.nav`
   }
 
   a {
-    color: #4a6a2b;
     text-decoration: none;
-    font-size: 20px;
-    padding-right: 20px;
   }
 
   a:hover {
-    color: #415c26;
-    text-decoration: underline;
     transform: scale(4);
     font-weight: 500;
   }

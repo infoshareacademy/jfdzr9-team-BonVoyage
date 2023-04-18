@@ -13,3 +13,10 @@ export const AccountPageWrapper = styled.div`
   margin: 5rem;
   margin-top: 0.5rem;
 `;
+
+export const ButtonsJumbotronWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--gap-m);
+`;

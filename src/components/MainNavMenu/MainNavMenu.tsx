@@ -19,7 +19,7 @@ export const MainNavMenu: React.FC<NavigationProps> = (): JSX.Element => {
       <>
         <NavMenuContainer>
           <NavMenuDiv>
-            <h1>Bon Voyage</h1>
+            <h2>Bon Voyage</h2>
           </NavMenuDiv>
           <NavMenuDiv>
             <ul>
