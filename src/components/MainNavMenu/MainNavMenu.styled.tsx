@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-export const NavMenuContainer = styled.nav`
-  display: flex;
+interface MenuProps {
+  hidden?: boolean;
+}
+
+export const NavMenuContainer = styled.nav<MenuProps>`
+  display: ${(props) => (props.hidden ? "none" : "flex")};
   justify-content: space-between;
   position: fixed;
   top: 0;
@@ -9,6 +13,7 @@ export const NavMenuContainer = styled.nav`
   right: 0;
   z-index: 999;
   background-color: transparent;
+  transition: top 0.3s;
 
   ul {
     display: flex;
