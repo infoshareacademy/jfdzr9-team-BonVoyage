@@ -12,9 +12,11 @@ export const Jumbotron: React.FC = () => {
         <Header2 white>Plan your new journey with us! </Header2>
         <ButtonsJumbotronWrapper>
           <Link to="/signIn">
-            <Button secondary>Sign In</Button>
+            <Button white secondary>
+              Sign In
+            </Button>
           </Link>
-          <Button>See top voyages</Button>
+          <Button white>See top voyages</Button>
         </ButtonsJumbotronWrapper>
       </JumbotronDiv>
     </JumbotronContainer>

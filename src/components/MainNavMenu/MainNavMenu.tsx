@@ -1,4 +1,4 @@
-import { NavMenuContainer, NavMenuDiv } from "./MainNavMenu.styled";
+import { Li, NavMenuContainer, NavMenuDiv } from "./MainNavMenu.styled";
 import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
@@ -46,29 +46,29 @@ export const MainNavMenu: React.FC<NavigationProps> = (): JSX.Element => {
     return (
       <>
         <NavMenuContainer hidden={!show}>
-          <NavMenuDiv>
+          <Link to="/">
             <h2>Bon Voyage</h2>
-          </NavMenuDiv>
+          </Link>
           <NavMenuDiv>
             <ul>
-              <li>
+              <Li>
                 <Link to="/">Home</Link>
-              </li>
-              <li>
+              </Li>
+              <Li>
                 <Link to="/voyages">Voyages</Link>
-              </li>
-              <li>
+              </Li>
+              <Li>
                 <NavLink to="/about">About Us</NavLink>
-              </li>
+              </Li>
             </ul>
             <Dropdown />
           </NavMenuDiv>
         </NavMenuContainer>
-        <div>
+        {/* <div>
           <br />
           <br />
           <br />
-        </div>
+        </div> */}
       </>
     );
   } else {

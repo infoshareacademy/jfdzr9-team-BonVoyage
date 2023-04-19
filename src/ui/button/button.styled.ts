@@ -4,6 +4,7 @@ interface ButtonProps {
   secondary?: boolean;
   wide?: boolean;
   vwmax?: boolean;
+  white?: boolean;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -19,18 +20,18 @@ export const Button = styled.button<ButtonProps>`
   padding: 1rem;
   text-transform: capitalize;
   transition: 0.2s linear;
-  color: var(--color-neutral-black);
-  background-color: ${(props) => (props.secondary ? "var(--color-primary-ruby)" : "transparent")};
-  border: ${(props) => (props.secondary ? "0px" : "1.5px solid black")};
+  color: ${(props) => (props.white ? "var(--color-neutral-white)" : "var(--color-neutral-black)")};
+  background-color: ${(props) => (props.secondary ? "var(--color-secondary-topaz)" : "transparent")};
+  border: ${(props) => (props.secondary ? "0px" : "1.5px solid white")};
   :hover {
-    background-color: var(--color-primary-ruby-light);
+    background-color: var(--color-secondary-topaz-dark);
   }
 `;
 
 export const ButtonGrey = styled(Button)`
-  background-color: var(--color-primary-ruby-light);
+  background-color: var(--color-secondary-topaz-light);
   border: 0px;
   :hover {
-    background-color: var(--color-primary-ruby);
+    background-color: var(--color-secondary-topaz);
   }
 `;

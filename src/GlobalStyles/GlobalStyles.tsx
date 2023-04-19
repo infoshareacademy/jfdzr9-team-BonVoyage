@@ -14,16 +14,18 @@ export const GlobalStyles = createGlobalStyle<ButtonProps>`
  --color-primary-ruby-light: #FFCFCF;
  --color-primary-emerald-dark: #003734;
  --color-primary-emerald: #02716A;
+ --color-primary-emerald-new: #012e34;
  --color-primary-emerald-light: #A5E3E0;
  --color-secondary-amethyst-dark: #49159C;
  --color-secondary-amethyst: #8350EE;
  --color-secondary-amethyst-light: #E6D7FE;
  --color-secondary-topaz-dark: #C16316;
- --color-secondary-topaz: #F39239
+ --color-secondary-topaz: #F39239;
  --color-secondary-topaz-light: #FCE5CA;
 
  --color-neutral-black: 000000;
  --color-neutral-white: #fffffe;
+ --color-neutral-white-opacity: rgba(255, 255, 255, 0.9);
  --font-size-h1: 7.2rem;
   --line-height-h1: 10.8rem;
   --font-size-h2: 3.6rem;
@@ -66,7 +68,7 @@ body {
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   color: var(--color-neutral-black);
-  background-color: var(--color-primary-emerald);
+  background-color: var(--color-primary-emerald-new);
 }
 
 :root {
