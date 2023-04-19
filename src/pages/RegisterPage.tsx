@@ -9,6 +9,9 @@ import { FirebaseError } from "@firebase/util";
 import { useState } from "react";
 import { TextInput } from "../ui/TextInput/TextInput.styled";
 import { useNavigate } from "react-router-dom";
+import { SignInWrapper } from "../ui/wrapper/wrapper.styled";
+import { ImgSignIn } from "../ui/img/img.styled";
+import { Header2 } from "../ui/headers/header.styled";
 
 // import { Navigate } from "react-router-dom";
 
@@ -32,15 +35,16 @@ const RegisterPage = () => {
       });
   };
   return (
-    <>
+    <SignInWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <h1>Register</h1>
+        <Header2>Register</Header2>
         <TextInput placeholder="Type email" {...register("email")} />
         <TextInput placeholder="Type password" {...register("password")} />
         <Button type="submit">Register</Button>
         {error}
       </StyledForm>
-    </>
+      <ImgSignIn src="https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/website-backgrounds%2Fpexels-element-digital-1051075.jpg?alt=media&token=75bdcfa6-7fb2-44ba-b032-63a6099b1c82" />
+    </SignInWrapper>
   );
 };
 

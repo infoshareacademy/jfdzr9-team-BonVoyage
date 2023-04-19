@@ -10,6 +10,9 @@ import { FcGoogle } from "react-icons/fc";
 import { useUser } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
 import { TextInput } from "../ui/TextInput/TextInput.styled";
+import { ButtonsJumbotronWrapper, SignInWrapper } from "../ui/wrapper/wrapper.styled";
+import { ImgSignIn } from "../ui/img/img.styled";
+import { Header2 } from "../ui/headers/header.styled";
 
 interface IFormInputs {
   email: string;
@@ -45,21 +48,26 @@ const SignInPage = () => {
   }, [user]);
 
   return (
-    <>
+    <SignInWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <h1>Sign in to existing account:</h1>
+        <Header2>Welcome back!</Header2>
         <TextInput placeholder="Type email" {...register("email")} />
         <TextInput placeholder="Type password" {...register("password")} />
-        <Button type="submit">Login</Button>
-        <Button onClick={googleLogin}>
-          <FcGoogle />
-          Sign in with Google
-        </Button>
-        <h3>Do you want to create a new account?</h3>
+        <ButtonsJumbotronWrapper>
+          <Button white={false} secondary type="submit">
+            Login
+          </Button>
+          <Button white={false} onClick={googleLogin}>
+            <FcGoogle />
+            Sign in with Google
+          </Button>
+        </ButtonsJumbotronWrapper>
+        <p>Do you want to create a new account?</p>
         <Link to={"/signIn/register"}>Register</Link>
         {error}
       </StyledForm>
-    </>
+      <ImgSignIn src="https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/website-backgrounds%2Fpexels-element-digital-1051072.jpg?alt=media&token=2b7f3aaf-fc7b-4423-b271-f4609d864eb2" />
+    </SignInWrapper>
   );
 };
 

@@ -22,15 +22,16 @@ export const Button = styled.button<ButtonProps>`
   transition: 0.2s linear;
   color: ${(props) => (props.white ? "var(--color-neutral-white)" : "var(--color-neutral-black)")};
   background-color: ${(props) => (props.secondary ? "var(--color-secondary-topaz)" : "transparent")};
-  border: ${(props) => (props.secondary ? "0px" : "1.5px solid white")};
+  border: ${(props) => (props.secondary ? "1.5px solid #F39239" : "1.5px solid ")};
   :hover {
     background-color: var(--color-secondary-topaz-dark);
+    border: 1.5px solid #c16316;
   }
 `;
 
 export const ButtonGrey = styled(Button)`
   background-color: var(--color-secondary-topaz-light);
-  border: 0px;
+  border: 1.5px solid #c16316;
   :hover {
     background-color: var(--color-secondary-topaz);
   }

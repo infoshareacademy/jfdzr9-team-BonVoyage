@@ -66,9 +66,10 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   font-size: var(--font-size-body);
+  font-weight: 400;
   line-height: var(--line-height-body);
   color: var(--color-neutral-black);
-  background-color: var(--color-primary-emerald-new);
+  background-color: var(--color-pneutral-white);
 }
 
 :root {
