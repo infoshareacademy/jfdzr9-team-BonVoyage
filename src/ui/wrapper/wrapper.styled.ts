@@ -24,8 +24,13 @@ export const ButtonsJumbotronWrapper = styled.div`
 export const SignInWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: var(--gap-m);
+  gap: 10%;
+
   padding: var(--padding-layout);
-  height: calc(100vh - 5.4rem);
+  height: calc(100vh - 8rem);
   margin-top: 5.4rem;
+`;
+
+export const ImgWrapper = styled.div`
+  flex: 1;
 `;
