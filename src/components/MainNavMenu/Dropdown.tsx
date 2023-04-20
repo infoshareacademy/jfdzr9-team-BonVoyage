@@ -54,7 +54,7 @@ export function Dropdown() {
               {loggedInOptions.map((option) => (
                 <DropdownListItem key={option.path}>
                   {
-                    <LinkStyle to="" onClick={option.onClick}>
+                    <LinkStyle to={option.path} onClick={option.onClick}>
                       <p>{option.label}</p>
                     </LinkStyle>
                   }

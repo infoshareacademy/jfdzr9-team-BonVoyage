@@ -15,7 +15,7 @@ export const Button = styled.button<ButtonProps>`
   width: ${(props) => (props.vwmax ? "100%" : "auto")};
   font-size: var(--font-size-body);
   font-weight: 700;
-  border-radius: var(--border-radius-m);
+  border-radius: var(--border-radius-s);
   padding: var(--padding-search-bar-items);
   text-transform: capitalize;
   transition: 0.2s linear;

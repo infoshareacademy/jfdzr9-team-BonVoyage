@@ -10,7 +10,13 @@ export const TripsList = ({ trips }: TripsListProps) => {
   return (
     <TripsListStyled>
       {trips.map((trip) => (
-        <SingleTrip key={trip.title} url={trip.imageUrl} title={trip.title} tripId={trip.id} />
+        <SingleTrip
+          tripDescription={trip.description}
+          key={trip.title}
+          url={trip.imageUrl}
+          title={trip.title}
+          tripId={trip.id}
+        />
       ))}
     </TripsListStyled>
   );
