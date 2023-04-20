@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledForm = styled.form`
   flex: 1;
   display: flex;
-  gap: var(--gap-m);
+  gap: var(--gap-s);
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@ export const StyledForm = styled.form`
 
 export const StyledFormDetails = styled.form`
   display: flex;
-  gap: var(--gap-m);
+  gap: var(--gap-s);
   flex-direction: column;
   justify-content: center;
   align-items: center;

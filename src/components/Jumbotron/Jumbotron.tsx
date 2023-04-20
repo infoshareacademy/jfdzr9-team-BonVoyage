@@ -1,5 +1,5 @@
 import { JumbotronContainer, JumbotronDiv } from "./Jumbotron.style";
-import { Button } from "../../ui/button/button.styled";
+import { Button, ButtonWhite } from "../../ui/button/button.styled";
 import { Link } from "react-router-dom";
 import { Header1, Header2 } from "../../ui/headers/header.styled";
 import { ButtonsJumbotronWrapper } from "../../ui/wrapper/wrapper.styled";
@@ -12,11 +12,9 @@ export const Jumbotron: React.FC = () => {
         <Header2 white>Plan your new journey with us! </Header2>
         <ButtonsJumbotronWrapper>
           <Link to="/signIn">
-            <Button white secondary>
-              Sign In
-            </Button>
+            <Button>Sign In</Button>
           </Link>
-          <Button white>See top voyages</Button>
+          <ButtonWhite secondary>See top voyages</ButtonWhite>
         </ButtonsJumbotronWrapper>
       </JumbotronDiv>
     </JumbotronContainer>

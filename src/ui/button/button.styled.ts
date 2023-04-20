@@ -4,7 +4,6 @@ interface ButtonProps {
   secondary?: boolean;
   wide?: boolean;
   vwmax?: boolean;
-  white?: boolean;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -17,16 +16,23 @@ export const Button = styled.button<ButtonProps>`
   font-size: var(--font-size-body);
   font-weight: 700;
   border-radius: var(--border-radius-m);
-  padding: 1rem;
+  padding: var(--padding-search-bar-items);
   text-transform: capitalize;
   transition: 0.2s linear;
-  color: ${(props) => (props.white ? "var(--color-neutral-white)" : "var(--color-neutral-black)")};
-  background-color: ${(props) => (props.secondary ? "var(--color-secondary-topaz)" : "transparent")};
-  border: ${(props) => (props.secondary ? "1.5px solid #F39239" : "1.5px solid ")};
+  color: ${(props) => (props.secondary ? "var(--color-neutral-black)" : "var(--color-neutral-white)")};
+  background-color: ${(props) => (props.secondary ? "transparent" : "black")};
+  border: 1.5px solid black;
   :hover {
-    background-color: var(--color-secondary-topaz-dark);
-    border: 1.5px solid #c16316;
+    color: var(--color-neutral-white);
+    background-color: var(--color-secondary-topaz);
+    border: 1.5px solid #f39239;
   }
+`;
+
+export const ButtonWhite = styled(Button)`
+  color: ${(props) => (props.secondary ? "var(--color-neutral-white)" : "var(--color-neutral-black)")};
+  background-color: ${(props) => (props.secondary ? "transparent" : "var(--color-neutral-white)")};
+  border: 1.5px solid white;
 `;
 
 export const ButtonGrey = styled(Button)`

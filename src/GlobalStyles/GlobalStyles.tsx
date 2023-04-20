@@ -32,8 +32,8 @@ export const GlobalStyles = createGlobalStyle<ButtonProps>`
   --line-height-h2: 5.4rem;
   --font-size-h3: 2rem;
   --line-height-h3: 2.4rem;
-  --font-size-h4: 1.4rem;
-  --line-height-h4: 1.8rem;
+  --font-size-h4: 1.6rem;
+  --line-height-h4: 2.6rem;
   --font-size-body: 1.6rem;
   --line-height-body: 2.6rem;
   --border-radius-xxs: 0.3rem;
@@ -43,7 +43,7 @@ export const GlobalStyles = createGlobalStyle<ButtonProps>`
   --border-radius-l: 1.5rem;
   --border-radius-xl: 10rem;
   --padding-layout: 0 10%;
-  --padding-search-bar-items: 2rem 3.2rem;
+  --padding-search-bar-items: 0.6rem 3.2rem;
   --gap-xs: 0.5rem;
   --gap-s: 1rem;
   --gap-m: 1.5rem;

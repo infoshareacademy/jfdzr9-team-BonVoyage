@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TextInput = styled.input`
-  padding: 5px;
+  padding: var(--padding-search-bar-items);
   border-radius: 10px;
   text-align: center;
   font-size: 15px;

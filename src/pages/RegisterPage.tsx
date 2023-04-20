@@ -11,7 +11,7 @@ import { TextInput } from "../ui/TextInput/TextInput.styled";
 import { useNavigate } from "react-router-dom";
 import { ImgWrapper, SignInWrapper } from "../ui/wrapper/wrapper.styled";
 import { ImgSignIn } from "../ui/img/img.styled";
-import { Header2 } from "../ui/headers/header.styled";
+import { Header2, Header4Form } from "../ui/headers/header.styled";
 
 // import { Navigate } from "react-router-dom";
 
@@ -38,7 +38,9 @@ const RegisterPage = () => {
     <SignInWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <Header2>Register</Header2>
+        <Header4Form bold>Email</Header4Form>
         <TextInput placeholder="Type email" {...register("email")} />
+        <Header4Form bold>Password</Header4Form>
         <TextInput placeholder="Type password" {...register("password")} />
         <Button type="submit">Register</Button>
         {error}

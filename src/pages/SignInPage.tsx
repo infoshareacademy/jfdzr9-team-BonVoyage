@@ -10,9 +10,9 @@ import { FcGoogle } from "react-icons/fc";
 import { useUser } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
 import { TextInput } from "../ui/TextInput/TextInput.styled";
-import { ButtonsJumbotronWrapper, ImgWrapper, SignInWrapper } from "../ui/wrapper/wrapper.styled";
+import { ButtonsSignIntronWrapper, ImgWrapper, SignInWrapper } from "../ui/wrapper/wrapper.styled";
 import { ImgSignIn } from "../ui/img/img.styled";
-import { Header2 } from "../ui/headers/header.styled";
+import { Header2, Header4Form } from "../ui/headers/header.styled";
 
 interface IFormInputs {
   email: string;
@@ -52,17 +52,19 @@ const SignInPage = () => {
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <Header2>Welcome back!</Header2>
         <p>Sign in to your account and start planning new adventures!</p>
-        <TextInput placeholder="Type email" {...register("email")} />
-        <TextInput placeholder="Type password" {...register("password")} />
-        <ButtonsJumbotronWrapper>
-          <Button white={false} secondary type="submit">
+        <Header4Form bold>Email</Header4Form>
+        <TextInput placeholder="Enter your email" type="email" {...register("email")} />
+        <Header4Form bold>Password</Header4Form>
+        <TextInput placeholder="Enter password" type="password" {...register("password")} />
+        <ButtonsSignIntronWrapper>
+          <Button vwmax type="submit">
             Login
           </Button>
-          <Button white={false} onClick={googleLogin}>
+          <Button vwmax secondary onClick={googleLogin}>
             <FcGoogle />
             Sign in with Google
           </Button>
-        </ButtonsJumbotronWrapper>
+        </ButtonsSignIntronWrapper>
         <p>Do you want to create a new account?</p>
         <Link to={"/signIn/register"}>Register</Link>
         {error}
