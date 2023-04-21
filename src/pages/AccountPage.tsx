@@ -68,7 +68,7 @@ const AccountPage = () => {
               setSuccess(false);
             }}
           />
-          <NavLink to="/voyages">
+          <NavLink to="/add-new-trip">
             <Button vwmax>Add new trip</Button>
           </NavLink>
           <TripsList trips={trips} />
