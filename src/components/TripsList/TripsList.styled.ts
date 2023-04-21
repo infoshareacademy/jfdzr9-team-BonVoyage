@@ -61,4 +61,8 @@ export const TripMiniTitle = styled.h3`
 export const TripDescription = styled.p`
   padding: 5%;
   padding-top: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-height: calc(var(--line-height-body) * var(--max-lines));
 `;
