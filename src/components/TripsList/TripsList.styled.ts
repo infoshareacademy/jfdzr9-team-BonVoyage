@@ -23,19 +23,31 @@ export const SingleTripStyled = styled.div`
   border-radius: var(--border-radius-s);
 
   /* grid-area: 1 / 1 / 2 / 2; */
-  &::before {
+  /* &::before {
     content: "";
     padding-bottom: 100%;
     display: block;
-    grid-area: 1 / 1 / 2 / 2;
+    grid-area: 1 / 1 / 2 / 2; 
+  }*/
+`;
+
+export const ImgContainer = styled.div`
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
   }
 `;
 
 export const TripMini = styled.img`
+  position: absolute;
   width: 100%;
   height: 100%;
+
   object-fit: cover;
-  grid-area: 1 / 1 / 2 / 2;
+  /* grid-area: 1 / 1 / 2 / 2; */
   border-radius: var(--border-radius-s);
 `;
 

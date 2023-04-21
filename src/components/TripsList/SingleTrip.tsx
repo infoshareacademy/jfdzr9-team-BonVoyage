@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { SingleTripStyled, TripDescription, TripMini, TripMiniTitle } from "./TripsList.styled";
+import { ImgContainer, SingleTripStyled, TripDescription, TripMini, TripMiniTitle } from "./TripsList.styled";
 
 export interface SingleTripProps {
   url: string;
@@ -12,7 +12,10 @@ export const SingleTrip = ({ url, title, tripId, tripDescription }: SingleTripPr
   return (
     <Link to={`/voyages/${tripId}`}>
       <SingleTripStyled>
-        <TripMini src={url}></TripMini>
+        <ImgContainer>
+          <TripMini src={url}></TripMini>
+        </ImgContainer>
+
         <TripMiniTitle>{title}</TripMiniTitle>
         <TripDescription>{tripDescription}</TripDescription>
       </SingleTripStyled>
