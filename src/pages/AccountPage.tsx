@@ -9,10 +9,13 @@ import UsersDetails from "../components/UsersDetails/UsersDetails";
 import { NavLink } from "react-router-dom";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase/firebase.config";
-import { AccountPageWrapper } from "../ui/wrapper/wrapper.styled";
+import { AccountPageWrapper, SignInWrapper } from "../ui/wrapper/wrapper.styled";
 import { TripsList } from "../components/TripsList/TripsList";
 import { Trip } from "./AddTrip";
 import getTrips from "../firebase/getTrip";
+import getUsersDetails from "../firebase/getUsersDetails";
+import { User } from "../components/UsersDetails/UsersDetails";
+import { Avatar } from "../components/UsersDetails/UsersDetails.styled";
 
 export interface UsersDetailsFormInput {
   firstName: string;
@@ -25,12 +28,23 @@ export interface UsersDetailsFormInput {
 const AccountPage = () => {
   const { register, handleSubmit, setValue } = useForm<UsersDetailsFormInput>();
   const [success, setSuccess] = useState(true);
-
   const [file, setFile] = useState<File | null>(null);
-
   const [trips, setTrips] = useState<Trip[]>([]);
-
+  const [userData, setUserData] = useState<User | null>(null);
   const user = useUser();
+  // const { firstName = "", lastName = "", city = "", imageUrl = "", bio = "" } = userData || {};
+  const { imageUrl = "" } = userData || {};
+
+  if (user) {
+    useEffect(() => {
+      const fetchData = async () => {
+        const data = await getUsersDetails(user.uid);
+        setUserData(data);
+      };
+
+      fetchData();
+    }, []);
+  }
 
   const uploadImage = () => {
     if (!file) return;
@@ -58,25 +72,31 @@ const AccountPage = () => {
     fetchData();
   }, []);
 
-  return user ? (
-    <>
-      {success ? (
-        <AccountPageWrapper>
-          <UsersDetails
-            numberOfTrips={trips.length}
-            onClick={() => {
-              setSuccess(false);
-            }}
-          />
-          <NavLink to="/add-new-trip">
-            <Button vwmax>Add new trip</Button>
-          </NavLink>
-          <TripsList trips={trips} />
-        </AccountPageWrapper>
-      ) : (
-        <AccountPageWrapper>
-          {" "}
-          <h1>Hello {user.email} please fill in this form:</h1>
+  if (success) {
+    return (
+      <AccountPageWrapper>
+        <UsersDetails
+          numberOfTrips={trips.length}
+          onClick={() => {
+            setSuccess(false);
+          }}
+        />
+        <NavLink to="/add-new-trip">
+          <Button vwmax>Add new trip</Button>
+        </NavLink>
+        <TripsList trips={trips} />
+      </AccountPageWrapper>
+    );
+  }
+
+  if (!success) {
+    if (!userData) {
+      return;
+    }
+    if (userData) {
+      return (
+        <SignInWrapper>
+          <Avatar src={imageUrl}></Avatar>
           <StyledForm onSubmit={handleSubmit(onSubmit)}>
             <div>
               <input
@@ -102,13 +122,11 @@ const AccountPage = () => {
             <TextInput placeholder="Bio" type={"text"} {...register("bio")} required />
             <TextInput alt="Uppload photos" type={"hidden"} {...register("imageUrl")} />
             <Button type="submit">Submit</Button>
-          </StyledForm>{" "}
-        </AccountPageWrapper>
-      )}
-    </>
-  ) : (
-    <h1>You are not logged in</h1>
-  );
+          </StyledForm>
+        </SignInWrapper>
+      );
+    }
+  }
 };
 
 export default AccountPage;
