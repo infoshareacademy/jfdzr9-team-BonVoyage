@@ -40,7 +40,7 @@ const UsersDetails = ({ onClick, numberOfTrips }: Props) => {
           <Details>
             <Name>
               {" "}
-              <h2>Name: </h2>
+              <Header2>Name: </Header2>
               <Button secondary onClick={onClick}>
                 Edit Profile
               </Button>

@@ -9,7 +9,7 @@ export const WrapperStyled = styled.div`
 `;
 
 export const AccountPageWrapper = styled.div`
-  margin-top: 0.5rem;
+  margin-top: 8rem;
   padding: var(--padding-layout);
 `;
 
@@ -29,6 +29,14 @@ export const ButtonsSignIntronWrapper = styled.div`
 `;
 
 export const SignInWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+  padding: var(--padding-layout);
+  height: calc(100vh - 8rem);
+  margin-top: 5.4rem;
+`;
+export const EditDetailsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10%;
