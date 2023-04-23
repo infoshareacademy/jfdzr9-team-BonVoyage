@@ -1,31 +1,44 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+interface ButtonProps {
+  secondary?: boolean;
+  wide?: boolean;
+  vwmax?: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
   display: flex;
   flex-direction: row;
   gap: 0.7rem;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  width: ${(props) => (props.vwmax ? "100%" : "auto")};
+  font-size: var(--font-size-body);
   font-weight: 700;
-  border-radius: 10px;
-  padding: 5px;
+  border-radius: var(--border-radius-s);
+  padding: var(--padding-search-bar-items);
+  text-transform: capitalize;
   transition: 0.2s linear;
-  background-color: #0a4d3b;
-  color: #e0e9e7;
-  border: 1px solid gray;
-  width: 100%;
+  color: ${(props) => (props.secondary ? "var(--color-neutral-black)" : "var(--color-neutral-white)")};
+  background-color: ${(props) => (props.secondary ? "transparent" : "black")};
+  border: 1.5px solid black;
+  :hover {
+    color: var(--color-neutral-white);
+    background-color: var(--color-secondary-topaz);
+    border: 1.5px solid #f39239;
+  }
 `;
 
-export const ButtonEditProfile = styled.button`
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  font-weight: 500;
-  border-radius: 10px;
-  padding: 10px;
-  transition: 0.2s linear;
-  background-color: lightgray;
-  color: black;
-  border: 0 solid gray;
+export const ButtonWhite = styled(Button)`
+  color: ${(props) => (props.secondary ? "var(--color-neutral-white)" : "var(--color-neutral-black)")};
+  background-color: ${(props) => (props.secondary ? "transparent" : "var(--color-neutral-white)")};
+  border: 1.5px solid white;
+`;
+
+export const ButtonGrey = styled(Button)`
+  background-color: var(--color-secondary-topaz-light);
+  border: 1.5px solid #c16316;
+  :hover {
+    background-color: var(--color-secondary-topaz);
+  }
 `;

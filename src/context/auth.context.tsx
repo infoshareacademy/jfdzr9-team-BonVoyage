@@ -4,7 +4,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import type { User } from "firebase/auth";
 
 type State = {
-  logout: any;
+  logout: () => Promise<void>;
   user: null | User;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
 };
@@ -31,7 +31,7 @@ export const AuthContextProvider = ({ children }: ProviderProps) => {
     return unsubscribe;
   }, [auth]);
 
-  const logout = async () => {
+  const logout = async (): Promise<void> => {
     await signOut(auth);
     setUser(null);
   };

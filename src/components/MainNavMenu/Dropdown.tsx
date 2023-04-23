@@ -1,23 +1,33 @@
 import { ProfileSVG } from "../../assets/ProfileSVG";
 import { useState } from "react";
-import { DropdownButton, DropdownContainer, DropdownListItem, DropdownList, LinkStyle } from "./Dropdown.style";
+import { DropdownButton, DropdownContainer, DropdownListItem, DropdownList } from "./Dropdown.style";
 import { useUser, useLogout } from "../../context/auth.context";
+import { LinkStyleComponent } from "./LinkStyle";
 
 export function Dropdown() {
   const logout = useLogout();
-  const handleLogout = async () => {
-    await logout();
-  };
   const user = useUser();
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleLogout = async () => {
+    await logout();
+    setIsOpen(!isOpen);
+  };
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   const options = [
     {
       label: "Sign in",
       path: "/signIn",
+      onClick: toggleMenu,
     },
     {
       label: "Register",
       path: "signIn/register",
+      onClick: toggleMenu,
     },
   ];
 
@@ -25,16 +35,14 @@ export function Dropdown() {
     {
       label: "Your Profile",
       path: "/account",
+      onClick: toggleMenu,
     },
     {
       label: "Logout",
+      path: "/",
       onClick: handleLogout,
     },
   ];
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
 
   return (
     <>
@@ -47,15 +55,7 @@ export function Dropdown() {
             <DropdownList>
               {loggedInOptions.map((option) => (
                 <DropdownListItem key={option.path}>
-                  {option.onClick ? (
-                    <LinkStyle to="" onClick={option.onClick}>
-                      <p>{option.label}</p>
-                    </LinkStyle>
-                  ) : (
-                    <LinkStyle to={option.path}>
-                      <p>{option.label}</p>
-                    </LinkStyle>
-                  )}
+                  <LinkStyleComponent onClick={option.onClick} to={option.path} label={option.label} />
                 </DropdownListItem>
               ))}
             </DropdownList>
@@ -70,9 +70,7 @@ export function Dropdown() {
             <DropdownList>
               {options.map((option) => (
                 <DropdownListItem key={option.path}>
-                  <LinkStyle to={option.path}>
-                    <p>{option.label}</p>
-                  </LinkStyle>
+                  <LinkStyleComponent onClick={option.onClick} to={option.path} label={option.label} />
                 </DropdownListItem>
               ))}
             </DropdownList>

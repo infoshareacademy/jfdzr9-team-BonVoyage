@@ -2,14 +2,15 @@ import getUsersDetails from "../../firebase/getUsersDetails";
 import { useState, useEffect } from "react";
 import { Avatar, Details, DetailsWrapper, Name, Description } from "./UsersDetails.styled";
 import { useUser } from "../../context/auth.context";
-import { ButtonEditProfile } from "../../ui/button/button.styled";
+import { Button } from "../../ui/button/button.styled";
+import { Header2 } from "../../ui/headers/header.styled";
 
 export interface User {
-  firstName: string;
-  lastName: string;
-  city: string;
-  imageUrl: string;
-  bio: string;
+  firstName?: string;
+  lastName?: string;
+  city?: string;
+  imageUrl?: string;
+  bio?: string;
 }
 
 type Props = {
@@ -37,12 +38,18 @@ const UsersDetails = ({ onClick, numberOfTrips }: Props) => {
         <DetailsWrapper>
           <Avatar src="https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/users-avatar%2Favatar.jpg?alt=media&token=da740dbc-b0d9-40bc-8024-6415d43d5c00" />
           <Details>
-            {" "}
-            <h2>Name: </h2>
-            <ButtonEditProfile onClick={onClick}>Edit Profile</ButtonEditProfile>
-            <p>City: </p>
-            <p>Bio: </p>
-            <p>Trips: </p>
+            <Name>
+              {" "}
+              <Header2>Name: </Header2>
+              <Button secondary onClick={onClick}>
+                Edit Profile
+              </Button>
+            </Name>
+            <Description>
+              <p>City: </p>
+              <p>Bio: </p>
+              <p>Trips: </p>
+            </Description>
           </Details>
         </DetailsWrapper>
       </>
@@ -57,10 +64,12 @@ const UsersDetails = ({ onClick, numberOfTrips }: Props) => {
         <Avatar src={imageUrl} />
         <Details>
           <Name>
-            <h2>
+            <Header2>
               {firstName} {lastName}
-            </h2>
-            <ButtonEditProfile onClick={onClick}>Edit Profile</ButtonEditProfile>
+            </Header2>
+            <Button secondary onClick={onClick}>
+              Edit Profile
+            </Button>
           </Name>
           <Description>
             <p>City: {city}</p>

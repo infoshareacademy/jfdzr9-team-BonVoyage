@@ -1,6 +1,6 @@
 import { Button } from "../../ui/button/button.styled";
 import { StyledFormDetails } from "../../ui/form/form.styled";
-import { TextInput } from "../../ui/TextInput/TextInput.styled";
+import { TextInput, TextareaInput } from "../../ui/TextInput/TextInput.styled";
 import { useForm } from "react-hook-form";
 import { Pin } from "../Map/Map";
 import { FakeButton } from "./TripDetailsForm.styled";
@@ -77,7 +77,7 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
     <StyledFormDetails onSubmit={onSubmit}>
       <h2>Trip Details</h2>
       <TextInput placeholder="Pin name" type={"text"} {...register("name")} required />
-      <TextInput placeholder="Add details" type={"text"} {...register("description")} required />
+      <TextareaInput rows={10} placeholder="Add details" {...register("description")} required />
       <TextInput type={"file"} multiple {...register("imageUrls")} required />
       {imageError && <p>You can choose maximum 4 pictures for one place!</p>}
       <FakeButton onClick={deletePin}>Delete</FakeButton>

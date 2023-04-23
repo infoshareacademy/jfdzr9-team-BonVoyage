@@ -1,50 +1,40 @@
 import styled from "styled-components";
 
-export const NavMenuContainer = styled.nav`
-  display: flex;
+interface MenuProps {
+  hidden?: boolean;
+}
+
+export const NavMenuContainer = styled.nav<MenuProps>`
+  display: ${(props) => (props.hidden ? "none" : "flex")};
   justify-content: space-between;
-  background-color: #cfe5d6;
-  height: 8vh;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  padding: 10px;
   z-index: 999;
+  background-color: var(--color-neutral-white-opacity);
+  transition: top 0.3s;
+  padding: 0 1.8rem;
 
   ul {
     display: flex;
     list-style: none;
-    color: white;
-  }
-
-  li {
-    margin-right: 20px;
-    color: white;
-    transition: all 0.3s ease-in-out;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-
-  li:hover {
-    transform: scale(1.07);
-    transition: all 0.3s ease-in-out;
+    color: var(--color-neutral-black);
   }
 
   a {
-    color: #4a6a2b;
     text-decoration: none;
-    font-size: 20px;
-    padding-right: 20px;
   }
+`;
 
-  a:hover {
-    color: #415c26;
-    text-decoration: underline;
-    transform: scale(4);
-    font-weight: 500;
+export const Li = styled.li`
+  font-size: var(--font-size-body);
+  margin-right: 20px;
+  color: var(--color-neutral-black);
+  transition: all 0.3s ease-in-out;
+  :hover {
+    transform: scale(1.07);
+    transition: all 0.3s ease-in-out;
   }
 `;
 
@@ -55,8 +45,8 @@ export const NavMenuDiv = styled.div`
 `;
 
 export const NavMenuItem = styled.li`
-  color: white;
-  background-color: white;
+  color: var(--color-neutral-white);
+  background-color: var(--color-neutral-white);
   text-decoration: none;
   list-style-type: none;
   display: flex;

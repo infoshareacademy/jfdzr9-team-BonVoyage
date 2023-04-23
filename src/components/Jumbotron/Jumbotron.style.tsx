@@ -1,22 +1,23 @@
 import styled from "styled-components";
 
 export const JumbotronContainer = styled.div`
-  background-color: #cfe5d6;
-  height: 80vh;
-  background-image: url("https://ct-card.pl/wp-content/uploads/2023/03/mountains-615428_1920.jpg");
+  background: rgba(0, 0, 0, 0.3)
+    url("https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/website-backgrounds%2Froad.jpg?alt=media&token=9a0f65ff-9a27-4f67-aa23-a47a4dce0088");
+  background-blend-mode: darken;
   background-size: cover;
+  background-position: left top;
+  background-repeat: no-repeat;
 
-  h1 {
-    color: white;
-    text-transform: uppercase;
-    font-size: 60px;
-  }
+  height: 100vh;
 `;
 
 export const JumbotronDiv = styled.div`
-  padding-top: 40vh;
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: column;
+  gap: var(--gap-m);
+  padding: var(--padding-layout);
+  padding-top: 10%;
 `;
