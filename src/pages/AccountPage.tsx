@@ -5,7 +5,7 @@ import { TextInput } from "../ui/TextInput/TextInput.styled";
 import { StyledForm } from "../ui/form/form.styled";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../ui/button/button.styled";
-import UsersDetails from "../components/UsersDetails/UsersDetails";
+import UsersDetails, { User } from "../components/UsersDetails/UsersDetails";
 import { NavLink } from "react-router-dom";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase/firebase.config";
@@ -13,10 +13,8 @@ import { AccountPageWrapper, SignInWrapper } from "../ui/wrapper/wrapper.styled"
 import { TripsList } from "../components/TripsList/TripsList";
 import { Trip } from "./AddTrip";
 import getTrips from "../firebase/getTrip";
-import getUsersDetails from "../firebase/getUsersDetails";
-import { User } from "../components/UsersDetails/UsersDetails";
 import { Avatar } from "../components/UsersDetails/UsersDetails.styled";
-
+import getUsersDetails from "../firebase/getUsersDetails";
 export interface UsersDetailsFormInput {
   firstName: string;
   lastName: string;
@@ -24,7 +22,6 @@ export interface UsersDetailsFormInput {
   city: string;
   bio: string;
 }
-
 const AccountPage = () => {
   const { register, handleSubmit, setValue } = useForm<UsersDetailsFormInput>();
   const [success, setSuccess] = useState(true);
@@ -32,14 +29,18 @@ const AccountPage = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
   const [userData, setUserData] = useState<User | null>(null);
   const user = useUser();
-  // const { firstName = "", lastName = "", city = "", imageUrl = "", bio = "" } = userData || {};
   const { imageUrl = "" } = userData || {};
 
   if (user) {
     useEffect(() => {
       const fetchData = async () => {
         const data = await getUsersDetails(user.uid);
-        setUserData(data);
+        data
+          ? setUserData(data)
+          : setUserData({
+              imageUrl:
+                "https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/users-avatar%2Favatar.jpg?alt=media&token=da740dbc-b0d9-40bc-8024-6415d43d5c00",
+            });
       };
 
       fetchData();
@@ -55,7 +56,6 @@ const AccountPage = () => {
       });
     });
   };
-
   const onSubmit: SubmitHandler<UsersDetailsFormInput> = (data) => {
     if (user) {
       addUsersDetails(data, user.uid).then(() => {
@@ -63,7 +63,6 @@ const AccountPage = () => {
       });
     }
   };
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await getTrips();
@@ -71,30 +70,22 @@ const AccountPage = () => {
     };
     fetchData();
   }, []);
-
-  if (success) {
-    return (
-      <AccountPageWrapper>
-        <UsersDetails
-          numberOfTrips={trips.length}
-          onClick={() => {
-            setSuccess(false);
-          }}
-        />
-        <NavLink to="/add-new-trip">
-          <Button vwmax>Add new trip</Button>
-        </NavLink>
-        <TripsList trips={trips} />
-      </AccountPageWrapper>
-    );
-  }
-
-  if (!success) {
-    if (!userData) {
-      return;
-    }
-    if (userData) {
-      return (
+  return user ? (
+    <>
+      {success ? (
+        <AccountPageWrapper>
+          <UsersDetails
+            numberOfTrips={trips.length}
+            onClick={() => {
+              setSuccess(false);
+            }}
+          />
+          <NavLink to="/add-new-trip">
+            <Button vwmax>Add new trip</Button>
+          </NavLink>
+          <TripsList trips={trips} />
+        </AccountPageWrapper>
+      ) : (
         <SignInWrapper>
           <Avatar src={imageUrl}></Avatar>
           <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -124,9 +115,10 @@ const AccountPage = () => {
             <Button type="submit">Submit</Button>
           </StyledForm>
         </SignInWrapper>
-      );
-    }
-  }
+      )}
+    </>
+  ) : (
+    <h1>You are not logged in</h1>
+  );
 };
-
 export default AccountPage;

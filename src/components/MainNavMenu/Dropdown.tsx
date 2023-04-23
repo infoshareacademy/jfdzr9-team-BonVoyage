@@ -1,7 +1,8 @@
 import { ProfileSVG } from "../../assets/ProfileSVG";
 import { useState } from "react";
-import { DropdownButton, DropdownContainer, DropdownListItem, DropdownList, LinkStyle } from "./Dropdown.style";
+import { DropdownButton, DropdownContainer, DropdownListItem, DropdownList } from "./Dropdown.style";
 import { useUser, useLogout } from "../../context/auth.context";
+import { LinkStyleComponent } from "./LinkStyle";
 
 export function Dropdown() {
   const logout = useLogout();
@@ -38,6 +39,7 @@ export function Dropdown() {
     },
     {
       label: "Logout",
+      path: "/",
       onClick: handleLogout,
     },
   ];
@@ -53,11 +55,7 @@ export function Dropdown() {
             <DropdownList>
               {loggedInOptions.map((option) => (
                 <DropdownListItem key={option.path}>
-                  {
-                    <LinkStyle to={option.path} onClick={option.onClick}>
-                      <p>{option.label}</p>
-                    </LinkStyle>
-                  }
+                  <LinkStyleComponent onClick={option.onClick} to={option.path} label={option.label} />
                 </DropdownListItem>
               ))}
             </DropdownList>
@@ -72,9 +70,7 @@ export function Dropdown() {
             <DropdownList>
               {options.map((option) => (
                 <DropdownListItem key={option.path}>
-                  <LinkStyle onClick={option.onClick} to={option.path}>
-                    <p>{option.label}</p>
-                  </LinkStyle>
+                  <LinkStyleComponent onClick={option.onClick} to={option.path} label={option.label} />
                 </DropdownListItem>
               ))}
             </DropdownList>
