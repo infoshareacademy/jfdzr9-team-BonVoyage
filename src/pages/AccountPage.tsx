@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useUser } from "../context/auth.context";
 import { addUsersDetails } from "../firebase/addUsersDetails";
-import { TextInput } from "../ui/TextInput/TextInput.styled";
+import { TextInput, TextareaInput } from "../ui/TextInput/TextInput.styled";
 import { StyledForm } from "../ui/form/form.styled";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../ui/button/button.styled";
@@ -29,7 +29,6 @@ const AccountPage = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
   const [userData, setUserData] = useState<User | null>(null);
   const user = useUser();
-  const { imageUrl = "" } = userData || {};
 
   if (user) {
     useEffect(() => {
@@ -56,6 +55,7 @@ const AccountPage = () => {
       });
     });
   };
+
   const onSubmit: SubmitHandler<UsersDetailsFormInput> = (data) => {
     if (user) {
       addUsersDetails(data, user.uid).then(() => {
@@ -63,6 +63,7 @@ const AccountPage = () => {
       });
     }
   };
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await getTrips();
@@ -70,6 +71,7 @@ const AccountPage = () => {
     };
     fetchData();
   }, []);
+
   return user ? (
     <>
       {success ? (
@@ -87,7 +89,7 @@ const AccountPage = () => {
         </AccountPageWrapper>
       ) : (
         <SignInWrapper>
-          <Avatar src={imageUrl}></Avatar>
+          <Avatar src={userData?.imageUrl}></Avatar>
           <StyledForm onSubmit={handleSubmit(onSubmit)}>
             <div>
               <input
@@ -107,10 +109,22 @@ const AccountPage = () => {
                 Upload image
               </Button>
             </div>
-            <TextInput placeholder="First name" type={"text"} {...register("firstName")} required />
-            <TextInput placeholder="Last name" type={"text"} {...register("lastName")} required />
-            <TextInput placeholder="City" type={"text"} {...register("city")} required />
-            <TextInput placeholder="Bio" type={"text"} {...register("bio")} required />
+            <TextInput
+              placeholder="First name"
+              type={"text"}
+              defaultValue={userData?.firstName}
+              {...register("firstName")}
+              required
+            />
+            <TextInput
+              placeholder="Last name"
+              type={"text"}
+              defaultValue={userData?.lastName}
+              {...register("lastName")}
+              required
+            />
+            <TextInput placeholder="City" type={"text"} defaultValue={userData?.city} {...register("city")} required />
+            <TextareaInput rows={2} placeholder="Bio" defaultValue={userData?.bio} {...register("bio")} required />
             <TextInput alt="Uppload photos" type={"hidden"} {...register("imageUrl")} />
             <Button type="submit">Submit</Button>
           </StyledForm>
