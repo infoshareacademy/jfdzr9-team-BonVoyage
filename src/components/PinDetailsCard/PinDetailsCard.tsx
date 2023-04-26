@@ -36,7 +36,7 @@ const PinDetailsCard = ({ selectedPlace }: Props) => {
       </Gallery>
       <TripDescription>{selectedPlace?.description}</TripDescription>
       <div style={{ width: "100%", height: "200px" }}>
-        <GoogleMap mapContainerStyle={mapContainerStyle} zoom={12} options={options} onLoad={onLoad} center={center}>
+        <GoogleMap mapContainerStyle={mapContainerStyle} zoom={15} options={options} onLoad={onLoad} center={center}>
           <Marker
             key={selectedPlace?.lat}
             position={selectedPlace}
