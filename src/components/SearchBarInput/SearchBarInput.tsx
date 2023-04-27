@@ -1,5 +1,6 @@
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 import { List, ListButton, ListItem, SearchBar, SearchBarWrapper } from "./SearchBarInput.styled";
+import { TextInput } from "../../ui/TextInput/TextInput.styled";
 
 type SearchBarInputProps = {
   setCity: (position: google.maps.LatLngLiteral) => void;
@@ -25,7 +26,7 @@ const SearchBarInput = ({ setCity }: SearchBarInputProps) => {
 
   return (
     <SearchBarWrapper>
-      <SearchBar
+      <TextInput
         value={value}
         onChange={(e) => {
           setValue(e.target.value);

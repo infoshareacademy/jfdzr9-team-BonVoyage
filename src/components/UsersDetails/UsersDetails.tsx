@@ -1,6 +1,6 @@
 import getUsersDetails from "../../firebase/getUsersDetails";
 import { useState, useEffect } from "react";
-import { Avatar, Details, DetailsWrapper, Name, Description } from "./UsersDetails.styled";
+import { Avatar, Details, DetailsWrapper, Name, Description, AvatarContainer } from "./UsersDetails.styled";
 import { useUser } from "../../context/auth.context";
 import { Button } from "../../ui/button/button.styled";
 import { Header2 } from "../../ui/headers/header.styled";
@@ -36,7 +36,9 @@ const UsersDetails = ({ onClick, numberOfTrips }: Props) => {
     return (
       <>
         <DetailsWrapper>
-          <Avatar src="https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/users-avatar%2Favatar.jpg?alt=media&token=da740dbc-b0d9-40bc-8024-6415d43d5c00" />
+          <AvatarContainer>
+            <Avatar src="https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/users-avatar%2Favatar.jpg?alt=media&token=da740dbc-b0d9-40bc-8024-6415d43d5c00" />
+          </AvatarContainer>
           <Details>
             <Name>
               {" "}
@@ -61,7 +63,9 @@ const UsersDetails = ({ onClick, numberOfTrips }: Props) => {
   return (
     <>
       <DetailsWrapper>
-        <Avatar src={imageUrl} />
+        <AvatarContainer>
+          <Avatar src={imageUrl} />
+        </AvatarContainer>
         <Details>
           <Name>
             <Header2>

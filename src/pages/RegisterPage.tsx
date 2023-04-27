@@ -7,7 +7,7 @@ import { firebaseErrors } from "../firebase/firebaseErrors";
 // import { FirebaseError } from "firebase/app";
 import { FirebaseError } from "@firebase/util";
 import { useState } from "react";
-import { TextInput } from "../ui/TextInput/TextInput.styled";
+import { TextInput, InputLabel, LabelAndInput } from "../ui/TextInput/TextInput.styled";
 import { useNavigate } from "react-router-dom";
 import { ImgWrapper, SignInWrapper } from "../ui/wrapper/wrapper.styled";
 import { ImgSignIn } from "../ui/img/img.styled";
@@ -37,11 +37,15 @@ const RegisterPage = () => {
   return (
     <SignInWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <Header2>Register</Header2>
-        <Header4Form bold>Email</Header4Form>
-        <TextInput placeholder="Type email" {...register("email")} />
-        <Header4Form bold>Password</Header4Form>
-        <TextInput placeholder="Type password" {...register("password")} />
+        <Header4Form bold>Register</Header4Form>
+        <LabelAndInput>
+          <InputLabel>Email</InputLabel>
+          <TextInput placeholder="Type email" {...register("email")} />
+        </LabelAndInput>
+        <LabelAndInput>
+          <InputLabel>Password</InputLabel>
+          <TextInput placeholder="Type password" {...register("password")} />
+        </LabelAndInput>
         <Button type="submit">Register</Button>
         {error}
       </StyledForm>

@@ -43,7 +43,10 @@ export const GlobalStyles = createGlobalStyle<ButtonProps>`
   --border-radius-l: 1.5rem;
   --border-radius-xl: 10rem;
   --padding-layout: 0 10%;
+  --padding-layout-mobile: 0 5%;
   --padding-search-bar-items: 0.6rem 3.2rem;
+  --padding-search-bar-items-l-r: 0 3.2rem;
+
   --gap-xs: 0.5rem;
   --gap-s: 1rem;
   --gap-m: 1.5rem;
@@ -140,6 +143,8 @@ a {
   text-decoration: none;
   color: var(--color-neutral-black);
 }
+
+
 
 
 

@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useUser } from "../context/auth.context";
 import { addUsersDetails } from "../firebase/addUsersDetails";
-import { TextInput, TextareaInput } from "../ui/TextInput/TextInput.styled";
+import { TextInput, TextareaInput, InputLabel, LabelAndInput } from "../ui/TextInput/TextInput.styled";
 import { StyledForm } from "../ui/form/form.styled";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../ui/button/button.styled";
@@ -9,12 +9,20 @@ import UsersDetails, { User } from "../components/UsersDetails/UsersDetails";
 import { NavLink } from "react-router-dom";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase/firebase.config";
-import { AccountPageWrapper, SignInWrapper } from "../ui/wrapper/wrapper.styled";
+import {
+  AccountPageWrapper,
+  ButtonsRowWrapper,
+  EditProfileWrapper,
+  ButtonsUploadImgWrapper,
+  FormWrapper,
+  ImgWrapper,
+} from "../ui/wrapper/wrapper.styled";
 import { TripsList } from "../components/TripsList/TripsList";
 import { Trip } from "./AddTrip";
 import getTrips from "../firebase/getTrip";
-import { Avatar } from "../components/UsersDetails/UsersDetails.styled";
+import { Avatar, AvatarContainer } from "../components/UsersDetails/UsersDetails.styled";
 import getUsersDetails from "../firebase/getUsersDetails";
+
 export interface UsersDetailsFormInput {
   firstName: string;
   lastName: string;
@@ -29,6 +37,7 @@ const AccountPage = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
   const [userData, setUserData] = useState<User | null>(null);
   const user = useUser();
+  const hiddenFileInput = useRef(null);
 
   if (user) {
     useEffect(() => {
@@ -64,6 +73,11 @@ const AccountPage = () => {
     }
   };
 
+  const handleChoosePhoto = (e) => {
+    e.preventDefault();
+    hiddenFileInput.current.click();
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await getTrips();
@@ -88,47 +102,92 @@ const AccountPage = () => {
           <TripsList trips={trips} />
         </AccountPageWrapper>
       ) : (
-        <SignInWrapper>
-          <Avatar src={userData?.imageUrl}></Avatar>
-          <StyledForm onSubmit={handleSubmit(onSubmit)}>
-            <div>
-              <input
-                type="file"
-                onChange={(e) => {
-                  e.preventDefault();
-                  if (!e.target.files) return;
-                  setFile(e.target.files[0]);
-                }}
-              ></input>
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  uploadImage();
-                }}
-              >
-                Upload image
-              </Button>
-            </div>
-            <TextInput
-              placeholder="First name"
-              type={"text"}
-              defaultValue={userData?.firstName}
-              {...register("firstName")}
-              required
-            />
-            <TextInput
-              placeholder="Last name"
-              type={"text"}
-              defaultValue={userData?.lastName}
-              {...register("lastName")}
-              required
-            />
-            <TextInput placeholder="City" type={"text"} defaultValue={userData?.city} {...register("city")} required />
-            <TextareaInput rows={2} placeholder="Bio" defaultValue={userData?.bio} {...register("bio")} required />
-            <TextInput alt="Uppload photos" type={"hidden"} {...register("imageUrl")} />
-            <Button type="submit">Submit</Button>
-          </StyledForm>
-        </SignInWrapper>
+        <EditProfileWrapper>
+          <FormWrapper>
+            <StyledForm onSubmit={handleSubmit(onSubmit)}>
+              <ButtonsRowWrapper>
+                <ImgWrapper>
+                  <AvatarContainer style={{ maxWidth: "10px" }}>
+                    <Avatar src={userData?.imageUrl}></Avatar>
+                  </AvatarContainer>
+                </ImgWrapper>
+                <ButtonsUploadImgWrapper style={{ alignSelf: "center" }}>
+                  <Button onClick={handleChoosePhoto}>Choose photo</Button>
+                  <input
+                    type="file"
+                    ref={hiddenFileInput}
+                    style={{ display: "none" }}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      if (!e.target.files) return;
+                      setFile(e.target.files[0]);
+                    }}
+                  ></input>
+                  <Button
+                    secondary
+                    onClick={(e) => {
+                      e.preventDefault();
+                      uploadImage();
+                    }}
+                  >
+                    Upload image
+                  </Button>
+                </ButtonsUploadImgWrapper>
+              </ButtonsRowWrapper>
+              <LabelAndInput>
+                <InputLabel>First name</InputLabel>
+                <TextInput
+                  placeholder="First name"
+                  type={"text"}
+                  defaultValue={userData?.firstName}
+                  {...register("firstName")}
+                  required
+                />
+              </LabelAndInput>
+              <LabelAndInput>
+                <InputLabel>Last name</InputLabel>
+                <TextInput
+                  placeholder="Last name"
+                  type={"text"}
+                  defaultValue={userData?.lastName}
+                  {...register("lastName")}
+                  required
+                />
+              </LabelAndInput>
+              <LabelAndInput>
+                <InputLabel>City</InputLabel>
+                <TextInput
+                  placeholder="City"
+                  type={"text"}
+                  defaultValue={userData?.city}
+                  {...register("city")}
+                  required
+                />
+              </LabelAndInput>
+              <LabelAndInput>
+                <InputLabel>Bio</InputLabel>
+                <TextareaInput rows={2} placeholder="Bio" defaultValue={userData?.bio} {...register("bio")} required />
+              </LabelAndInput>
+              <TextInput alt="Uppload photos" type={"hidden"} {...register("imageUrl")} />
+
+              <ButtonsRowWrapper>
+                <Button
+                  vwmax
+                  secondary
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSuccess(true);
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button vwmax type="submit">
+                  Save
+                </Button>
+              </ButtonsRowWrapper>
+            </StyledForm>
+          </FormWrapper>
+        </EditProfileWrapper>
       )}
     </>
   ) : (
