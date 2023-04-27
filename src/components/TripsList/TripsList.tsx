@@ -12,7 +12,7 @@ export const TripsList = ({ trips }: TripsListProps) => {
       {trips.map((trip) => (
         <SingleTrip
           tripDescription={trip.description}
-          key={trip.title}
+          key={trip.id}
           url={trip.imageUrl}
           title={trip.title}
           tripId={trip.id}

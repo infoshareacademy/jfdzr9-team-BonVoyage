@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../ui/button/button.styled";
 import { StyledFormNewTrip } from "../../ui/form/form.styled";
-import { TextInput } from "../../ui/TextInput/TextInput.styled";
+import { TextInput, TextareaInput } from "../../ui/TextInput/TextInput.styled";
 import { useForm } from "react-hook-form";
 import { db, auth, storage } from "../../firebase/firebase.config";
 import { doc, setDoc } from "firebase/firestore";
@@ -41,7 +41,7 @@ const NewTripForm = () => {
     <StyledFormNewTrip onSubmit={onSubmit}>
       <h1>Create new trip</h1>
       <TextInput placeholder="Trip Title" {...register("title")} required />
-      <TextInput placeholder="Description" {...register("description")} required />
+      <TextareaInput rows={10} placeholder="Description" {...register("description")} required />
       <TextInput type="file" {...register("imageUrl")} required />
       <Button>Create and go to next step</Button>
     </StyledFormNewTrip>

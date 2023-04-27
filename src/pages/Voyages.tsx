@@ -13,8 +13,6 @@ const Voyages = () => {
     };
     fetchData();
   }, []);
-
   return <TripsList trips={trips} />;
 };
-
 export default Voyages;

@@ -6,11 +6,11 @@ import { Button } from "../../ui/button/button.styled";
 import { Header2 } from "../../ui/headers/header.styled";
 
 export interface User {
-  firstName: string;
-  lastName: string;
-  city: string;
-  imageUrl: string;
-  bio: string;
+  firstName?: string;
+  lastName?: string;
+  city?: string;
+  imageUrl?: string;
+  bio?: string;
 }
 
 type Props = {
