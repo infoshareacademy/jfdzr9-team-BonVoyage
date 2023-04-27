@@ -47,6 +47,7 @@ const options = {
   disableDefaultUI: true,
   zoomControl: false,
   clickableIcons: false,
+  mapId: "461a4919bddfec0",
 };
 
 const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
@@ -161,7 +162,20 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
           onLoad={onLoad}
           onClick={addNewPin}
         >
-          {place && pins.map((pin) => <Marker key={pin.lat} position={pin} onClick={onPinClickHandler} />)}
+          {place &&
+            pins.map((pin) => (
+              <Marker
+                key={pin.lat}
+                position={pin}
+                onClick={onPinClickHandler}
+                icon={{
+                  url:
+                    clickedPin?.lat === pin.lat && clickedPin.lng === pin.lng
+                      ? "/public/icons/clickedIcon.png"
+                      : "../../../public/icons/icon.png",
+                }}
+              />
+            ))}
         </GoogleMap>
       </MapWrapper>
     </FullWrapper>
