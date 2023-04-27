@@ -42,7 +42,7 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
       } else {
         setImageError(false);
         [...imageUrls].forEach((file: Blob) => {
-          const imageRef = ref(storage, `${auth.currentUser?.email}/${tripId}/${file.name}`);
+          const imageRef = ref(storage, `${auth.currentUser?.email}/${tripId}/${name}/${file.name}`);
           const uploadedImage = uploadBytes(imageRef, file);
           promises.push(uploadedImage);
         });
