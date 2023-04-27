@@ -34,7 +34,6 @@ type GoogleMapProps = {
   center: Coordinates;
   tripId: string | undefined;
   tripData: Trip | undefined;
-  setTripData: React.Dispatch<React.SetStateAction<Trip | undefined>>;
 };
 
 const mapContainerStyle = {
@@ -52,11 +51,20 @@ const options = {
 
 const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
   const navigate = useNavigate();
-  const [pins, setPins] = useState<Pin[]>([]);
-  const [place, setPlace] = useState<LatLngLiteral>();
+  const [pins, setPins] = useState<Pin[]>(tripData?.places || []);
+  const [place, setPlace] = useState<LatLngLiteral | undefined>(tripData?.place);
   const [clickedPin, setClickedPin] = useState<Pin | null>();
   const mapRef = useRef<GoogleMap>();
-  const onLoad = useCallback((map: any) => (mapRef.current = map), []);
+  const onLoad = useCallback((map: any) => {
+    if (tripData?.places.length === 0) mapRef.current = map;
+    else {
+      const bounds = new window.google.maps.LatLngBounds();
+      tripData?.places.forEach((pin) => {
+        bounds.extend({ lat: pin.lat, lng: pin.lng });
+      });
+      map.fitBounds(bounds);
+    }
+  }, []);
   const [error, setError] = useState(false);
 
   const addNewPin = (e: google.maps.MapMouseEvent) => {
@@ -112,7 +120,8 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
     if (clickedPin && !clickedPin?.name && !clickedPin?.description && !clickedPin?.imageRefs) return;
     updateDoc(tripRef, {
       ...tripData,
-      places: pins.map((pin) => ({ ...pin, imageUrls: [] })),
+      places: pins?.map((pin) => ({ ...pin, imageUrls: [] })),
+      place,
     }).catch((err) => console.log(err));
   }, [pins]);
 
@@ -124,7 +133,7 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
     const tripRef = doc(db, "trips", `${tripId}`);
     updateDoc(tripRef, {
       ...tripData,
-      places: pins.map((pin) => ({ ...pin, imageUrls: [] })),
+      places: pins.map((pin) => ({ ...pin, imageUrls: [] })).filter((pin) => pin.name.trim().length > 0),
       inProgress: false,
     });
     navigate(`/voyages/${tripId}`);
@@ -156,14 +165,14 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
       <MapWrapper>
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
-          center={center}
+          center={tripData?.place.lat ? tripData.place : center}
           zoom={12}
           options={options}
           onLoad={onLoad}
           onClick={addNewPin}
         >
           {place &&
-            pins.map((pin) => (
+            pins?.map((pin) => (
               <Marker
                 key={pin.lat}
                 position={pin}

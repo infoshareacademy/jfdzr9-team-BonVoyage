@@ -3,7 +3,6 @@ import { createBrowserRouter, Route, RouterProvider, createRoutesFromElements } 
 import { LandingPage } from "./pages/LandingPage";
 import RegisterPage from "./pages/RegisterPage";
 import SignInPage from "./pages/SignInPage";
-import { AddTripPage } from "./pages/AddTrip";
 import AccountPage from "./pages/AccountPage";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import { Team } from "./components/AboutUs/AboutUs";
@@ -12,6 +11,7 @@ import AddNewTripStepOne from "./pages/AddNewTripStepOne";
 import LayoutMain from "./components/Layout/LayoutMain";
 import Voyages from "./pages/Voyages";
 import TripPage from "./pages/TripPage";
+import AddTripPage from "./pages/AddTrip";
 
 const App: React.FC = () => {
   const router = createBrowserRouter(

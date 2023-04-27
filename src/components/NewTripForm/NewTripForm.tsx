@@ -30,6 +30,7 @@ const NewTripForm = () => {
           userEmail: auth.currentUser?.email,
           inProgress: true,
           places: [],
+          place: "",
           id: id,
         };
         setDoc(tripRef, trip);

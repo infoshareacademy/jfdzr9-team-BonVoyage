@@ -7,6 +7,8 @@ import { db } from "../firebase/firebase.config";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
 
+type LatLngLiteral = google.maps.LatLngLiteral;
+
 const libraries: Library[] = ["places"];
 
 export type Trip = {
@@ -18,9 +20,10 @@ export type Trip = {
   userEmail: string;
   inProgress: boolean;
   center: Coordinates;
+  place: LatLngLiteral;
 };
 
-const AddTrip = () => {
+const AddTripPage = () => {
   const [tripData, setTripData] = useState<Trip>();
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
@@ -43,13 +46,11 @@ const AddTrip = () => {
     return <div>Error loading maps</div>;
   }
 
-  return isLoaded ? (
-    <Map center={{ lat: 45.7749, lng: -122.4194 }} tripData={tripData} tripId={tripId} setTripData={setTripData} />
+  return isLoaded && tripData ? (
+    <Map center={{ lat: 45.7749, lng: -122.4194 }} tripData={tripData} tripId={tripId} />
   ) : (
     <div>Loading maps...</div>
   );
 };
 
-export const AddTripPage = () => {
-  return <AddTrip />;
-};
+export default AddTripPage;
