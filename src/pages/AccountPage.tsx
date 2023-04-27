@@ -70,6 +70,10 @@ const AccountPage = () => {
     };
     fetchData();
   }, []);
+
+  const finishedTrips = trips.filter((trip) => trip.inProgress === false);
+
+  const tripsInProgress = trips.filter((trip) => trip.inProgress);
   return user ? (
     <>
       {success ? (
@@ -83,7 +87,8 @@ const AccountPage = () => {
           <NavLink to="/add-new-trip">
             <Button vwmax>Add new trip</Button>
           </NavLink>
-          <TripsList trips={trips} />
+          <TripsList trips={tripsInProgress} tripsName="Trips in progress" />
+          <TripsList trips={finishedTrips} tripsName="Completed trips" />
         </AccountPageWrapper>
       ) : (
         <SignInWrapper>

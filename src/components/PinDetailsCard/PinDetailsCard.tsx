@@ -41,7 +41,7 @@ const PinDetailsCard = ({ selectedPlace }: Props) => {
             key={selectedPlace?.lat}
             position={selectedPlace}
             icon={{
-              url: "../../../public/icons/icon.png",
+              url: "/public/icons/icon.png",
             }}
           />
         </GoogleMap>
