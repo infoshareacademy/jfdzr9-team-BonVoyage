@@ -87,7 +87,7 @@ const AccountPage = () => {
           <NavLink to="/add-new-trip">
             <Button vwmax>Add new trip</Button>
           </NavLink>
-          <TripsList trips={tripsInProgress} tripsName="Trips in progress" />
+          {tripsInProgress.length > 0 && <TripsList trips={tripsInProgress} tripsName="Trips in progress" />}
           <TripsList trips={finishedTrips} tripsName="Completed trips" />
         </AccountPageWrapper>
       ) : (

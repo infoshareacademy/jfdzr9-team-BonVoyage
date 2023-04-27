@@ -41,7 +41,7 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
       } else {
         setImageError(false);
         [...imageUrls].forEach((file: Blob) => {
-          const imageRef = ref(storage, `${auth.currentUser?.email}/${tripId}/${name}/${file.name}`);
+          const imageRef = ref(storage, `${auth.currentUser?.email}/${tripId}/${file.name}`);
           const uploadedImage = uploadBytes(imageRef, file);
           promises.push(uploadedImage);
         });
@@ -77,8 +77,8 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
     <StyledFormDetails onSubmit={onSubmit}>
       <h2>Trip Details</h2>
       <TextInput placeholder="Pin name" type={"text"} {...register("name")} required />
-      <TextareaInput rows={10} placeholder="Add details" {...register("description")} required />
-      <TextInput type={"file"} multiple {...register("imageUrls")} required />
+      <TextareaInput rows={10} placeholder="Add details" {...register("description")} />
+      <TextInput type={"file"} multiple {...register("imageUrls")} />
       {imageError && <p>You can choose maximum 4 pictures for one place!</p>}
       <FakeButton onClick={deletePin}>Delete</FakeButton>
       <Button>Save</Button>
