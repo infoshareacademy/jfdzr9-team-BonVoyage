@@ -9,6 +9,10 @@ export const TripsListStyled = styled.article`
 
   justify-items: stretch;
   grid-gap: var(--gap-m);
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: var(--gap-xs);
+  }
 `;
 
 export const SingleTripStyled = styled.div`
@@ -29,6 +33,10 @@ export const SingleTripStyled = styled.div`
     display: block;
     grid-area: 1 / 1 / 2 / 2; 
   }*/
+  @media (max-width: 768px) {
+    min-width: 150px;
+    min-height: 150px;
+  }
 `;
 
 export const ImgContainer = styled.div`
@@ -77,4 +85,7 @@ export const TripDescription = styled.p`
   text-overflow: ellipsis;
   white-space: nowrap;
   max-height: calc(var(--line-height-body) * var(--max-lines));
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;

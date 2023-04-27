@@ -7,11 +7,8 @@ interface ButtonProps {
 }
 
 export const Button = styled.button<ButtonProps>`
-  display: flex;
-  flex-direction: row;
-  gap: 0.7rem;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  height: fit-content;
   width: ${(props) => (props.vwmax ? "100%" : "auto")};
   font-size: var(--font-size-body);
   font-weight: 700;
@@ -33,12 +30,4 @@ export const ButtonWhite = styled(Button)`
   color: ${(props) => (props.secondary ? "var(--color-neutral-white)" : "var(--color-neutral-black)")};
   background-color: ${(props) => (props.secondary ? "transparent" : "var(--color-neutral-white)")};
   border: 1.5px solid white;
-`;
-
-export const ButtonGrey = styled(Button)`
-  background-color: var(--color-secondary-topaz-light);
-  border: 1.5px solid #c16316;
-  :hover {
-    background-color: var(--color-secondary-topaz);
-  }
 `;

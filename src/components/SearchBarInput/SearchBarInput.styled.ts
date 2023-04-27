@@ -20,16 +20,16 @@ export const List = styled.ul`
   flex-direction: column;
   gap: 5px;
   border: 1px solid;
-  border-radius: 10px;
+  border-radius: var(--border-radius-s);
 `;
 
 export const ListItem = styled.li`
   list-style: none;
   background-color: transparent;
   text-align: center;
-  border-radius: 30px;
+  border-radius: var(--border-radius-s);
   :hover {
-    background-color: lightgreen;
+    background-color: var(--color-secondary-topaz);
   }
 `;
 

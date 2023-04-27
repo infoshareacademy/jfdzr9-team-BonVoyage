@@ -3,19 +3,16 @@ import styled from "styled-components";
 export const StyledForm = styled.form`
   flex: 1;
   display: flex;
-  gap: var(--gap-s);
+  gap: var(--gap-m);
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* border: 1px solid black; */
+  align-self: center;
 `;
 
 export const StyledFormDetails = styled.form`
   display: flex;
-  gap: var(--gap-s);
+  gap: var(--gap-m);
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem 0;
   width: 100%;
 `;
 
@@ -28,5 +25,4 @@ export const StyledFormNewTrip = styled.form`
   gap: 2rem;
   align-items: center;
   border-radius: 2rem;
-  box-shadow: 0px 0px 10px 1px rgba(85, 154, 64, 1);
 `;

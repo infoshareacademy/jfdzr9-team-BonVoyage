@@ -1,12 +1,13 @@
 import { Button } from "../../ui/button/button.styled";
 import { StyledFormDetails } from "../../ui/form/form.styled";
-import { TextInput, TextareaInput } from "../../ui/TextInput/TextInput.styled";
+import { InputLabel, LabelAndInput, TextInput, TextareaInput } from "../../ui/TextInput/TextInput.styled";
 import { useForm } from "react-hook-form";
 import { Pin } from "../Map/Map";
 import { FakeButton } from "./TripDetailsForm.styled";
 import { UploadResult, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { auth, storage } from "../../firebase/firebase.config";
 import { useState } from "react";
+import { FormWrapper } from "../../ui/wrapper/wrapper.styled";
 
 type FormData = {
   name: string;
@@ -74,15 +75,26 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
   });
 
   return (
-    <StyledFormDetails onSubmit={onSubmit}>
-      <h2>Trip Details</h2>
-      <TextInput placeholder="Pin name" type={"text"} {...register("name")} required />
-      <TextareaInput rows={10} placeholder="Add details" {...register("description")} required />
-      <TextInput type={"file"} multiple {...register("imageUrls")} required />
-      {imageError && <p>You can choose maximum 4 pictures for one place!</p>}
-      <FakeButton onClick={deletePin}>Delete</FakeButton>
-      <Button>Save</Button>
-    </StyledFormDetails>
+    <FormWrapper vwmax>
+      <StyledFormDetails onSubmit={onSubmit}>
+        <h2>Trip Details</h2>
+        <LabelAndInput>
+          <InputLabel>Pin name</InputLabel>
+          <TextInput placeholder="Pin name" type={"text"} {...register("name")} required />
+        </LabelAndInput>
+        <LabelAndInput>
+          <InputLabel>Details</InputLabel>
+          <TextareaInput rows={10} placeholder="Add details" {...register("description")} required />
+        </LabelAndInput>
+        <LabelAndInput>
+          <InputLabel>Choose maximum 4 pictures</InputLabel>
+          <TextInput type={"file"} multiple {...register("imageUrls")} required />
+          {imageError && <p>You can choose maximum 4 pictures for one place!</p>}
+        </LabelAndInput>
+        <FakeButton onClick={deletePin}>Delete</FakeButton>
+        <Button>Save</Button>
+      </StyledFormDetails>
+    </FormWrapper>
   );
 };
 

@@ -1,5 +1,5 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
-import { FullWrapper, MapWrapper, SearchbardWrapper } from "./Map.styled";
+import { FullWrapper, MapWrapper } from "./Map.styled";
 import { useRef, useCallback, useState, useEffect } from "react";
 import SearchBarInput from "../SearchBarInput/SearchBarInput";
 import TripDetailsForm from "../TripDetailsForm/TripDetailsForm";
@@ -9,6 +9,8 @@ import { db, storage } from "../../firebase/firebase.config";
 import { deleteObject, ref } from "firebase/storage";
 import { Button } from "../../ui/button/button.styled";
 import { useNavigate } from "react-router-dom";
+import { FormWrapper } from "../../ui/wrapper/wrapper.styled";
+import { LabelAndInput, InputLabel } from "../../ui/TextInput/TextInput.styled";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
@@ -132,27 +134,30 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
 
   return (
     <FullWrapper>
-      <SearchbardWrapper>
-        {!place && <p>Pick your trip place!</p>}
-        <SearchBarInput
-          setCity={(position) => {
-            setPlace(position);
-            mapRef.current?.panTo(position);
-          }}
-        />
-        {clickedPin && (
-          <TripDetailsForm
-            deletePin={deletePin}
-            clickedPin={clickedPin}
-            setPins={setPins}
-            setClickedPin={setClickedPin}
-            tripId={tripId}
+      <FormWrapper padding>
+        <LabelAndInput>
+          {!place && <InputLabel>Pick your trip place!</InputLabel>}
+          <SearchBarInput
+            setCity={(position) => {
+              setPlace(position);
+              mapRef.current?.panTo(position);
+            }}
           />
-        )}
+          {clickedPin && (
+            <TripDetailsForm
+              deletePin={deletePin}
+              clickedPin={clickedPin}
+              setPins={setPins}
+              setClickedPin={setClickedPin}
+              tripId={tripId}
+            />
+          )}
+        </LabelAndInput>
         {clickedPin === null && <p>Your pin was succesfully saved!</p>}
         {!clickedPin && <Button onClick={finishTrip}>Save and finish trip</Button>}
         {error && <p>There must be at least one place in your trip to finish it!</p>}
-      </SearchbardWrapper>
+      </FormWrapper>
+
       <MapWrapper>
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
