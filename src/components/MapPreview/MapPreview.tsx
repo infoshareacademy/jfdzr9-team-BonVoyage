@@ -15,7 +15,7 @@ const options = {
   disableDefaultUI: true,
   zoomControl: false,
   clickableIcons: false,
-  // mapId: "461a4919bddfec0",
+  mapId: "461a4919bddfec0",
 };
 
 type MapProps = {
@@ -42,7 +42,14 @@ const MapPreview = ({ tripData, setIsModalActive, setSelectedPlace }: MapProps) 
     <MapWrapper>
       <GoogleMap mapContainerStyle={mapContainerStyle} zoom={12} options={options} onLoad={onLoad}>
         {tripData?.places.map((pin) => (
-          <Marker key={pin.lat} position={pin} onClick={onPinClickHandler} />
+          <Marker
+            key={pin.lat}
+            position={pin}
+            onClick={onPinClickHandler}
+            icon={{
+              url: "../../../public/icons/icon.png",
+            }}
+          />
         ))}
       </GoogleMap>
     </MapWrapper>
