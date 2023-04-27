@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useUser } from "../context/auth.context";
 import { addUsersDetails } from "../firebase/addUsersDetails";
 import { TextInput, TextareaInput, InputLabel, LabelAndInput } from "../ui/TextInput/TextInput.styled";
@@ -37,7 +37,7 @@ const AccountPage = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
   const [userData, setUserData] = useState<User | null>(null);
   const user = useUser();
-  const hiddenFileInput = useRef(null);
+  const hiddenFileInput = useRef<HTMLInputElement>(null);
 
   if (user) {
     useEffect(() => {
@@ -73,9 +73,11 @@ const AccountPage = () => {
     }
   };
 
-  const handleChoosePhoto = (e) => {
+  const handleChoosePhoto = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    hiddenFileInput.current.click();
+    if (hiddenFileInput.current != null) {
+      hiddenFileInput.current.click();
+    }
   };
 
   useEffect(() => {
