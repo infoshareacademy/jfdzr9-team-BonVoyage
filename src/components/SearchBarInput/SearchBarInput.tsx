@@ -1,5 +1,5 @@
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
-import { List, ListButton, ListItem, SearchBar, SearchBarWrapper } from "./SearchBarInput.styled";
+import { List, ListButton, ListItem, SearchBarWrapper } from "./SearchBarInput.styled";
 import { TextInput } from "../../ui/TextInput/TextInput.styled";
 
 type SearchBarInputProps = {
