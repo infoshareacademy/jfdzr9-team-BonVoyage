@@ -19,6 +19,7 @@ export const TripsList = ({ trips, tripsName }: TripsListProps) => {
             url={trip.imageUrl}
             title={trip.title}
             tripId={trip.id}
+            inProgress={trip.inProgress}
           />
         ))}
       </TripsListStyled>
