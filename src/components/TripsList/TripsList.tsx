@@ -4,7 +4,7 @@ import { Trip } from "../../pages/AddTrip";
 
 export interface TripsListProps {
   trips: Trip[];
-  tripsName: string;
+  tripsName?: string;
 }
 
 export const TripsList = ({ trips, tripsName }: TripsListProps) => {
