@@ -1,6 +1,6 @@
 import { useLoadScript } from "@react-google-maps/api";
 import Map, { Coordinates, Pin } from "../components/Map/Map";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DocumentReference, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
@@ -26,6 +26,7 @@ const AddTrip = () => {
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+  const navigate = useNavigate();
   const { tripId } = useParams<{ tripId: string }>();
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const AddTrip = () => {
     };
     getTrip();
   }, []);
-
+  if (tripData?.inProgress === false) navigate(`/voyages/${tripId}`);
   if (loadError) {
     return <div>Error loading maps</div>;
   }

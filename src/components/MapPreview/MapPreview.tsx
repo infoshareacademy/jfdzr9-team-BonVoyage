@@ -47,7 +47,7 @@ const MapPreview = ({ tripData, setIsModalActive, setSelectedPlace }: MapProps) 
             position={pin}
             onClick={onPinClickHandler}
             icon={{
-              url: "../../../public/icons/icon.png",
+              url: "/public/icons/icon.png",
             }}
           />
         ))}
