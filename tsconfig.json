@@ -18,6 +18,6 @@
     "types": ["cypress", "@testing-library/cypress", "node", "vite/client"]
   },
   "exclude": ["**/*.test.tsx", "**/*.test.ts"],
-  "include": ["src"],
+  "include": ["src", "carousel.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
