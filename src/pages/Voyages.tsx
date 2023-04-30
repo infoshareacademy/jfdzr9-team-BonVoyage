@@ -9,7 +9,7 @@ const Voyages = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getTrips();
-      setTrips(data?.filter((trip) => trip.imageUrl) ?? []);
+      setTrips(data?.filter((trip) => trip.imageUrl).filter((trip) => !trip.inProgress) ?? []);
     };
     fetchData();
   }, []);

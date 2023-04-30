@@ -1,11 +1,13 @@
 import { useLoadScript } from "@react-google-maps/api";
 import Map, { Coordinates, Pin } from "../components/Map/Map";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DocumentReference, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
+
+type LatLngLiteral = google.maps.LatLngLiteral;
 
 const libraries: Library[] = ["places"];
 
@@ -18,14 +20,16 @@ export type Trip = {
   userEmail: string;
   inProgress: boolean;
   center: Coordinates;
+  place: LatLngLiteral;
 };
 
-const AddTrip = () => {
+const AddTripPage = () => {
   const [tripData, setTripData] = useState<Trip>();
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+  const navigate = useNavigate();
   const { tripId } = useParams<{ tripId: string }>();
 
   useEffect(() => {
@@ -37,18 +41,16 @@ const AddTrip = () => {
     };
     getTrip();
   }, []);
-
+  if (tripData?.inProgress === false) navigate(`/voyages/${tripId}`);
   if (loadError) {
     return <div>Error loading maps</div>;
   }
 
-  return isLoaded ? (
-    <Map center={{ lat: 45.7749, lng: -122.4194 }} tripData={tripData} tripId={tripId} setTripData={setTripData} />
+  return isLoaded && tripData ? (
+    <Map center={{ lat: 45.7749, lng: -122.4194 }} tripData={tripData} tripId={tripId} />
   ) : (
     <div>Loading maps...</div>
   );
 };
 
-export const AddTripPage = () => {
-  return <AddTrip />;
-};
+export default AddTripPage;

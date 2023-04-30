@@ -6,11 +6,12 @@ export interface SingleTripProps {
   title: string;
   tripId: string;
   tripDescription: string;
+  inProgress: boolean;
 }
 
-export const SingleTrip = ({ url, title, tripId, tripDescription }: SingleTripProps) => {
+export const SingleTrip = ({ url, title, tripId, tripDescription, inProgress }: SingleTripProps) => {
   return (
-    <Link to={`/voyages/${tripId}`}>
+    <Link to={inProgress ? `/add-new-trip/${tripId}` : `/voyages/${tripId}`}>
       <SingleTripStyled>
         <ImgContainer>
           <TripMini src={url}></TripMini>
