@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   ButtonsSection,
   ImgContainer,
@@ -23,6 +23,8 @@ export interface SingleTripProps {
 export const SingleTrip = ({ url, title, tripId, tripDescription, inProgress, tripUser }: SingleTripProps) => {
   const user = useUser();
 
+  const navigate = useNavigate();
+
   const deleteTrip = () => {
     const tripRef = doc(db, "trips", tripId);
     deleteDoc(tripRef);
@@ -32,10 +34,8 @@ export const SingleTrip = ({ url, title, tripId, tripDescription, inProgress, tr
       <ImgContainer>
         <TripMini src={url}></TripMini>
         <ButtonsSection>
-          <TripButton>
-            <Link to={inProgress ? `/add-new-trip/${tripId}` : `/voyages/${tripId}`}>
-              {inProgress ? "Edit" : "Preview"}
-            </Link>
+          <TripButton onClick={() => navigate(`${inProgress ? `/add-new-trip/${tripId}` : `/voyages/${tripId}`}`)}>
+            {inProgress ? "Edit" : "Preview"}
           </TripButton>
           {user?.email === tripUser && <TripButton onClick={deleteTrip}>Delete</TripButton>}
         </ButtonsSection>

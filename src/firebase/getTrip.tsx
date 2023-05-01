@@ -12,7 +12,7 @@ import { Trip } from "../pages/AddTrip";
 //   return data;
 // };
 
-const getTrips = async (): Promise<Trip[] | null> => {
+const getTrips = async (stateChanger: React.Dispatch<React.SetStateAction<Trip[]>>) => {
   const tripRef = collection(db, "trips");
   const docsSnap = await onSnapshot(tripRef, (data) => {
     const trips: Trip[] = [];
@@ -20,7 +20,9 @@ const getTrips = async (): Promise<Trip[] | null> => {
       const trip = doc.data() as Trip;
       trips.push(trip);
     });
+    stateChanger(trips);
   });
+  return docsSnap;
   // const data = docsSnap.docs.map((doc) => doc.data()) as Trip[];
 };
 
