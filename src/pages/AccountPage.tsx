@@ -36,6 +36,7 @@ const AccountPage = () => {
   const [file, setFile] = useState<File | null>(null);
   const [trips, setTrips] = useState<Trip[]>([]);
   const [userData, setUserData] = useState<User | null>(null);
+  const [userImg, setUserImg] = useState("");
   const user = useUser();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
@@ -61,6 +62,7 @@ const AccountPage = () => {
     uploadBytes(imageRef, file).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setValue("imageUrl", url);
+        setUserImg(url);
       });
     });
   };
@@ -114,7 +116,7 @@ const AccountPage = () => {
               <ButtonsRowWrapper>
                 <ImgWrapper>
                   <AvatarContainer style={{ maxWidth: "10px" }}>
-                    <Avatar src={userData?.imageUrl}></Avatar>
+                    <Avatar src={userImg}></Avatar>
                   </AvatarContainer>
                 </ImgWrapper>
                 <ButtonsUploadImgWrapper style={{ alignSelf: "center" }}>
