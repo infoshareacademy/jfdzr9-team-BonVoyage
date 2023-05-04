@@ -66,6 +66,7 @@ export const AvatarContainer = styled.div`
   border-radius: 50%;
   overflow: hidden;
   min-width: 100px;
+  transition: 0.2s linear;
   @media (max-width: 768px) {
     max-width: 100px;
   }
@@ -77,6 +78,7 @@ export const AvatarContainer = styled.div`
 `;
 
 export const Avatar = styled.img`
+  transition: 0.2s linear;
   display: block;
   position: absolute;
   width: 100%;

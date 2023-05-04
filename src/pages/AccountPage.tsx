@@ -37,6 +37,7 @@ const AccountPage = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
   const [userData, setUserData] = useState<User | null>(null);
   const [userImg, setUserImg] = useState("");
+  const [disabled, setDisabled] = useState(false);
   const user = useUser();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
@@ -63,6 +64,7 @@ const AccountPage = () => {
       getDownloadURL(snapshot.ref).then((url) => {
         setValue("imageUrl", url);
         setUserImg(url);
+        setDisabled(true);
       });
     });
   };
@@ -71,6 +73,7 @@ const AccountPage = () => {
     if (user) {
       addUsersDetails(data, user.uid).then(() => {
         setSuccess(true);
+        setDisabled(false);
       });
     }
   };
@@ -120,7 +123,9 @@ const AccountPage = () => {
                   </AvatarContainer>
                 </ImgWrapper>
                 <ButtonsUploadImgWrapper style={{ alignSelf: "center" }}>
-                  <Button onClick={handleChoosePhoto}>Choose photo</Button>
+                  <Button disabled={disabled} onClick={handleChoosePhoto}>
+                    Choose photo
+                  </Button>
                   <input
                     type="file"
                     ref={hiddenFileInput}
@@ -132,6 +137,7 @@ const AccountPage = () => {
                     }}
                   ></input>
                   <Button
+                    disabled={disabled}
                     secondary
                     onClick={(e) => {
                       e.preventDefault();
