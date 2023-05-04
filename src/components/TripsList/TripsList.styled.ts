@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const TripsListStyled = styled.article`
   transition: 0.2s linear;
-  margin: 50px 0;
+  margin: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   justify-items: stretch;
