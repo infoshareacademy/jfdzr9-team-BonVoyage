@@ -36,6 +36,8 @@ const AccountPage = () => {
   const [file, setFile] = useState<File | null>(null);
   const [trips, setTrips] = useState<Trip[]>([]);
   const [userData, setUserData] = useState<User | null>(null);
+  const [userImg, setUserImg] = useState("");
+  const [disabled, setDisabled] = useState(false);
   const user = useUser();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
@@ -61,6 +63,8 @@ const AccountPage = () => {
     uploadBytes(imageRef, file).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setValue("imageUrl", url);
+        setUserImg(url);
+        setDisabled(true);
       });
     });
   };
@@ -69,6 +73,7 @@ const AccountPage = () => {
     if (user) {
       addUsersDetails(data, user.uid).then(() => {
         setSuccess(true);
+        setDisabled(false);
       });
     }
   };
@@ -114,11 +119,13 @@ const AccountPage = () => {
               <ButtonsRowWrapper>
                 <ImgWrapper>
                   <AvatarContainer style={{ maxWidth: "10px" }}>
-                    <Avatar src={userData?.imageUrl}></Avatar>
+                    <Avatar src={userImg ? userImg : userData?.imageUrl}></Avatar>
                   </AvatarContainer>
                 </ImgWrapper>
                 <ButtonsUploadImgWrapper style={{ alignSelf: "center" }}>
-                  <Button onClick={handleChoosePhoto}>Choose photo</Button>
+                  <Button disabled={disabled} onClick={handleChoosePhoto}>
+                    Choose photo
+                  </Button>
                   <input
                     type="file"
                     ref={hiddenFileInput}
@@ -130,6 +137,7 @@ const AccountPage = () => {
                     }}
                   ></input>
                   <Button
+                    disabled={disabled}
                     secondary
                     onClick={(e) => {
                       e.preventDefault();

@@ -4,6 +4,7 @@ interface ButtonProps {
   secondary?: boolean;
   wide?: boolean;
   vwmax?: boolean;
+  disabled?: boolean;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -23,6 +24,12 @@ export const Button = styled.button<ButtonProps>`
     color: var(--color-neutral-white);
     background-color: var(--color-secondary-topaz);
     border: 1.5px solid #f39239;
+  }
+  :disabled {
+    background-color: grey;
+    color: white;
+    cursor: not-allowed;
+    border: 1.5px solid grey;
   }
 `;
 

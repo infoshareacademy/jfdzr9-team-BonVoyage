@@ -14,6 +14,7 @@ export const AccountPageWrapper = styled.div`
   width: 100vw;
   min-height: calc(100vh - 8rem);
   padding: var(--padding-layout);
+  gap: var(--gap-m);
 
   @media (max-width: 768px) {
     padding: var(--padding-layout-mobile);
