@@ -5,8 +5,8 @@ interface Props {
 }
 
 export const StyledBurger = styled.button<Props>`
-  width: 1.5rem;
-  height: 1.5rem;
+  width: var(--line-height-body);
+  height: var(--line-height-body);
   position: fixed;
   top: 15px;
   right: 20px;
@@ -24,8 +24,8 @@ export const StyledBurger = styled.button<Props>`
     flex-flow: column nowrap;
   }
   div {
-    width: 1.5rem;
-    height: 0.25rem;
+    width: var(--line-height-body);
+    height: 0.3rem;
     background-color: ${({ open }) => (open ? "#030303" : "#030303")};
     border-radius: 10px;
     transform-origin: 1px;
