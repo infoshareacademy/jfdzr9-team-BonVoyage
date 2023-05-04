@@ -6,7 +6,7 @@ export const DetailsWrapper = styled.div`
   height: 100%;
   margin: 50px 0px;
   display: flex;
-  gap: var(--gap-m);
+  gap: var(--gap-l);
   border-bottom: 1px solid grey;
   align-content: space-between;
   @media (max-width: 768px) {
@@ -38,7 +38,11 @@ export const Name = styled.div`
   }
 `;
 
-export const Description = styled.div``;
+export const Description = styled.div`
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
 
 // export const AvatarContainer = styled.div`
 //   position: relative;
@@ -66,8 +70,9 @@ export const AvatarContainer = styled.div`
   border-radius: 50%;
   overflow: hidden;
   min-width: 100px;
+  transition: 0.2s linear;
   @media (max-width: 768px) {
-    max-width: 100px;
+    max-width: 200px;
   }
   &:before {
     display: block;
@@ -77,6 +82,7 @@ export const AvatarContainer = styled.div`
 `;
 
 export const Avatar = styled.img`
+  transition: 0.2s linear;
   display: block;
   position: absolute;
   width: 100%;
@@ -84,4 +90,7 @@ export const Avatar = styled.img`
   right: 0;
   bottom: 0;
   left: 0;
+  @media (max-width: 768px) {
+    max-width: 200px;
+  }
 `;

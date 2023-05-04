@@ -2,41 +2,31 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const TripsListStyled = styled.article`
-  margin: 50px auto;
+  transition: 0.2s linear;
+  margin: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  /* grid-template-rows: minmax(200px, 1fr); */
-  /* /* grid-auto-rows: minmax(150px, 1fr); */
-
   justify-items: stretch;
   grid-gap: var(--gap-m);
+
   @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: var(--gap-xs);
   }
 `;
 
 export const SingleTripStyled = styled.div`
   display: grid;
-  width: 100%;
-  box-sizing: border-box;
-  min-width: 300px;
-  min-height: 300px;
+  /* width: 100%;
+  box-sizing: border-box; */
   margin: 0;
   padding: 0;
   border: 1px solid grey;
   border-radius: var(--border-radius-s);
-
   /* grid-area: 1 / 1 / 2 / 2; */
-  /* &::before {
-    content: "";
-    padding-bottom: 100%;
-    display: block;
-    grid-area: 1 / 1 / 2 / 2; 
-  }*/
+
   @media (max-width: 768px) {
-    min-width: 150px;
-    min-height: 150px;
+    grid-column: 1 / 2;
   }
 `;
 
@@ -68,7 +58,6 @@ export const TripMiniTitle = styled.h3`
   color: black;
   justify-self: flex-start;
   padding: 5%;
-
   margin: 0;
 
   /* &::before {

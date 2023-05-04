@@ -41,5 +41,6 @@ export const StyledMenu = styled.nav<Props>`
     padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;
     align-items: center;
+    z-index: 1;
   }
 `;
