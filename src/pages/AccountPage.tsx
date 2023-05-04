@@ -116,7 +116,7 @@ const AccountPage = () => {
               <ButtonsRowWrapper>
                 <ImgWrapper>
                   <AvatarContainer style={{ maxWidth: "10px" }}>
-                    <Avatar src={userImg}></Avatar>
+                    <Avatar src={userImg ? userImg : userData?.imageUrl}></Avatar>
                   </AvatarContainer>
                 </ImgWrapper>
                 <ButtonsUploadImgWrapper style={{ alignSelf: "center" }}>
