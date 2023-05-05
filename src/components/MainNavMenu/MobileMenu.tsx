@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useUser, useLogout } from "../../context/auth.context";
 import { useState } from "react";
 import { Header2 } from "../../ui/headers/header.styled";
+import path from "path";
 
 interface Props {
   open: boolean;
@@ -14,6 +15,8 @@ export const Menu: React.FC<Props> = ({ open, onClose }) => {
   const logout = useLogout();
   const user = useUser();
 
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleLogout = async () => {
     await logout();
     onClose();
@@ -23,6 +26,67 @@ export const Menu: React.FC<Props> = ({ open, onClose }) => {
     onClose();
   };
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const options = [
+    {
+      label: "Home",
+      path: "/",
+      onClick: handleClose,
+    },
+    {
+      label: "Voyages",
+      path: "/voyages",
+      onClick: handleClose,
+    },
+    {
+      label: "About Us",
+      path: "/about",
+      onClick: handleClose,
+    },
+
+    {
+      label: "Sign in",
+      path: "/signIn",
+      onClick: handleClose,
+    },
+    {
+      label: "Register",
+      path: "signIn/register",
+      onClick: handleClose,
+    },
+  ];
+
+  const loggedInOptions = [
+    {
+      label: "Home",
+      path: "/",
+      onClick: handleClose,
+    },
+    {
+      label: "Voyages",
+      path: "/voyages",
+      onClick: handleClose,
+    },
+    {
+      label: "About Us",
+      path: "/about",
+      onClick: handleClose,
+    },
+    {
+      label: "Your Profile",
+      path: "/account",
+      onClick: handleClose,
+    },
+    {
+      label: "Logout",
+      path: "/",
+      onClick: handleLogout,
+    },
+  ];
+
   return (
     <>
       <Link to="/">
@@ -30,36 +94,19 @@ export const Menu: React.FC<Props> = ({ open, onClose }) => {
       </Link>
       {user ? (
         <StyledMenu open={open}>
-          <a href="/">Home</a>
-          <Link to="/voyages" onClick={handleClose}>
-            Voyages
-          </Link>
-          <NavLink to="/about" onClick={handleClose}>
-            About Us
-          </NavLink>
-          <Link to="/account" onClick={handleClose}>
-            {" "}
-            Your Profile
-          </Link>
-          <a href="" onClick={handleLogout}>
-            Logout
-          </a>
+          {loggedInOptions.map((option) => (
+            <Link key={option.path} to={option.path} onClick={option.onClick}>
+              {option.label}
+            </Link>
+          ))}
         </StyledMenu>
       ) : (
         <StyledMenu open={open}>
-          <a href="/">Home</a>
-          <Link to="/voyages" onClick={handleClose}>
-            Voyages
-          </Link>
-          <NavLink to="/about" onClick={handleClose}>
-            About Us
-          </NavLink>
-          <Link to="signIn" onClick={handleClose}>
-            Sign in
-          </Link>
-          <Link to="/signIn/register" onClick={handleClose}>
-            Register
-          </Link>
+          {options.map((option) => (
+            <Link key={option.path} to={option.path} onClick={option.onClick}>
+              {option.label}
+            </Link>
+          ))}
         </StyledMenu>
       )}
     </>
