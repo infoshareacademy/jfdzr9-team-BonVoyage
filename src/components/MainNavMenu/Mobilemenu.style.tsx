@@ -21,7 +21,7 @@ export const StyledMenu = styled.nav<Props>`
   .sign-in {
     width: 180px;
     height: 30px;
-    background: #090909;
+    background: #ffffff;
     border-radius: 92px;
     margin-top: 10rem;
     color: #fff;
@@ -29,7 +29,8 @@ export const StyledMenu = styled.nav<Props>`
   }
   @media (max-width: 768px) {
     flex-flow: column wrap;
-    background-color: #e5e5e5;
+    background-color: #fff;
+    opacity: 0.87;
     position: fixed;
     transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
     top: 0;

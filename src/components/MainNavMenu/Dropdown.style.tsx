@@ -14,10 +14,12 @@ export const DropdownButton = styled.button`
   margin-top: 10px;
   border-radius: 4rem;
   transition: all 0.2s ease-in;
+  opacity: 0.9;
 
   :hover {
     transform: scale(1.07);
     transition: all 0.2s ease-in;
+    opacity: 1;
   }
 
   img {

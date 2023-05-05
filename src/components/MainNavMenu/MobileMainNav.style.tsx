@@ -10,7 +10,7 @@ export const StyledBurger = styled.button<Props>`
   position: fixed;
   top: 15px;
   right: 20px;
-  z-index: 20;
+  z-index: 9999;
   display: none;
   border: none;
   cursor: pointer;
@@ -26,8 +26,9 @@ export const StyledBurger = styled.button<Props>`
   div {
     width: var(--line-height-body);
     height: 0.3rem;
-    background-color: ${({ open }) => (open ? "#030303" : "#030303")};
+    background-color: ${({ open }) => (open ? "#030303" : "#c4c4c4")};
     border-radius: 10px;
+    z-index: 9999;
     transform-origin: 1px;
     transition: all 0.3s linear;
     position: relative;
