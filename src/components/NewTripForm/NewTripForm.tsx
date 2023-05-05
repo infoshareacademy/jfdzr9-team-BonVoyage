@@ -64,7 +64,9 @@ const NewTripForm = () => {
             <InputLabel>Add a trip image</InputLabel>
             <TextInput type="file" {...register("imageUrl")} accept="image/*" required />
           </LabelAndInput>
-          {error && <p style={{ color: "red" }}>Wrong file type!</p>}
+          {error && (
+            <p style={{ color: "red" }}>Wrong file type! You can only pick images of type: jpg, jpeg, png, bmp, gif</p>
+          )}
           <Button>Create and go to next step</Button>
         </StyledForm>
       </FormWrapper>
