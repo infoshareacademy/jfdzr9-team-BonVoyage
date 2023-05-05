@@ -14,7 +14,7 @@ export const Overlay = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(000, 000, 000, 0.4);
-  z-index: 10;
+  z-index: 1;
   cursor: pointer;
   backdrop-filter: blur(4px);
 `;
@@ -22,13 +22,29 @@ export const Overlay = styled.div`
 export const Wrapper = styled.div`
   position: fixed;
   background-color: white;
-  border-radius: 25%;
+  border-radius: 5rem;
   padding: 2%;
   border: white 1px solid;
   width: fit-content;
-  height: fit-content;
+  height: 80%;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 11;
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10%;
+  }
+
+  @media screen and (max-width: 768px) {
+    border-radius: 5rem;
+    width: 85%;
+    height: 80%;
+  }
+  @media screen and (max-width: 992px) {
+    border-radius: 5rem;
+    width: 85%;
+  }
 `;
