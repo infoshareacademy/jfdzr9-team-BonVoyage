@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { ImgWrapper, SignInWrapper } from "../ui/wrapper/wrapper.styled";
 import { ImgSignIn } from "../ui/img/img.styled";
 import { Header2, Header4Form } from "../ui/headers/header.styled";
+import { useMediaQuery } from "../hooks/UseMediaQuery";
 
 // import { Navigate } from "react-router-dom";
 
@@ -26,6 +27,7 @@ const RegisterPage = () => {
   const { register, handleSubmit } = useForm<IFormInput>();
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const bigScreen = useMediaQuery("(min-width: 768px)");
   const onSubmit: SubmitHandler<IFormInput> = ({ email, password }) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => signInWithEmailAndPassword(auth, email, password))
@@ -44,14 +46,18 @@ const RegisterPage = () => {
         </LabelAndInput>
         <LabelAndInput>
           <InputLabel>Password</InputLabel>
-          <TextInput placeholder="Type password" {...register("password")} />
+          <TextInput placeholder="Type password" type="password" {...register("password")} />
         </LabelAndInput>
         <Button type="submit">Register</Button>
         {error}
       </StyledForm>
-      <ImgWrapper>
-        <ImgSignIn src="https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/website-backgrounds%2Fpexels-element-digital-1051075.jpg?alt=media&token=75bdcfa6-7fb2-44ba-b032-63a6099b1c82" />
-      </ImgWrapper>
+      {bigScreen ? (
+        <ImgWrapper>
+          <ImgSignIn src="https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/website-backgrounds%2Fpexels-element-digital-1051075.jpg?alt=media&token=75bdcfa6-7fb2-44ba-b032-63a6099b1c82" />
+        </ImgWrapper>
+      ) : (
+        <></>
+      )}
     </SignInWrapper>
   );
 };

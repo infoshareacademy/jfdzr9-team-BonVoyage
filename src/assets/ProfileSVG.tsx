@@ -4,6 +4,7 @@ import styled from "styled-components";
 const StyledProfileSVG = styled.svg`
   height: 25px;
   width: 25px;
+  background-color: transparent;
   border: none;
   fill: #7a7a7a;
   transition: all 0.2s ease-in-out;

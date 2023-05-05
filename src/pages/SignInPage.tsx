@@ -13,6 +13,7 @@ import { LabelAndInput, TextInput, InputLabel } from "../ui/TextInput/TextInput.
 import { ButtonsRowWrapper, ImgWrapper, SignInWrapper } from "../ui/wrapper/wrapper.styled";
 import { ImgSignIn } from "../ui/img/img.styled";
 import { Header2, Header4Form } from "../ui/headers/header.styled";
+import { useMediaQuery } from "../hooks/UseMediaQuery";
 
 interface IFormInputs {
   email: string;
@@ -26,6 +27,7 @@ const SignInPage = () => {
   const { handleSubmit, register } = useForm<IFormInputs>();
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const bigScreen = useMediaQuery("(min-width: 768px)");
 
   const onSubmit: SubmitHandler<IFormInputs> = ({ email, password }) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -78,9 +80,13 @@ const SignInPage = () => {
         </Link>
         {error}
       </StyledForm>
-      <ImgWrapper>
-        <ImgSignIn src="https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/website-backgrounds%2Fpexels-element-digital-1051072.jpg?alt=media&token=2b7f3aaf-fc7b-4423-b271-f4609d864eb2" />
-      </ImgWrapper>
+      {bigScreen ? (
+        <ImgWrapper>
+          <ImgSignIn src="https://firebasestorage.googleapis.com/v0/b/bonvoyage-e7ad8.appspot.com/o/website-backgrounds%2Fpexels-element-digital-1051072.jpg?alt=media&token=2b7f3aaf-fc7b-4423-b271-f4609d864eb2" />
+        </ImgWrapper>
+      ) : (
+        <></>
+      )}
     </SignInWrapper>
   );
 };
