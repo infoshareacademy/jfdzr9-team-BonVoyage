@@ -16,6 +16,7 @@ export const TripsListStyled = styled.article`
 `;
 
 export const SingleTripStyled = styled.div`
+  position: relative;
   display: grid;
   /* width: 100%;
   box-sizing: border-box; */
@@ -32,6 +33,7 @@ export const SingleTripStyled = styled.div`
 
 export const ImgContainer = styled.div`
   position: relative;
+  z-index: -9999;
 
   &::after {
     content: "";

@@ -8,6 +8,25 @@ export const DropdownContainer = styled.div`
 export const DropdownButton = styled.button`
   background-color: transparent;
   border: none;
+
+  height: 5rem;
+  width: 5rem;
+  margin-top: 10px;
+  border-radius: 4rem;
+  transition: all 0.2s ease-in;
+  opacity: 0.9;
+
+  :hover {
+    transform: scale(1.07);
+    transition: all 0.2s ease-in;
+    opacity: 1;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 4rem;
+  }
 `;
 
 export const DropdownList = styled.ul`

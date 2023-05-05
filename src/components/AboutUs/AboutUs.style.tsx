@@ -6,6 +6,7 @@ export const H1 = styled.h1`
 `;
 
 export const MemberCard = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -16,13 +17,14 @@ export const MemberCard = styled.div`
   padding: 5vh 2vh;
   border-radius: 5px;
   transition: all 0.2s ease-in-out;
+  z-index: -9999;
 
   :hover {
     -webkit-box-shadow: 0px 0px 19px 0px rgba(66, 68, 90, 0.34);
     -moz-box-shadow: 0px 0px 19px 0px rgba(66, 68, 90, 0.34);
     box-shadow: 0px 0px 19px 0px rgba(66, 68, 90, 0.34);
     transform: scale(1.01);
-    ransition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
 
   & > div {
