@@ -22,7 +22,7 @@ export const Overlay = styled.div`
 export const Wrapper = styled.div`
   position: fixed;
   background-color: white;
-  border-radius: 25%;
+  border-radius: var(--border-radius-xl);
   padding: 2%;
   border: white 1px solid;
   width: fit-content;

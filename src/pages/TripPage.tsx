@@ -15,6 +15,10 @@ import {
 import Modal from "../ui/Modal/Modal";
 import PinDetailsCard from "../components/PinDetailsCard/PinDetailsCard";
 import { Pin } from "../components/Map/Map";
+import { PinPhotoContainer, PinsWrapper } from "../components/PinPreview/PinPreview.styled";
+import PinPreview from "../components/PinPreview/PinPreview";
+import { Header4 } from "../ui/headers/header.styled";
+import { AccountPageWrapper, TripFinishedWrapper } from "../ui/wrapper/wrapper.styled";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
 
@@ -40,27 +44,38 @@ const TripPage = () => {
   }, []);
 
   return (
-    <div>
+    <TripFinishedWrapper>
+      <Title>{tripData?.title}</Title>
       <TripWrapper>
         <ColumnWrapper>
-          <Title>{tripData?.title}</Title>
+          <Header4 bold>Trip description</Header4>
           <TripDescription>{tripData?.description}</TripDescription>
+          <Header4 bold>Pins</Header4>
+          <PinsWrapper>
+            {tripData?.places.map((place) => (
+              <PinPhotoContainer key={place.name}>
+                <PinPreview src={place.imageRefs} key={place.name} />
+              </PinPhotoContainer>
+            ))}
+          </PinsWrapper>
         </ColumnWrapper>
-
-        {loadError ? (
-          <div>Error loading maps</div>
-        ) : isLoaded && tripData?.places ? (
-          <MapPreview tripData={tripData} setIsModalActive={setIsModalActive} setSelectedPlace={setSelectedPlace} />
-        ) : (
-          <div style={{ margin: "100px" }}>Loading maps...</div>
-        )}
+        <ColumnWrapper>
+          <Header4 bold>Map</Header4>
+          {loadError ? (
+            <div>Error loading maps</div>
+          ) : isLoaded && tripData?.places ? (
+            <MapPreview tripData={tripData} setIsModalActive={setIsModalActive} setSelectedPlace={setSelectedPlace} />
+          ) : (
+            <div style={{ margin: "100px" }}>Loading maps...</div>
+          )}
+        </ColumnWrapper>
       </TripWrapper>
       {isModalActive && (
         <Modal setIsModalActive={setIsModalActive} isModalActive={isModalActive} setSelectedPlace={setSelectedPlace}>
           {selectedPlace && <PinDetailsCard selectedPlace={selectedPlace} />}
         </Modal>
       )}
-    </div>
+    </TripFinishedWrapper>
   );
 };
 

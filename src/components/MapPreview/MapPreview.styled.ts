@@ -11,8 +11,12 @@ export const TripWrapper = styled.div`
   flex-direction: row;
   gap: var(--gap-l);
   padding: var(--padding-layout);
-  height: calc(100vh - 9.4rem);
+  min-height: calc(100vh - 9.4rem);
   margin-top: 6.8rem;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: var(--gap-s);
+  }
 `;
 
 export const ColumnWrapper = styled.div`

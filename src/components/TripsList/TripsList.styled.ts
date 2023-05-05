@@ -46,7 +46,6 @@ export const TripMini = styled.img`
   height: 100%;
   z-index: 20;
   object-fit: cover;
-  /* grid-area: 1 / 1 / 2 / 2; */
   border-radius: var(--border-radius-s);
   :hover {
     z-index: 10;

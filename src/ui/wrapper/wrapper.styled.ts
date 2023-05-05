@@ -20,6 +20,19 @@ export const AccountPageWrapper = styled.div`
     padding: var(--padding-layout-mobile);
   }
 `;
+export const TripFinishedWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 6.8rem;
+  width: 100vw;
+  min-height: calc(100vh - 9.4rem);
+  padding: var(--padding-layout);
+  gap: var(--gap-s);
+
+  @media (max-width: 768px) {
+    padding: var(--padding-layout-mobile);
+  }
+`;
 
 export const EditProfileWrapper = styled.div`
   display: flex;
