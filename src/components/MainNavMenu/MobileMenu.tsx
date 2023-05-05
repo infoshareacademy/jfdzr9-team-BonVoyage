@@ -6,14 +6,21 @@ import { Header2 } from "../../ui/headers/header.styled";
 
 interface Props {
   open: boolean;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export const Menu: React.FC<Props> = ({ open }) => {
+export const Menu: React.FC<Props> = ({ open, onClose }) => {
   const logout = useLogout();
   const user = useUser();
 
   const handleLogout = async () => {
     await logout();
+    onClose();
+  };
+
+  const handleClose = () => {
+    onClose();
   };
 
   return (
@@ -24,9 +31,16 @@ export const Menu: React.FC<Props> = ({ open }) => {
       {user ? (
         <StyledMenu open={open}>
           <a href="/">Home</a>
-          <Link to="/voyages">Voyages</Link>
-          <NavLink to="/about">About Us</NavLink>
-          <Link to="/account"> Your Profile</Link>
+          <Link to="/voyages" onClick={handleClose}>
+            Voyages
+          </Link>
+          <NavLink to="/about" onClick={handleClose}>
+            About Us
+          </NavLink>
+          <Link to="/account" onClick={handleClose}>
+            {" "}
+            Your Profile
+          </Link>
           <a href="" onClick={handleLogout}>
             Logout
           </a>
@@ -34,10 +48,18 @@ export const Menu: React.FC<Props> = ({ open }) => {
       ) : (
         <StyledMenu open={open}>
           <a href="/">Home</a>
-          <Link to="/voyages">Voyages</Link>
-          <NavLink to="/about">About Us</NavLink>
-          <Link to="signIn">Sign in</Link>
-          <Link to="/signIn/register">Register</Link>
+          <Link to="/voyages" onClick={handleClose}>
+            Voyages
+          </Link>
+          <NavLink to="/about" onClick={handleClose}>
+            About Us
+          </NavLink>
+          <Link to="signIn" onClick={handleClose}>
+            Sign in
+          </Link>
+          <Link to="/signIn/register" onClick={handleClose}>
+            Register
+          </Link>
         </StyledMenu>
       )}
     </>
