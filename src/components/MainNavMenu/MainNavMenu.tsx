@@ -76,7 +76,7 @@ export const MainNavMenu: React.FC<NavigationProps> = (): JSX.Element => {
     return (
       <>
         <Burger open={open} setOpen={setOpen} />
-        <Menu open={open} />
+        <Menu open={open} onClose={() => setOpen(false)} />
       </>
     );
   }
