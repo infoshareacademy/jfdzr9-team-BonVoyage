@@ -8,11 +8,11 @@ const Voyages = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getTrips();
-      setTrips(data?.filter((trip) => trip.imageUrl).filter((trip) => !trip.inProgress) ?? []);
+      await getTrips(setTrips);
+      // setTrips(data?.filter((trip) => trip.imageUrl).filter((trip) => !trip.inProgress) ?? []);
     };
     fetchData();
   }, []);
-  return <TripsList trips={trips} />;
+  return <TripsList trips={trips.filter((trip) => trip.imageUrl).filter((trip) => !trip.inProgress) ?? []} />;
 };
 export default Voyages;

@@ -87,15 +87,15 @@ const AccountPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getTrips();
-      setTrips(data?.filter((trip) => trip.userEmail === user?.email) ?? []);
+      await getTrips(setTrips);
+      setTrips((prev) => prev.filter((trip) => trip.userEmail === user?.email) ?? []);
     };
     fetchData();
   }, []);
 
-  const finishedTrips = trips.filter((trip) => trip.inProgress === false);
+  const finishedTrips = trips.filter((trip) => trip.userEmail === user?.email && trip.inProgress === false);
 
-  const tripsInProgress = trips.filter((trip) => trip.inProgress);
+  const tripsInProgress = trips.filter((trip) => trip.userEmail === user?.email && trip.inProgress);
   return user ? (
     <>
       {success ? (

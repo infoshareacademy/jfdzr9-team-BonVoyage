@@ -20,6 +20,7 @@ export const TripsList = ({ trips, tripsName }: TripsListProps) => {
             title={trip.title}
             tripId={trip.id}
             inProgress={trip.inProgress}
+            tripUser={trip.userEmail}
           />
         ))}
       </TripsListStyled>

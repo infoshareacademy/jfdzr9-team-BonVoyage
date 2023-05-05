@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const TripsListStyled = styled.article`
@@ -43,10 +44,13 @@ export const TripMini = styled.img`
   position: absolute;
   width: 100%;
   height: 100%;
-
+  z-index: 20;
   object-fit: cover;
   /* grid-area: 1 / 1 / 2 / 2; */
   border-radius: var(--border-radius-s);
+  :hover {
+    z-index: 10;
+  }
 `;
 
 export const TripMiniTitle = styled.h3`
@@ -76,5 +80,35 @@ export const TripDescription = styled.p`
   max-height: calc(var(--line-height-body) * var(--max-lines));
   @media (max-width: 768px) {
     display: none;
+  }
+`;
+
+export const ButtonsSection = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  gap: var(--gap-s);
+  :hover {
+    z-index: 25;
+  }
+`;
+
+export const TripButton = styled.button`
+  width: 9rem;
+  height: 6rem;
+  border-radius: var(--border-radius-s);
+  background-color: var(--color-neutral-white-opacity);
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  font-weight: 600;
+  color: var(--color-secondary-topaz-light);
+  text-shadow: 2px 2px 5px rgba(0, 1, 8, 1);
+  :hover {
+    background-color: var(--color-secondary-topaz-light);
+    color: var(--color-neutral-white);
   }
 `;
