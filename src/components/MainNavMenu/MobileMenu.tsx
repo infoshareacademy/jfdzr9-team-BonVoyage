@@ -2,6 +2,7 @@ import { StyledMenu } from "./Mobilemenu.style";
 import { Link, NavLink } from "react-router-dom";
 import { useUser, useLogout } from "../../context/auth.context";
 import { useState } from "react";
+import { Header2 } from "../../ui/headers/header.styled";
 
 interface Props {
   open: boolean;
@@ -17,6 +18,9 @@ export const Menu: React.FC<Props> = ({ open }) => {
 
   return (
     <>
+      <Link to="/">
+        <Header2 bold>Bon Voyage</Header2>
+      </Link>
       {user ? (
         <StyledMenu open={open}>
           <a href="/">Home</a>
