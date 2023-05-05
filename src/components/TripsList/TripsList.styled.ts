@@ -33,7 +33,7 @@ export const SingleTripStyled = styled.div`
 
 export const ImgContainer = styled.div`
   position: relative;
-  z-index: -9999;
+  z-index: 0;
 
   &::after {
     content: "";
