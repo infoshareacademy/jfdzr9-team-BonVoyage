@@ -5,7 +5,13 @@ import { db } from "../firebase/firebase.config";
 import { Trip } from "./AddTrip";
 import { useLoadScript } from "@react-google-maps/api";
 import MapPreview from "../components/MapPreview/MapPreview";
-import { Title, TripDescription, TripSection, TripWrapper } from "../components/MapPreview/MapPreview.styled";
+import {
+  ColumnWrapper,
+  Title,
+  TripDescription,
+  TripSection,
+  TripWrapper,
+} from "../components/MapPreview/MapPreview.styled";
 import Modal from "../ui/Modal/Modal";
 import PinDetailsCard from "../components/PinDetailsCard/PinDetailsCard";
 import { Pin } from "../components/Map/Map";
@@ -36,17 +42,18 @@ const TripPage = () => {
   return (
     <div>
       <TripWrapper>
-        <Title>{tripData?.title}</Title>
-        <TripSection>
+        <ColumnWrapper>
+          <Title>{tripData?.title}</Title>
           <TripDescription>{tripData?.description}</TripDescription>
-          {loadError ? (
-            <div>Error loading maps</div>
-          ) : isLoaded && tripData?.places ? (
-            <MapPreview tripData={tripData} setIsModalActive={setIsModalActive} setSelectedPlace={setSelectedPlace} />
-          ) : (
-            <div style={{ margin: "100px" }}>Loading maps...</div>
-          )}
-        </TripSection>
+        </ColumnWrapper>
+
+        {loadError ? (
+          <div>Error loading maps</div>
+        ) : isLoaded && tripData?.places ? (
+          <MapPreview tripData={tripData} setIsModalActive={setIsModalActive} setSelectedPlace={setSelectedPlace} />
+        ) : (
+          <div style={{ margin: "100px" }}>Loading maps...</div>
+        )}
       </TripWrapper>
       {isModalActive && (
         <Modal setIsModalActive={setIsModalActive} isModalActive={isModalActive} setSelectedPlace={setSelectedPlace}>

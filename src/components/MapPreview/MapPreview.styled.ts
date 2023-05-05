@@ -1,21 +1,29 @@
 import styled from "styled-components";
 
 export const MapWrapper = styled.div`
-  width: 50%;
+  width: 100%;
   height: 100%;
-  min-width: 300px;
+  flex: 1;
 `;
 
 export const TripWrapper = styled.div`
-  width: 100vw;
-  height: 90vh;
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-l);
+  padding: var(--padding-layout);
+  height: calc(100vh - 9.4rem);
+  margin-top: 6.8rem;
+`;
+
+export const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10vw;
+  flex: 1;
+  gap: var(--gap-m);
 `;
-export const Title = styled.h1`
+
+export const Title = styled.h2`
   text-align: center;
-  height: 10%;
 `;
 export const TripSection = styled.div`
   display: flex;
@@ -23,8 +31,5 @@ export const TripSection = styled.div`
   height: 90%;
 `;
 export const TripDescription = styled.p`
-  width: 50%;
-  height: 100%;
   text-align: justify;
-  padding: 0 2vw;
 `;

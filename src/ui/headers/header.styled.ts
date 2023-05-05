@@ -24,3 +24,8 @@ export const Header4Form = styled.h4<HeaderProps>`
   font-weight: ${(props) => (props.bold ? "700" : "400")};
   color: ${(props) => (props.white ? "var(--color-neutral-white)" : "var(--color-neutral-black)")};
 `;
+
+export const Logo = styled.h3<HeaderProps>`
+  font-weight: ${(props) => (props.bold ? "700" : "400")};
+  color: ${(props) => (props.white ? "var(--color-neutral-white)" : "var(--color-neutral-black)")};
+`;

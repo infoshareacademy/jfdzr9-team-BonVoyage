@@ -13,8 +13,8 @@ export const NavMenuContainer = styled.nav<MenuProps>`
   right: 0;
   z-index: 999;
   background-color: var(--color-neutral-white-opacity);
-  transition: top 0.3s;
-  padding: 0 1.8rem;
+  transition: all 0.3s ease-in-out;
+  padding: 1rem 1.8rem;
 
   ul {
     display: flex;
