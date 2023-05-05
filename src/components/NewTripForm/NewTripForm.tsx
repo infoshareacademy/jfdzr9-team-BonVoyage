@@ -8,6 +8,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { EditProfileWrapper, FormWrapper } from "../../ui/wrapper/wrapper.styled";
 import { Header2 } from "../../ui/headers/header.styled";
+import { useState } from "react";
 
 type FormData = {
   title: string;
@@ -16,9 +17,15 @@ type FormData = {
 };
 const NewTripForm = () => {
   const { register, handleSubmit } = useForm<FormData>();
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const onSubmit = handleSubmit(({ title, description, imageUrl }) => {
     const id = `${title}-${Math.floor(Math.random() * 100000000 + 1)}`;
+    if (imageUrl[0].name.split(".")[1] !== `${"jpg" || "jpeg" || "png" || "gif" || "bmp"}`) {
+      setError(true);
+      return;
+    }
+    setError(false);
     const imageRef = ref(storage, `${auth.currentUser?.email}/${id}/${imageUrl[0].name}`);
     const tripRef = doc(db, "trips", id);
 
@@ -55,8 +62,9 @@ const NewTripForm = () => {
           </LabelAndInput>
           <LabelAndInput>
             <InputLabel>Add a trip image</InputLabel>
-            <TextInput type="file" {...register("imageUrl")} required />
+            <TextInput type="file" {...register("imageUrl")} accept="image/*" required />
           </LabelAndInput>
+          {error && <p style={{ color: "red" }}>Wrong file type!</p>}
           <Button>Create and go to next step</Button>
         </StyledForm>
       </FormWrapper>
