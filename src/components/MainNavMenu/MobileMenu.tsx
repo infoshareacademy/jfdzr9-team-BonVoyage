@@ -8,7 +8,7 @@ import path from "path";
 interface Props {
   open: boolean;
   isOpen?: boolean;
-  onClose?: () => void;
+  onClose: () => void;
 }
 
 export const Menu: React.FC<Props> = ({ open, onClose }) => {
