@@ -21,6 +21,7 @@ export type Trip = {
   inProgress: boolean;
   center: Coordinates;
   place: LatLngLiteral;
+  likes: string[];
 };
 
 const AddTripPage = () => {

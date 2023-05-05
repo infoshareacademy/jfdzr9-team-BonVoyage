@@ -41,6 +41,7 @@ const NewTripForm = () => {
           places: [],
           place: "",
           id: id,
+          likes: [],
         };
         setDoc(tripRef, trip);
       })
