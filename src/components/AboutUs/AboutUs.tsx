@@ -4,7 +4,6 @@ import { GithubLogo } from "../../assets/GithubLogo";
 import { LinkedinLogo } from "../../assets/LinkedinLogo";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
-import { Footer } from "../Footer/Footer";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { MainNavMenu } from "../MainNavMenu/MainNavMenu";
@@ -51,7 +50,6 @@ export const Team: React.FC = () => {
             ))}
           </MemberWrapper>
         </div>
-        <Footer year={2023} />
       </>
     );
   } else {
