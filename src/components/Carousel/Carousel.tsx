@@ -3,7 +3,7 @@
 import { TestVoyageData } from "./TestVoyageData";
 import { StyledLink } from "./Carousel.style";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
-
+import { Swiper } from "swiper/react";
 import { register } from "swiper/element/bundle";
 import { useEffect, useRef } from "react";
 register();
@@ -11,6 +11,7 @@ declare module "react" {
   interface HTMLAttributes<T> {
     navigation?: string;
     pagination?: string;
+    njectStyles?: string;
   }
 }
 
@@ -90,6 +91,7 @@ export const Carousel: React.FC = () => {
 
     Object.assign(swiperContainer, params);
     swiperContainer.initialize();
+    console.log(swiperContainer);
   }, [smallScreen]);
 
   return (
