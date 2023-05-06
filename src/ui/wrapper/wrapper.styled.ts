@@ -32,6 +32,17 @@ export const EditProfileWrapper = styled.div`
   justify-content: center;
 `;
 
+export const NewTripWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 6.8rem;
+  width: 100vw;
+  min-height: calc(100vh - 9.4rem);
+  padding: var(--padding-layout);
+  align-items: center;
+  justify-content: center;
+`;
+
 export const ButtonsJumbotronWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -71,10 +82,13 @@ interface WrapperProps {
 }
 
 export const FormWrapper = styled.div<WrapperProps>`
+  display: flex;
+  flex-direction: column;
   width: ${(props) => (props.vwmax ? "100%" : "50%")};
-  height: calc(100vh - 9.4rem);
-
+  /* height: calc(100vh - 9.4rem); */
+  gap: var(--gap-m);
   padding: ${(props) => (props.padding ? "var(--padding-layout)" : "0")};
+
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -89,7 +103,7 @@ export const TripFinishedWrapper = styled.div`
   flex-direction: column; */
   margin-top: 6.8rem;
 
-  /* min-height: calc(100vh - 9.4rem); */
+  min-height: calc(100vh - 9.4rem);
   padding: var(--padding-layout);
   gap: var(--gap-s);
 
