@@ -108,6 +108,7 @@ export const ButtonsSection = styled.div`
 export const TripButton = styled.button`
   width: 9rem;
   height: 6rem;
+  transition: 0.5s;
   border-radius: var(--border-radius-s);
   background-color: var(--color-neutral-white-opacity);
   text-transform: uppercase;
@@ -129,6 +130,7 @@ export const LikeLogo = styled.div<LikeProps>`
   height: 40px;
   opacity: 0.7;
   z-index: 0;
+  transition: 0.5s;
   cursor: pointer;
   :hover {
     background-image: url("/public/icons/love.png");

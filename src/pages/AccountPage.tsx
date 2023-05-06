@@ -101,7 +101,7 @@ const AccountPage = () => {
       {success ? (
         <AccountPageWrapper>
           <UsersDetails
-            numberOfTrips={trips.length}
+            numberOfTrips={finishedTrips.length}
             onClick={() => {
               setSuccess(false);
             }}
