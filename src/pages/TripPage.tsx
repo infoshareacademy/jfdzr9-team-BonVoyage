@@ -11,6 +11,8 @@ import PinDetailsCard from "../components/PinDetailsCard/PinDetailsCard";
 import { Pin } from "../components/Map/Map";
 import { ColumnWrapper, TripFinishedWrapper } from "../ui/wrapper/wrapper.styled";
 import { Header4 } from "../ui/headers/header.styled";
+import { PinPhotoContainer, PinsWrapper } from "../components/PinPreview/PinPreview.styled";
+import PinPreview from "../components/PinPreview/PinPreview";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
 
@@ -42,6 +44,14 @@ const TripPage = () => {
         <ColumnWrapper>
           <Header4 bold>Description</Header4>
           <TripDescription>{tripData?.description}</TripDescription>
+          <Header4 bold>Places</Header4>
+          <PinsWrapper>
+            {tripData?.places.map((place) => (
+              <PinPhotoContainer key={place.name}>
+                <PinPreview src={place.imageRefs} key={place.name} />
+              </PinPhotoContainer>
+            ))}
+          </PinsWrapper>
         </ColumnWrapper>
         <ColumnWrapper>
           <Header4 bold>Map</Header4>
