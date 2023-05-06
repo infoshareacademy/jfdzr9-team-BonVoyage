@@ -183,7 +183,10 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
                 position={pin}
                 onClick={onPinClickHandler}
                 icon={{
-                  url: clickedPin?.lat === pin.lat && clickedPin.lng === pin.lng ? "/clickedIcon.png" : "/icon.png",
+                  url:
+                    clickedPin?.lat === pin.lat && clickedPin.lng === pin.lng
+                      ? "/public/icons/clickedIcon.png"
+                      : "/public/icons/icon.png",
                 }}
               />
             ))}
