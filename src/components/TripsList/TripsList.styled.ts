@@ -125,7 +125,4 @@ export const LikeLogo = styled.img`
   z-index: 0;
   transition: 0.5s;
   cursor: pointer;
-  :hover {
-    background-image: url("/love.png");
-  }
 `;
