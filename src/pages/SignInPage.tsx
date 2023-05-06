@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LabelAndInput, TextInput, InputLabel } from "../ui/TextInput/TextInput.styled";
 import { ButtonsRowWrapper, ImgWrapper, SignInWrapper } from "../ui/wrapper/wrapper.styled";
 import { ImgSignIn } from "../ui/img/img.styled";
-import { Header2, Header4Form } from "../ui/headers/header.styled";
+import { Header2 } from "../ui/headers/header.styled";
 import { useMediaQuery } from "../hooks/UseMediaQuery";
 
 interface IFormInputs {

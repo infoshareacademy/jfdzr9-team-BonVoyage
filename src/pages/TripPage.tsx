@@ -5,10 +5,14 @@ import { db } from "../firebase/firebase.config";
 import { Trip } from "./AddTrip";
 import { useLoadScript } from "@react-google-maps/api";
 import MapPreview from "../components/MapPreview/MapPreview";
-import { Title, TripDescription, TripSection, TripWrapper } from "../components/MapPreview/MapPreview.styled";
+import { Title, TripDescription, TripWrapper } from "../components/MapPreview/MapPreview.styled";
 import Modal from "../ui/Modal/Modal";
 import PinDetailsCard from "../components/PinDetailsCard/PinDetailsCard";
 import { Pin } from "../components/Map/Map";
+import { ColumnWrapper, TripFinishedWrapper } from "../ui/wrapper/wrapper.styled";
+import { Header4 } from "../ui/headers/header.styled";
+import { PinPhotoContainer, PinsWrapper } from "../components/PinPreview/PinPreview.styled";
+import PinPreview from "../components/PinPreview/PinPreview";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
 
@@ -34,13 +38,24 @@ const TripPage = () => {
   }, []);
 
   return (
-    <div>
+    <TripFinishedWrapper>
+      <Title>{tripData?.title}</Title>
       <TripWrapper>
-        <Title>{tripData?.title}</Title>
-        <TripSection>
-          <TripDescription>
-            <p>{tripData?.description}</p>
-          </TripDescription>
+        <ColumnWrapper>
+          <Header4 bold>Description</Header4>
+          <TripDescription>{tripData?.description}</TripDescription>
+          <Header4 bold>Places</Header4>
+          <PinsWrapper>
+            {tripData?.places.map((place) => (
+              <PinPhotoContainer key={place.name}>
+                {/* @ts-expect-error jakis opis */}
+                <PinPreview src={place.imageRefs?.[0]} key={place.name} />
+              </PinPhotoContainer>
+            ))}
+          </PinsWrapper>
+        </ColumnWrapper>
+        <ColumnWrapper>
+          <Header4 bold>Map</Header4>
           {loadError ? (
             <div>Error loading maps</div>
           ) : isLoaded && tripData?.places ? (
@@ -48,14 +63,14 @@ const TripPage = () => {
           ) : (
             <div style={{ margin: "100px" }}>Loading maps...</div>
           )}
-        </TripSection>
+        </ColumnWrapper>
       </TripWrapper>
       {isModalActive && (
         <Modal setIsModalActive={setIsModalActive} isModalActive={isModalActive} setSelectedPlace={setSelectedPlace}>
           {selectedPlace && <PinDetailsCard selectedPlace={selectedPlace} />}
         </Modal>
       )}
-    </div>
+    </TripFinishedWrapper>
   );
 };
 
