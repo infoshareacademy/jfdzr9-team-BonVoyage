@@ -83,7 +83,7 @@ export const SingleTrip = ({
           >
             {likes.length}
           </p>
-          <LikeLogo isLiked={isLiked} onClick={likeTrip} />
+          <LikeLogo src={isLiked ? 'url("/love.png")' : 'url("/love-empty.png")'} onClick={likeTrip} />
         </TripMiniTitle>
       </div>
       <TripDescription>{tripDescription}</TripDescription>
