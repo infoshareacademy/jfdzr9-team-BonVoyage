@@ -26,6 +26,7 @@ const PinDetailsCard = ({ selectedPlace }: Props) => {
   const center: LatLng = { lat: selectedPlace.lat, lng: selectedPlace.lng };
   const mapRef = useRef<GoogleMap>();
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
+  const iconUrl = `${import.meta.env.BASE_URL}icons/icon.png`;
   return (
     <>
       {selectedPlace?.imageRefs?.map((url) => (
@@ -46,7 +47,7 @@ const PinDetailsCard = ({ selectedPlace }: Props) => {
               key={selectedPlace?.lat}
               position={selectedPlace}
               icon={{
-                url: "/public/icons/icon.png",
+                url: iconUrl,
               }}
             />
           </GoogleMap>
