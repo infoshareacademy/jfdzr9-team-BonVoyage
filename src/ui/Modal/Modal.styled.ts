@@ -22,7 +22,7 @@ export const Overlay = styled.div`
 export const Wrapper = styled.div`
   position: fixed;
   background-color: white;
-  border-radius: 5rem;
+  border-radius: var(--border-radius-l);
   padding: 2%;
   border: white 1px solid;
   width: fit-content;
@@ -39,12 +39,12 @@ export const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 768px) {
-    border-radius: 5rem;
+    border-radius: var(--border-radius-l);
     width: 85%;
     height: 80%;
   }
   @media screen and (max-width: 992px) {
-    border-radius: 5rem;
+    border-radius: var(--border-radius-l);
     width: 85%;
   }
 `;

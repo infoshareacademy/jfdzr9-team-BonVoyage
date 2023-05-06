@@ -5,7 +5,7 @@ import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { Burger } from "./MobileMainNav";
 import { Menu } from "./MobileMenu";
 import { Dropdown } from "./Dropdown";
-import { Header2 } from "../../ui/headers/header.styled";
+import { Header2, Logo } from "../../ui/headers/header.styled";
 
 interface NavigationProps {
   something?: string;
@@ -48,7 +48,8 @@ export const MainNavMenu: React.FC<NavigationProps> = (): JSX.Element => {
       <>
         <NavMenuContainer hidden={!show}>
           <Link to="/">
-            <Header2 bold>Bon Voyage</Header2>
+            <Logo bold>Bon</Logo>
+            <Logo bold>Voyage</Logo>
           </Link>
           <NavMenuDiv>
             <ul>

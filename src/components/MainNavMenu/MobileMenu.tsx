@@ -2,7 +2,7 @@ import { StyledMenu } from "./Mobilemenu.style";
 import { Link, NavLink } from "react-router-dom";
 import { useUser, useLogout } from "../../context/auth.context";
 import { useState } from "react";
-import { Header2 } from "../../ui/headers/header.styled";
+import { Header2, Logo } from "../../ui/headers/header.styled";
 import path from "path";
 
 interface Props {
@@ -89,9 +89,6 @@ export const Menu: React.FC<Props> = ({ open, onClose }) => {
 
   return (
     <>
-      <Link to="/">
-        <Header2 bold>Bon Voyage</Header2>
-      </Link>
       {user ? (
         <StyledMenu open={open}>
           {loggedInOptions.map((option) => (

@@ -5,6 +5,7 @@ type LikeProps = {
 };
 
 export const TripsListStyled = styled.article`
+  padding: 10rem;
   transition: 0.2s linear;
   margin: 0;
   display: grid;

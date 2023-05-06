@@ -9,6 +9,12 @@ export const PlaceWrapper = styled.div`
   gap: 5vh;
 `;
 
+export const PhotoHeader = styled.img`
+  width: 100%;
+  height: 40%;
+  object-fit: cover;
+`;
+
 export const Gallery = styled.div`
   width: 100%;
   display: flex;
@@ -16,9 +22,8 @@ export const Gallery = styled.div`
   flex-wrap: wrap;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h2`
   text-align: center;
-  height: 10%;
 `;
 
 export const TripDescription = styled.p`

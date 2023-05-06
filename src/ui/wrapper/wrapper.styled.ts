@@ -10,9 +10,9 @@ export const WrapperStyled = styled.div`
 export const AccountPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 5.4rem;
+  margin-top: 6.8rem;
   width: 100vw;
-  min-height: calc(100vh - 8rem);
+  min-height: calc(100vh - 9.4rem);
   padding: var(--padding-layout);
   gap: var(--gap-m);
 
@@ -24,9 +24,9 @@ export const AccountPageWrapper = styled.div`
 export const EditProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 5.4rem;
+  margin-top: 6.8rem;
   width: 100vw;
-  min-height: calc(100vh - 8rem);
+  min-height: calc(100vh - 9.4rem);
   padding: var(--padding-layout);
   align-items: center;
   justify-content: center;
@@ -61,8 +61,8 @@ export const SignInWrapper = styled.div`
   flex-direction: row;
   gap: 10%;
   padding: var(--padding-layout);
-  height: calc(100vh - 8rem);
-  margin-top: 5.4rem;
+  height: calc(100vh - 9.4rem);
+  margin-top: 6.8rem;
 `;
 
 interface WrapperProps {
@@ -72,7 +72,7 @@ interface WrapperProps {
 
 export const FormWrapper = styled.div<WrapperProps>`
   width: ${(props) => (props.vwmax ? "100%" : "50%")};
-  height: calc(100vh - 8rem);
+  height: calc(100vh - 9.4rem);
 
   padding: ${(props) => (props.padding ? "var(--padding-layout)" : "0")};
   @media (max-width: 768px) {
@@ -82,4 +82,25 @@ export const FormWrapper = styled.div<WrapperProps>`
 
 export const ImgWrapper = styled.div`
   flex: 1;
+`;
+
+export const TripFinishedWrapper = styled.div`
+  /* display: flex;
+  flex-direction: column; */
+  margin-top: 6.8rem;
+
+  /* min-height: calc(100vh - 9.4rem); */
+  padding: var(--padding-layout);
+  gap: var(--gap-s);
+
+  @media (max-width: 1023px) {
+    padding: var(--padding-layout-mobile);
+  }
+`;
+
+export const ColumnWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--gap-m);
 `;
