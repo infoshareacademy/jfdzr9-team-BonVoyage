@@ -21,6 +21,8 @@ export const TripsList = ({ trips, tripsName }: TripsListProps) => {
             tripId={trip.id}
             inProgress={trip.inProgress}
             tripUser={trip.userEmail}
+            likes={trip.likes}
+            trip={trip}
           />
         ))}
       </TripsListStyled>

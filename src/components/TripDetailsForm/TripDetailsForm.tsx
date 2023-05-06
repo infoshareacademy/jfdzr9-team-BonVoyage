@@ -24,7 +24,7 @@ type FormProps = {
 };
 
 const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId }: FormProps) => {
-  const [imageError, setImageError] = useState(false);
+  const [imageError, setImageError] = useState("");
   const { register, handleSubmit } = useForm<FormData>({
     values: {
       name: clickedPin.name,
@@ -37,10 +37,15 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
     const promises: Promise<UploadResult>[] = [];
     if (imageUrls) {
       if ([...imageUrls].length > 4) {
-        setImageError(true);
+        setImageError("amount");
+        return;
+      } else if (
+        [...imageUrls].some((file) => file.name.split(".")[1] !== `${"jpg" || "jpeg" || "png" || "gif" || "bmp"}`)
+      ) {
+        setImageError("type");
         return;
       } else {
-        setImageError(false);
+        setImageError("");
         [...imageUrls].forEach((file: Blob) => {
           const imageRef = ref(storage, `${auth.currentUser?.email}/${tripId}/${name}/${file.name}`);
           const uploadedImage = uploadBytes(imageRef, file);
@@ -88,8 +93,11 @@ const TripDetailsForm = ({ clickedPin, setPins, setClickedPin, deletePin, tripId
         </LabelAndInput>
         <LabelAndInput>
           <InputLabel>Choose maximum 4 pictures</InputLabel>
-          <TextInput type={"file"} multiple {...register("imageUrls")} required />
-          {imageError && <p>You can choose maximum 4 pictures for one place!</p>}
+          <TextInput type={"file"} multiple {...register("imageUrls")} accept="image/*" required />
+          {imageError === "amount" && <p style={{ color: "red" }}>You can choose maximum 4 pictures for one place!</p>}
+          {imageError === "type" && (
+            <p style={{ color: "red" }}>Wrong file type! You can only pick images of type: jpg, jpeg, png, bmp, gif</p>
+          )}
         </LabelAndInput>
         <FakeButton onClick={deletePin}>Delete</FakeButton>
         <Button>Save</Button>
