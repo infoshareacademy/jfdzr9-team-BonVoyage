@@ -7,6 +7,7 @@ interface MenuProps {
 export const NavMenuContainer = styled.nav<MenuProps>`
   display: ${(props) => (props.hidden ? "none" : "flex")};
   justify-content: space-between;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
