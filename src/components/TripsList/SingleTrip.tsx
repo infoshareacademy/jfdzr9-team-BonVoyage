@@ -78,7 +78,7 @@ export const SingleTrip = ({
               left: "50%",
               transform: "translate(-50%, -50%)",
               fontSize: "10px",
-              zIndex: "20",
+              zIndex: "-2",
             }}
           >
             {likes.length}

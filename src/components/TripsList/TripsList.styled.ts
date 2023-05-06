@@ -128,7 +128,7 @@ export const LikeLogo = styled.div<LikeProps>`
   width: 40px;
   height: 40px;
   opacity: 0.7;
-  z-index: 21;
+  z-index: 0;
   cursor: pointer;
   :hover {
     background-image: url("/public/icons/love.png");
