@@ -9,6 +9,7 @@ import { Title, TripDescription, TripSection, TripWrapper } from "../components/
 import Modal from "../ui/Modal/Modal";
 import PinDetailsCard from "../components/PinDetailsCard/PinDetailsCard";
 import { Pin } from "../components/Map/Map";
+import { ColumnWrapper } from "../ui/wrapper/wrapper.styled";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
 
@@ -35,10 +36,12 @@ const TripPage = () => {
 
   return (
     <div>
+      <Title>{tripData?.title}</Title>
       <TripWrapper>
-        <Title>{tripData?.title}</Title>
-        <TripSection>
+        <ColumnWrapper>
           <TripDescription>{tripData?.description}</TripDescription>
+        </ColumnWrapper>
+        <ColumnWrapper>
           {loadError ? (
             <div>Error loading maps</div>
           ) : isLoaded && tripData?.places ? (
@@ -46,7 +49,7 @@ const TripPage = () => {
           ) : (
             <div style={{ margin: "100px" }}>Loading maps...</div>
           )}
-        </TripSection>
+        </ColumnWrapper>
       </TripWrapper>
       {isModalActive && (
         <Modal setIsModalActive={setIsModalActive} isModalActive={isModalActive} setSelectedPlace={setSelectedPlace}>

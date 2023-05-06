@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const MapWrapper = styled.div`
-  width: 50%;
+  width: 100%;
   height: 100%;
   min-width: 300px;
+  min-height: 200px;
   @media screen and (max-width: 768px) {
     width: 100%;
   }
@@ -11,10 +12,15 @@ export const MapWrapper = styled.div`
 
 export const TripWrapper = styled.div`
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
+  min-height: calc(100vh - 9.4rem);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding: 10vw;
+  @media (max-width: 1023px) {
+    flex-direction: column;
+    gap: var(--gap-s);
+  }
 `;
 export const Title = styled.h1`
   text-align: center;
