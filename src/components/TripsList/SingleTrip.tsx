@@ -43,12 +43,16 @@ export const SingleTrip = ({
   };
 
   const likeTrip = () => {
-    if (likes.some((like) => like === user?.email)) return;
     if (!user || user.email === null) return;
-    const updatedLikes = [...likes];
-    updatedLikes.push(user.email);
     const tripRef = doc(db, "trips", tripId);
-    setDoc(tripRef, { ...trip, likes: updatedLikes });
+    if (likes.some((like) => like === user?.email)) {
+      const updatedLikes = likes.filter((like) => like !== user.email);
+      setDoc(tripRef, { ...trip, likes: updatedLikes });
+    } else {
+      const updatedLikes = [...likes];
+      updatedLikes.push(user.email);
+      setDoc(tripRef, { ...trip, likes: updatedLikes });
+    }
   };
 
   const isLiked = likes.some((like) => like === user?.email);
@@ -74,7 +78,7 @@ export const SingleTrip = ({
               left: "50%",
               transform: "translate(-50%, -50%)",
               fontSize: "10px",
-              zIndex: "20",
+              zIndex: "-2",
             }}
           >
             {likes.length}

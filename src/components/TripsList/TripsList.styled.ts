@@ -5,6 +5,7 @@ type LikeProps = {
 };
 
 export const TripsListStyled = styled.article`
+  padding: 10rem;
   transition: 0.2s linear;
   margin: 0;
   display: grid;
@@ -108,6 +109,7 @@ export const ButtonsSection = styled.div`
 export const TripButton = styled.button`
   width: 9rem;
   height: 6rem;
+  transition: 0.5s;
   border-radius: var(--border-radius-s);
   background-color: var(--color-neutral-white-opacity);
   text-transform: uppercase;
@@ -121,14 +123,16 @@ export const TripButton = styled.button`
   }
 `;
 export const LikeLogo = styled.div<LikeProps>`
-  background-image: ${({ isLiked }) =>
-    isLiked ? 'url("/public/icons/love.png")' : 'url("/public/icons/love-empty.png")'};
-  width: 48px;
-  height: 48px;
+  background-image: ${({ isLiked }) => (isLiked ? 'url("/love.png")' : 'url("/love-empty.png")')};
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
   opacity: 0.7;
-  z-index: 21;
-
+  z-index: 0;
+  transition: 0.5s;
+  cursor: pointer;
   :hover {
-    background-image: url("/public/icons/love.png");
+    background-image: url("/love.png");
   }
 `;

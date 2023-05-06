@@ -1,26 +1,33 @@
 import styled from "styled-components";
 
 export const MapWrapper = styled.div`
-  width: 50%;
+  width: 100%;
   height: 100%;
   min-width: 300px;
-  @media screen and (max-width: 768px) {
-    width: 100%;
+  min-height: 300px;
+  @media (max-width: 1023px) {
+    height: 300px;
   }
 `;
 
 export const TripWrapper = styled.div`
-  width: 100vw;
-  height: 90vh;
+  /* height: 100%; */
+  /* height: calc(100vh - 16rem); */
+  /* min-height: calc(100vh -16rem); */
   display: flex;
-  flex-direction: column;
-  padding: 10vw;
+  flex-direction: row;
+  gap: var(--gap-l);
+
+  @media (max-width: 1023px) {
+    flex-direction: column;
+    gap: var(--gap-l);
+  }
 `;
-export const Title = styled.h1`
+
+export const Title = styled.h2`
   text-align: center;
-  height: 10%;
-  margin-bottom: 10rem;
 `;
+
 export const TripSection = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -32,11 +39,16 @@ export const TripSection = styled.div`
   }
 `;
 export const TripDescription = styled.p`
-  width: 50%;
-  height: 100%;
+  width: 100%;
   text-align: justify;
-  padding: 0 2vw;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10%;
+  }
   @media screen and (max-width: 768px) {
     width: 100%;
+    margin-bottom: 2rem;
+    height: fit-content;
   }
 `;
