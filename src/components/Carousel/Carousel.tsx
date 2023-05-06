@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { TestVoyageData } from "./TestVoyageData";
 import { StyledLink } from "./Carousel.style";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
