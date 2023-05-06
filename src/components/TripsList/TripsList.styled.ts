@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+
+type LikeProps = {
+  isLiked: boolean;
+};
 
 export const TripsListStyled = styled.article`
   transition: 0.2s linear;
@@ -62,6 +65,8 @@ export const TripMiniTitle = styled.h3`
   justify-self: flex-start;
   padding: 5%;
   margin: 0;
+  display: flex;
+  align-items: center;
 
   /* &::before {
     content: "";
@@ -113,5 +118,17 @@ export const TripButton = styled.button`
   :hover {
     background-color: var(--color-secondary-topaz-light);
     color: var(--color-neutral-white);
+  }
+`;
+export const LikeLogo = styled.div<LikeProps>`
+  background-image: ${({ isLiked }) =>
+    isLiked ? 'url("/public/icons/love.png")' : 'url("/public/icons/love-empty.png")'};
+  width: 48px;
+  height: 48px;
+  opacity: 0.7;
+  z-index: 21;
+
+  :hover {
+    background-image: url("/public/icons/love.png");
   }
 `;
