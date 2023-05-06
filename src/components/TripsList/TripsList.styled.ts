@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-type LikeProps = {
-  isLiked: boolean;
-};
-
 export const TripsListStyled = styled.article`
   padding: 10rem;
   transition: 0.2s linear;
@@ -122,10 +118,7 @@ export const TripButton = styled.button`
     color: var(--color-neutral-white);
   }
 `;
-export const LikeLogo = styled.div<LikeProps>`
-  background-image: ${({ isLiked }) => (isLiked ? 'url("/love.png")' : 'url("/love-empty.png")')};
-  background-repeat: no-repeat;
-  background-position: center;
+export const LikeLogo = styled.img`
   width: 40px;
   height: 40px;
   opacity: 0.7;
