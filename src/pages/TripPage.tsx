@@ -5,11 +5,12 @@ import { db } from "../firebase/firebase.config";
 import { Trip } from "./AddTrip";
 import { useLoadScript } from "@react-google-maps/api";
 import MapPreview from "../components/MapPreview/MapPreview";
-import { Title, TripDescription, TripSection, TripWrapper } from "../components/MapPreview/MapPreview.styled";
+import { Title, TripDescription, TripWrapper } from "../components/MapPreview/MapPreview.styled";
 import Modal from "../ui/Modal/Modal";
 import PinDetailsCard from "../components/PinDetailsCard/PinDetailsCard";
 import { Pin } from "../components/Map/Map";
-import { ColumnWrapper } from "../ui/wrapper/wrapper.styled";
+import { ColumnWrapper, TripFinishedWrapper } from "../ui/wrapper/wrapper.styled";
+import { Header4 } from "../ui/headers/header.styled";
 
 type Library = "places" | "drawing" | "geometry" | "localContext" | "visualization";
 
@@ -35,13 +36,15 @@ const TripPage = () => {
   }, []);
 
   return (
-    <div>
+    <TripFinishedWrapper>
       <Title>{tripData?.title}</Title>
       <TripWrapper>
         <ColumnWrapper>
+          <Header4 bold>Description</Header4>
           <TripDescription>{tripData?.description}</TripDescription>
         </ColumnWrapper>
         <ColumnWrapper>
+          <Header4 bold>Map</Header4>
           {loadError ? (
             <div>Error loading maps</div>
           ) : isLoaded && tripData?.places ? (
@@ -56,7 +59,7 @@ const TripPage = () => {
           {selectedPlace && <PinDetailsCard selectedPlace={selectedPlace} />}
         </Modal>
       )}
-    </div>
+    </TripFinishedWrapper>
   );
 };
 
