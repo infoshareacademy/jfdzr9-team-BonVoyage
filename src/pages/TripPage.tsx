@@ -48,7 +48,8 @@ const TripPage = () => {
           <PinsWrapper>
             {tripData?.places.map((place) => (
               <PinPhotoContainer key={place.name}>
-                <PinPreview src={place.imageRefs} key={place.name} />
+                {/* @ts-expect-error jakis opis */}
+                <PinPreview src={place.imageRefs?.[0]} key={place.name} />
               </PinPhotoContainer>
             ))}
           </PinsWrapper>
