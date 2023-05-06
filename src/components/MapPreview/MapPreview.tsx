@@ -38,6 +38,8 @@ const MapPreview = ({ tripData, setIsModalActive, setSelectedPlace }: MapProps) 
     setIsModalActive(true);
     setSelectedPlace(tripData?.places.find((place) => place.lat === lat() && place.lng === lng()));
   };
+
+  const iconUrl = `${import.meta.env.BASE_URL}icons/icon.png`;
   return (
     <MapWrapper>
       <GoogleMap mapContainerStyle={mapContainerStyle} zoom={12} options={options} onLoad={onLoad}>
@@ -47,7 +49,7 @@ const MapPreview = ({ tripData, setIsModalActive, setSelectedPlace }: MapProps) 
             position={pin}
             onClick={onPinClickHandler}
             icon={{
-              url: "/icon.png",
+              url: iconUrl,
             }}
           />
         ))}

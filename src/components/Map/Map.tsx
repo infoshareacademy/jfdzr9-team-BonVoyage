@@ -69,6 +69,9 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
   }, []);
   const [error, setError] = useState(false);
 
+  const iconUrl = `${import.meta.env.BASE_URL}icons/icon.png`;
+  const clickedIconUrl = `${import.meta.env.BASE_URL}icons/clickedIcon.png`;
+
   const addNewPin = (e: google.maps.MapMouseEvent) => {
     setError(false);
     if (!place) return;
@@ -183,7 +186,7 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
                 position={pin}
                 onClick={onPinClickHandler}
                 icon={{
-                  url: clickedPin?.lat === pin.lat && clickedPin.lng === pin.lng ? "/clickedIcon.png" : "/icon.png",
+                  url: clickedPin?.lat === pin.lat && clickedPin.lng === pin.lng ? `${clickedIconUrl}` : `${iconUrl}`,
                 }}
               />
             ))}
