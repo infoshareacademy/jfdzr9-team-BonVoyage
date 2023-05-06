@@ -41,4 +41,14 @@ export const TripSection = styled.div`
 export const TripDescription = styled.p`
   width: 100%;
   text-align: justify;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10%;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 2rem;
+    height: fit-content;
+  }
 `;
