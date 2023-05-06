@@ -122,8 +122,7 @@ export const TripButton = styled.button`
   }
 `;
 export const LikeLogo = styled.div<LikeProps>`
-  background-image: ${({ isLiked }) =>
-    isLiked ? 'url("/public/icons/love.png")' : 'url("/public/icons/love-empty.png")'};
+  background-image: ${({ isLiked }) => (isLiked ? 'url("/love.png")' : 'url("/love-empty.png")')};
   background-repeat: no-repeat;
   background-position: center;
   width: 40px;
@@ -133,6 +132,6 @@ export const LikeLogo = styled.div<LikeProps>`
   transition: 0.5s;
   cursor: pointer;
   :hover {
-    background-image: url("/public/icons/love.png");
+    background-image: url("/love.png");
   }
 `;
