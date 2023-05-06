@@ -38,7 +38,9 @@ const TripPage = () => {
       <TripWrapper>
         <Title>{tripData?.title}</Title>
         <TripSection>
-          <TripDescription>{tripData?.description}</TripDescription>
+          <TripDescription>
+            <p>{tripData?.description}</p>
+          </TripDescription>
           {loadError ? (
             <div>Error loading maps</div>
           ) : isLoaded && tripData?.places ? (
