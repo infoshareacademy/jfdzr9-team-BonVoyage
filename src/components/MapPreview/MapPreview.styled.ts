@@ -5,18 +5,22 @@ export const MapWrapper = styled.div`
   height: 100%;
   min-width: 300px;
   min-height: 300px;
+  @media (max-width: 1023px) {
+    height: 300px;
+  }
 `;
 
 export const TripWrapper = styled.div`
-  height: calc(100vh - 16rem);
-  min-height: calc(100vh -16rem);
+  /* height: 100%; */
+  /* height: calc(100vh - 16rem); */
+  /* min-height: calc(100vh -16rem); */
   display: flex;
   flex-direction: row;
   gap: var(--gap-l);
 
   @media (max-width: 1023px) {
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--gap-l);
   }
 `;
 

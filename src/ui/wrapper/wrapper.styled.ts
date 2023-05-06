@@ -85,11 +85,11 @@ export const ImgWrapper = styled.div`
 `;
 
 export const TripFinishedWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   margin-top: 6.8rem;
 
-  min-height: calc(100vh - 9.4rem);
+  /* min-height: calc(100vh - 9.4rem); */
   padding: var(--padding-layout);
   gap: var(--gap-s);
 

@@ -12,7 +12,7 @@ const mapContainerStyle = {
   width: "100%",
   height: "100%",
   margin: "auto",
-  borderRadius: "5vw",
+  borderRadius: "1.5rem",
 };
 
 const options = {
