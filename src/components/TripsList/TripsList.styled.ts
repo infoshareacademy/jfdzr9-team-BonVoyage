@@ -13,8 +13,9 @@ export const TripsListStyled = styled.article`
   grid-gap: var(--gap-m);
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: var(--gap-xs);
+    display: flex;
+    flex-direction: column;
+    padding: 5rem 10rem;
   }
 `;
 
@@ -36,7 +37,7 @@ export const SingleTripStyled = styled.div`
 
 export const ImgContainer = styled.div`
   position: relative;
-  z-index: -9999;
+  z-index: 1;
 
   &::after {
     content: "";
