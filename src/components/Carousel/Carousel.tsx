@@ -1,41 +1,11 @@
 // @ts-nocheck
 
-// import { TestVoyageData } from "./TestVoyageData";
-// import { StyledLink } from "./Carousel.style";
-// import { useMediaQuery } from "../../hooks/UseMediaQuery";
-// import "./Swiper.css";
-// import { register } from "swiper/element/bundle";
-// import { useEffect, useRef } from "react";
-// register();
-// declare module "react" {
-//   interface HTMLAttributes<T> {
-//     navigation?: string;
-//     pagination?: string;
-//   }
-// }
-
-//export const Carousel: React.FC = () => {
-//   useEffect(() => {
-//     const swiperContainer = swiperRef.current;
-//     const params = {
-//       navigation: true,
-//       pagination: {
-//         clickable: true,
-//       },
-//       loop: true,
-//       slidesPerView: smallScreen ? 1 : 3,
-
-//     Object.assign(swiperContainer, params);
-//     swiperContainer.initialize();
-//   }, [smallScreen]);
-// };
-
 import { useEffect, useRef } from "react";
 import { register } from "swiper/element/bundle";
-register();
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { TestVoyageData } from "./TestVoyageData";
-import { StyledLink } from "./Carousel.style";
+import { StyledLink, StyledDiv } from "./Carousel.style";
+register();
 
 export const Carousel = () => {
   const swiperRef = useRef(null);
@@ -45,8 +15,10 @@ export const Carousel = () => {
     const swiperContainer = swiperRef.current;
     const params = {
       navigation: true,
-      pagination: true,
-      loop: true,
+      pagination: {
+        clickable: true,
+      },
+      loop: smallScreen ? true : false,
       slidesPerView: smallScreen ? 1 : 3,
       injectStyles: [
         `
@@ -65,7 +37,10 @@ export const Carousel = () => {
         .swiper-pagination-bullet{
           width: 10px;
           height: 10px;
-          background-color: #d7d7d7;
+          background-color: #9b9b9b;
+        }
+        .swiper-pagination-bullet:hover{
+          transform: scale(1.1)
         }
         .swiper-container {
           width: 100%;
@@ -100,6 +75,7 @@ export const Carousel = () => {
 
         .swiper-slide h3 {
           padding-bottom: 20px;
+          font-weight: 300;
         }
         `,
       ],
@@ -107,13 +83,13 @@ export const Carousel = () => {
 
     Object.assign(swiperContainer, params);
     swiperContainer.initialize();
-  }, []);
+  }, [smallScreen]);
 
   return (
     <>
-      <div>
-        <h1>Our Voyages</h1>
-      </div>
+      <StyledDiv>
+        <h2>Our Voyages</h2>
+      </StyledDiv>
       <swiper-container ref={swiperRef} init="false">
         {TestVoyageData.map((voyage) => (
           <swiper-slide class="swiper-slide" key={voyage.id}>
@@ -134,28 +110,3 @@ export const Carousel = () => {
     </>
   );
 };
-
-{
-  /* <>
-<div>
-  <h1>Our Voyages</h1>
-</div>
-<swiper-container class="swiper-container" ref={swiperRef}>
-  {TestVoyageData.map((voyage) => (
-    <swiper-slide class="swiper-slide" key={voyage.id}>
-      <div className="Card">
-        <div>
-          <img src={voyage.image} alt="" />
-        </div>
-        <div>
-          <StyledLink to={`/voyages/notloggedin/${voyage.id}`}>
-            <h2>{voyage.name}</h2>
-            <h3> {voyage.destination} </h3>
-          </StyledLink>
-        </div>
-      </div>
-    </swiper-slide>
-  ))}
-</swiper-container>
-</> */
-}
