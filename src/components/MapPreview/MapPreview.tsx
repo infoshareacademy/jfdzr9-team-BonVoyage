@@ -25,7 +25,7 @@ type MapProps = {
 };
 
 const MapPreview = ({ tripData, setIsModalActive, setSelectedPlace }: MapProps) => {
-  const onLoad = useCallback((map: any) => {
+  const onLoad = useCallback((map: google.maps.Map) => {
     const bounds = new window.google.maps.LatLngBounds();
     tripData?.places.forEach((pin) => {
       bounds.extend({ lat: pin.lat, lng: pin.lng });

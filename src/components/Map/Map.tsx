@@ -56,8 +56,8 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
   const [pins, setPins] = useState<Pin[]>(tripData?.places || []);
   const [place, setPlace] = useState<LatLngLiteral | undefined>(tripData?.place);
   const [clickedPin, setClickedPin] = useState<Pin | null>();
-  const mapRef = useRef<GoogleMap>();
-  const onLoad = useCallback((map: any) => {
+  const mapRef = useRef<google.maps.Map>();
+  const onLoad = useCallback((map: google.maps.Map) => {
     if (tripData?.places.length === 0) mapRef.current = map;
     else {
       const bounds = new window.google.maps.LatLngBounds();
@@ -124,7 +124,7 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
       ...tripData,
       places: pins?.map((pin) => ({ ...pin, imageUrls: [] })),
       place,
-    }).catch((err) => console.log(err));
+    });
   }, [pins]);
 
   const finishTrip = () => {
