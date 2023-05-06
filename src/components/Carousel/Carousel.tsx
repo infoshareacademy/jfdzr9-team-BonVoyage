@@ -97,7 +97,7 @@ export const Carousel: React.FC = () => {
       <div>
         <h1>Our Voyages</h1>
       </div>
-      <swiper-container class="swiper-container" ref={swiperRef} init="false">
+      <swiper-container class="swiper-container" ref={swiperRef}>
         {TestVoyageData.map((voyage) => (
           <swiper-slide class="swiper-slide" key={voyage.id}>
             <div className="Card">

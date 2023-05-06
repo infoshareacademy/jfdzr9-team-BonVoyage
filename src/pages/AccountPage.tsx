@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../ui/button/button.styled";
 import UsersDetails from "../components/UsersDetails/UsersDetails";
 import { NavLink } from "react-router-dom";
-import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase/firebase.config";
 import { AccountPageWrapper } from "../components/TripsList/TripsList.styled";
 import { TripsList } from "../components/TripsList/TripsList";
@@ -23,12 +23,10 @@ export interface UsersDetailsFormInput {
 const AccountPage = () => {
   const { register, handleSubmit, setValue } = useForm<UsersDetailsFormInput>();
   const [success, setSuccess] = useState(true);
-  const [imgUrl, setImgUrl] = useState("");
+
   const [file, setFile] = useState<File | null>(null);
 
   const user = useUser();
-
-  const imagesRef = ref(storage, "users-avatar/");
 
   const uploadImage = () => {
     if (!file) return;
