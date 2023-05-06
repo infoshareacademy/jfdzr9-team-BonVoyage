@@ -123,11 +123,13 @@ export const TripButton = styled.button`
 export const LikeLogo = styled.div<LikeProps>`
   background-image: ${({ isLiked }) =>
     isLiked ? 'url("/public/icons/love.png")' : 'url("/public/icons/love-empty.png")'};
-  width: 48px;
-  height: 48px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
   opacity: 0.7;
   z-index: 21;
-
+  cursor: pointer;
   :hover {
     background-image: url("/public/icons/love.png");
   }
