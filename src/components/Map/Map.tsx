@@ -143,7 +143,7 @@ const Map = ({ center, tripId, tripData }: GoogleMapProps) => {
 
   return (
     <FullWrapper>
-      <FormWrapper padding>
+      <FormWrapper>
         <LabelAndInput>
           {!place && <InputLabel>Pick your trip place!</InputLabel>}
           <SearchBarInput
