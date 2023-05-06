@@ -7,12 +7,6 @@ interface Voyage {
 
 export const TestVoyageData: Voyage[] = [
   {
-    id: "Zielona Góra - Szlakiem Winnic-66885199",
-    name: "Wineyard trail",
-    destination: "Zielona Góra",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Ratuno21w.jpg/1200px-Ratuno21w.jpg",
-  },
-  {
     id: "Poznań-2233872",
     name: "Old Town",
     destination: "Poznań",

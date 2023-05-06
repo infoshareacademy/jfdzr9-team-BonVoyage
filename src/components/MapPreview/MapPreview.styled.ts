@@ -6,6 +6,7 @@ export const MapWrapper = styled.div`
   min-width: 300px;
   @media screen and (max-width: 768px) {
     width: 100%;
+    padding-bottom: 5rem;
   }
 `;
 
@@ -31,12 +32,18 @@ export const TripSection = styled.div`
     height: 40%;
   }
 `;
-export const TripDescription = styled.p`
+export const TripDescription = styled.div`
   width: 50%;
   height: 100%;
   text-align: justify;
   padding: 0 2vw;
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10%;
+  }
   @media screen and (max-width: 768px) {
     width: 100%;
+    margin-bottom: 2rem;
+    height: fit-content;
   }
 `;
