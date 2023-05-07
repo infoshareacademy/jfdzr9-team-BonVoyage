@@ -18,6 +18,7 @@ export const MemberCard = styled.div`
   border-radius: 5px;
   transition: all 0.2s ease-in-out;
   z-index: -9999;
+  padding: 5rem;
 
   :hover {
     -webkit-box-shadow: 0px 0px 19px 0px rgba(66, 68, 90, 0.34);
@@ -63,7 +64,7 @@ export const MemberWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 10vh 0;
+  padding: 10vh 10vh;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
