@@ -5,7 +5,6 @@ type LikeProps = {
 };
 
 export const TripsListStyled = styled.article`
-  padding: 10rem;
   transition: 0.2s linear;
   margin: 0;
   display: grid;
@@ -16,7 +15,6 @@ export const TripsListStyled = styled.article`
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    padding: 5rem 10rem;
   }
 `;
 
