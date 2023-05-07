@@ -30,4 +30,16 @@ export const TestVoyageData: Voyage[] = [
     destination: "Radom",
     image: "https://bi.im-g.pl/im/ea/3f/e9/z15286250AMP,Radom--ul--Zeromskiego.jpg",
   },
+  {
+    id: "Krakow-34446350",
+    name: "Most Important Landmarks",
+    destination: "Krakow",
+    image: "https://www.polska.travel/images/pl-PL/glowne-miasta/krakow/krakow_rynek_2_1170.jpg",
+  },
+  {
+    id: "Prague-69343640",
+    name: "Best Instagram Spots",
+    destination: "Prague",
+    image: "https://lp-cms-production.imgix.net/features/2019/07/shutterstockRF_300856853-f8561259593d.jpg",
+  },
 ];
