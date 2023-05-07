@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { db, auth, storage } from "../../firebase/firebase.config";
 import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { EditProfileWrapper, FormWrapper } from "../../ui/wrapper/wrapper.styled";
+import { NewTripWrapper, FormWrapper } from "../../ui/wrapper/wrapper.styled";
 import { Header2 } from "../../ui/headers/header.styled";
 import { useState } from "react";
 
@@ -49,7 +49,7 @@ const NewTripForm = () => {
   });
 
   return (
-    <EditProfileWrapper>
+    <NewTripWrapper>
       <FormWrapper>
         <StyledForm onSubmit={onSubmit}>
           <Header2 bold>Create a new trip</Header2>
@@ -71,7 +71,7 @@ const NewTripForm = () => {
           <Button>Create and go to next step</Button>
         </StyledForm>
       </FormWrapper>
-    </EditProfileWrapper>
+    </NewTripWrapper>
   );
 };
 

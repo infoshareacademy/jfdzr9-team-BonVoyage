@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const FullWrapper = styled.div`
-  height: calc(100vh - 8rem);
-  margin-top: 5.4rem;
+  height: calc(100vh - 9.4rem);
+  margin-top: 6.8rem;
   width: 100vw;
   display: flex;
+  padding: var(--padding-layout);
+  gap: var(--gap-l);
 `;
 
 export const SearchbardWrapper = styled.div`
