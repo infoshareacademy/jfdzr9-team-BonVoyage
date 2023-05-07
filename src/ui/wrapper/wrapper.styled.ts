@@ -11,7 +11,7 @@ export const AccountPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 6.8rem;
-  width: 100vw;
+  /* width: 100vw; */
   min-height: calc(100vh - 9.4rem);
   padding: var(--padding-layout);
   gap: var(--gap-m);
